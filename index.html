@@ -485,15 +485,16 @@
   <script>
     /* -----------------------------
        GoatCounter: events "macro"
-       (aucun /enigme/xx, aucun /search?q=)
+       Objectif: DATA AGREGEE (pas de /enigme/xx, pas de /search?q=)
     ------------------------------*/
-    function gcEvent(name) {
+    function gcEvent(name, payload = {}) {
       try {
         if (window.goatcounter && typeof window.goatcounter.count === "function") {
           window.goatcounter.count({
-            path: "/event/" + name,
-            title: name,
-            event: true
+            path: "/event/" + String(name || "unknown"),
+            title: String(name || "unknown"),
+            event: true,
+            ...payload
           });
         }
       } catch(e) {}
@@ -530,8 +531,9 @@
 
     let ALL_ENIGMES = [];
     let AFFILIATE_URL = "";
-    let CURRENT_TAB = "enigmes"; // pour éviter un event tab au chargement
-    let SEARCH_HAS_BEEN_USED = false; // pour éviter trop d'events
+    let CURRENT_TAB = "enigmes";         // évite event tab au chargement
+    let TAB_INIT_DONE = false;           // empêche event tab lors du routage initial
+    let SEARCH_HAS_BEEN_USED = false;    // compte 1x par "session" de recherche
 
     function blurActive(){ try{ document.activeElement && document.activeElement.blur(); }catch(e){} }
 
@@ -539,10 +541,12 @@
       const isEnigmes = which === "enigmes";
       const nextTab = isEnigmes ? "enigmes" : "muscler";
 
-      if (CURRENT_TAB !== nextTab) {
-        gcEvent(nextTab === "enigmes" ? "tab_enigmes" : "tab_muscler");
-        CURRENT_TAB = nextTab;
+      // Track seulement si: (1) pas l'init, (2) changement réel d'onglet
+      if (TAB_INIT_DONE && CURRENT_TAB !== nextTab) {
+        gcEvent(nextTab === "enigmes" ? "tab_enigmes" : "tab_muscler", { referrer: origin });
       }
+
+      CURRENT_TAB = nextTab;
 
       tabEnigmes.classList.toggle("primary", isEnigmes);
       tabEnigmes.classList.toggle("selected", isEnigmes);
@@ -569,7 +573,7 @@
 
     linkToMuscler.addEventListener("click", (e) => {
       e.preventDefault();
-      gcEvent("link_to_muscler");
+      gcEvent("link_to_muscler", { referrer: "cta" });
       setTab("muscler", "cta_link");
     });
 
@@ -583,6 +587,8 @@
     }
 
     function closeAnswer(){
+      // évite de spam: si déjà fermé, on n'envoie rien
+      if (!overlay.classList.contains("show")) return;
       overlay.classList.remove("show");
       overlay.setAttribute("aria-hidden", "true");
       gcEvent("close_answer");
@@ -592,7 +598,7 @@
     closeModal.addEventListener("click", closeAnswer);
     overlay.addEventListener("click", (e) => { if(e.target === overlay) closeAnswer(); });
     document.addEventListener("keydown", (e) => {
-      if(e.key === "Escape" && overlay.classList.contains("show")) closeAnswer();
+      if(e.key === "Escape") closeAnswer();
     });
 
     async function loadJSON(path){
@@ -629,11 +635,12 @@
         searchMeta.textContent = `${filtered.length} résultat(s) pour “${searchInput.value.trim()}”`;
       }
 
-      // Tracking "recherche utilisée" (sans mots)
+      // Tracking "recherche utilisée" (macro, sans mots)
       if(!isInit && q && !SEARCH_HAS_BEEN_USED){
         gcEvent("search_used");
         SEARCH_HAS_BEEN_USED = true;
       }
+      // reset quand on vide
       if(!q){
         SEARCH_HAS_BEEN_USED = false;
       }
@@ -669,8 +676,9 @@
         btn.addEventListener("click", () => {
           gcEvent("click_answer");
 
+          // pub/affiliation (macro)
           if(AFFILIATE_URL && AFFILIATE_URL.trim() && AFFILIATE_URL !== "TON_LIEN_AFFILIATION_ICI"){
-            gcEvent("affiliate_open");
+            gcEvent("affiliate_open", { referrer: "answer_button" });
             window.open(AFFILIATE_URL, "_blank", "noopener,noreferrer");
           }
 
@@ -726,9 +734,9 @@
     const debouncedTrackFilter = debounce(() => applyFilter(false), 600);
 
     searchInput?.addEventListener("input", () => {
-      // Update UI instant
+      // UI instant
       applyFilter(true);
-      // Track (macro) après pause
+      // tracking macro après pause
       debouncedTrackFilter();
     });
 
@@ -765,6 +773,10 @@
         setTab("enigmes", "hash");
       }
 
+      // à partir de maintenant, on track les changements d'onglets
+      TAB_INIT_DONE = true;
+
+      // page view "macro" (optionnel)
       gcEvent("page_loaded");
     }
 
