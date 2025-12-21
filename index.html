@@ -200,6 +200,14 @@
       border-color: inherit;
     }
 
+    /* ✅ FIX iOS (WebKit) : on coupe le backdrop-filter UNIQUEMENT sur les cartes (évite les "carreaux") */
+    .card{
+      -webkit-backdrop-filter: none !important;
+      backdrop-filter: none !important;
+      /* on garde un effet "glass" sans blur (stable iOS) */
+      background: rgba(18,18,20,.72) !important;
+    }
+
     .pill{
       display:inline-flex;
       align-items:center;
@@ -256,6 +264,16 @@
       line-height:1.35;
     }
     .linker b{ color: rgba(255,255,255,.88); }
+
+    /* ✅ lien cliquable dans la phrase */
+    .linker a.inline-link{
+      color: rgba(255,255,255,.90);
+      font-weight: 900;
+      text-decoration: underline;
+      text-decoration-color: rgba(242,211,122,.55);
+      text-underline-offset: 3px;
+    }
+    .linker a.inline-link:active{ opacity:.85; }
 
     .empty{
       margin-top: 16px;
@@ -377,7 +395,9 @@
       <div id="enigmes-list"></div>
 
       <div class="linker">
-        Tu veux aller plus loin ? Appuie sur <b>“Muscler son cerveau”</b> juste au-dessus 🧠
+        Tu veux aller plus loin ? Appuie sur
+        <a href="#muscler" class="inline-link" id="inlineMusclerLink">“Muscler son cerveau”</a>
+        🧠
       </div>
     </section>
 
@@ -425,6 +445,8 @@
     const modalTitle = $("modalTitle");
     const modalAnswer = $("modalAnswer");
 
+    const inlineMusclerLink = $("inlineMusclerLink");
+
     // Prevent Safari "focus line" + keep clean
     function blurActive(){ try{ document.activeElement && document.activeElement.blur(); }catch(e){} }
 
@@ -456,6 +478,12 @@
 
     tabEnigmes.addEventListener("click", () => setTab("enigmes"));
     tabRessources.addEventListener("click", () => setTab("muscler"));
+
+    // ✅ lien inline qui bascule proprement sur l'onglet "muscler"
+    inlineMusclerLink.addEventListener("click", (e) => {
+      e.preventDefault();
+      setTab("muscler");
+    });
 
     function openAnswer(title, answer){
       modalTitle.textContent = title || "Réponse";
@@ -535,7 +563,6 @@
         return;
       }
 
-      // Si tu ajoutes des ressources plus tard, on pourra faire des “cards produits” clean ici.
       list.forEach((r) => {
         const card = document.createElement("div");
         card.className = "card";
