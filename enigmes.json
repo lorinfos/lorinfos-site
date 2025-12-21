@@ -3,73 +3,130 @@
   "enigmes": [
     {
       "id": 1,
-      "badge": "💎",
-      "titre": "Énigme #1",
-      "question": "Un père a 3 fils. Chaque fils a une sœur. Combien y a-t-il d’enfants au total ?",
-      "reponse": "4 enfants : 3 fils + 1 sœur (la même sœur)."
+      "titre": "Énigme 1",
+      "question": "Plus tu en prends, moins tu en as. Qu’est-ce que c’est ?",
+      "reponse": "Solution : Le temps.\n\nExplication : Plus le temps passe, moins il t’en reste."
     },
     {
       "id": 2,
-      "badge": "💎",
-      "titre": "Énigme #2",
-      "question": "Tu as 3 interrupteurs dans une pièce. Une seule ampoule est dans la pièce d’à côté. Tu peux ouvrir la porte une seule fois. Comment savoir quel interrupteur allume l’ampoule ?",
-      "reponse": "Allume le 1er interrupteur 5 minutes puis éteins-le. Allume le 2e et ouvre la porte : allumée → 2e, éteinte mais chaude → 1er, éteinte et froide → 3e."
+      "titre": "Énigme 2",
+      "question": "Qu’est-ce qui monte et descend sans jamais bouger ?",
+      "reponse": "Solution : Un escalier.\n\nExplication : Il permet de monter et descendre sans se déplacer."
     },
     {
       "id": 3,
-      "badge": "💎",
-      "titre": "Énigme #3",
-      "question": "Je suis plein de trous, mais je retiens l’eau. Qui suis-je ?",
-      "reponse": "Une éponge."
+      "titre": "Énigme 3",
+      "question": "Si tu me nommes, je disparais. Qui suis-je ?",
+      "reponse": "Solution : Le silence.\n\nExplication : Le fait de parler le fait disparaître."
     },
     {
       "id": 4,
-      "badge": "💎",
-      "titre": "Énigme #4",
-      "question": "Un train électrique roule vers le nord. Le vent souffle vers l’ouest. Dans quel sens va la fumée ?",
-      "reponse": "Il n’y a pas de fumée : un train électrique ne fume pas."
+      "titre": "Énigme 4",
+      "question": "Qu’est-ce qui est toujours devant toi mais que tu ne peux jamais voir ?",
+      "reponse": "Solution : Le futur.\n\nExplication : Il est devant toi dans le temps mais invisible."
     },
     {
       "id": 5,
-      "badge": "💎",
-      "titre": "Énigme #5",
-      "question": "Tu participes à une course. Tu dépasses le deuxième. À quelle position es-tu ?",
-      "reponse": "Deuxième."
+      "titre": "Énigme 5",
+      "question": "Un avion s’écrase à la frontière de deux pays. Où enterre-t-on les survivants ?",
+      "reponse": "Solution : Nulle part.\n\nExplication : On n’enterre pas les survivants."
     },
     {
       "id": 6,
-      "badge": "💎",
-      "titre": "Énigme #6",
-      "question": "Je commence la nuit et je finis le matin. Qui suis-je ?",
-      "reponse": "La lettre « N »."
+      "titre": "Énigme 6",
+      "question": "Un père et son fils ont 36 ans à eux deux. Le père a 30 ans de plus que le fils. Quel âge a le fils ?",
+      "reponse": "Solution : 3 ans.\n\nExplication : 33 + 3 = 36, et 33 − 3 = 30."
     },
     {
       "id": 7,
-      "badge": "💎",
-      "titre": "Énigme #7",
-      "question": "Plus tu en prends, plus tu en laisses derrière toi. Qu’est-ce que c’est ?",
-      "reponse": "Des pas."
+      "titre": "Énigme 7",
+      "question": "Qu’est-ce qui peut être cassé sans être touché ?",
+      "reponse": "Solution : Une promesse.\n\nExplication : Elle peut être rompue sans contact physique."
     },
     {
       "id": 8,
-      "badge": "💎",
-      "titre": "Énigme #8",
-      "question": "Je n’ai ni bouche ni oreilles, mais je réponds quand on me parle. Qui suis-je ?",
-      "reponse": "Un écho."
+      "titre": "Énigme 8",
+      "question": "Un homme pousse sa voiture, arrive à un hôtel et fait faillite. Pourquoi ?",
+      "reponse": "Solution : Il joue au Monopoly.\n\nExplication : La voiture et l’hôtel sont des éléments du jeu."
     },
     {
       "id": 9,
-      "badge": "💎",
-      "titre": "Énigme #9",
-      "question": "Qu’est-ce qui monte sans jamais redescendre ?",
-      "reponse": "L’âge."
+      "titre": "Énigme 9",
+      "question": "Qu’est-ce qui a des clés mais n’ouvre aucune porte ?",
+      "reponse": "Solution : Un piano.\n\nExplication : Les clés sont musicales."
     },
     {
       "id": 10,
-      "badge": "💎",
-      "titre": "Énigme #10",
-      "question": "Avant de m’utiliser, tu dois me casser. Qui suis-je ?",
-      "reponse": "Un œuf."
+      "titre": "Énigme 10",
+      "question": "Combien de mois ont 28 jours ?",
+      "reponse": "Solution : Tous.\n\nExplication : Chaque mois a au moins 28 jours."
+    },
+    {
+      "id": 11,
+      "titre": "Énigme 11",
+      "question": "Qu’est-ce qui devient plus humide à mesure qu’il sèche ?",
+      "reponse": "Solution : Une serviette.\n\nExplication : Elle absorbe l’eau."
+    },
+    {
+      "id": 12,
+      "titre": "Énigme 12",
+      "question": "Qu’est-ce qui appartient à toi mais que les autres utilisent plus que toi ?",
+      "reponse": "Solution : Ton prénom.\n\nExplication : Les autres l’utilisent pour t’appeler."
+    },
+    {
+      "id": 13,
+      "titre": "Énigme 13",
+      "question": "Plus c’est long, moins on en voit. Qu’est-ce que c’est ?",
+      "reponse": "Solution : Le brouillard.\n\nExplication : Plus il est dense, moins la visibilité est bonne."
+    },
+    {
+      "id": 14,
+      "titre": "Énigme 14",
+      "question": "Qu’est-ce qui a un cœur mais pas d’organes ?",
+      "reponse": "Solution : Un artichaut.\n\nExplication : Le cœur est la partie centrale du légume."
+    },
+    {
+      "id": 15,
+      "titre": "Énigme 15",
+      "question": "Je peux voler sans ailes et pleurer sans yeux. Qui suis-je ?",
+      "reponse": "Solution : Un nuage.\n\nExplication : Il se déplace dans le ciel et peut faire tomber la pluie."
+    },
+
+    {
+      "id": 16,
+      "titre": "Énigme 16",
+      "question": "Quel groupe est vraiment debout ?",
+      "reponse": "Solution : B\n\nExplication : En suivant la gravité (position des pieds), seul le groupe B est réellement debout."
+    },
+    {
+      "id": 17,
+      "titre": "Énigme 17",
+      "question": "Quelle boule touche le sol en premier ?",
+      "reponse": "Solution : B\n\nExplication : B est en chute libre immédiate, A est ralentie par le ressort."
+    },
+    {
+      "id": 18,
+      "titre": "Énigme 18",
+      "question": "Quel est le résultat du calcul ?\n\n8 ÷ 2(2+2)",
+      "reponse": "Solution : 16\n\nExplication : Parenthèses d’abord, puis division et multiplication de gauche à droite."
+    },
+    {
+      "id": 19,
+      "titre": "Énigme 19",
+      "question": "Qui supporte le plus de poids ?",
+      "reponse": "Solution : B\n\nExplication : Le support central porte toujours la plus grande charge."
+    },
+    {
+      "id": 20,
+      "titre": "Énigme 20",
+      "question": "Qui est le meurtrier ?",
+      "reponse": "Solution : B\n\nExplication : Ses mains présentent des taches, signe d’un contact direct avec la victime."
+    },
+    {
+      "id": 21,
+      "titre": "Énigme 21",
+      "question": "Quel réservoir se remplit en premier ?",
+      "reponse": "Solution : A\n\nExplication : Les autres tuyaux sont bloqués, l’eau reste dans A."
     }
   ]
 }
