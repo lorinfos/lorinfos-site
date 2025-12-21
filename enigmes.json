@@ -6,8 +6,70 @@
       "badge": "💎",
       "titre": "Énigme #1",
       "question": "Un père a 3 fils. Chaque fils a une sœur. Combien y a-t-il d’enfants au total ?",
-      "reponse": "4 enfants : 3 fils + 1 sœur (la même sœur).",
-      "astuce": "Si tu veux éviter les spoilers, ne mets pas la réponse en commentaires 😉"
+      "reponse": "4 enfants : 3 fils + 1 sœur (la même sœur)."
+    },
+    {
+      "id": 2,
+      "badge": "💎",
+      "titre": "Énigme #2",
+      "question": "Tu as 3 interrupteurs dans une pièce. Une seule ampoule est dans la pièce d’à côté. Tu peux ouvrir la porte une seule fois. Comment savoir quel interrupteur allume l’ampoule ?",
+      "reponse": "Allume le 1er interrupteur 5 minutes puis éteins-le. Allume le 2e et ouvre la porte : allumée → 2e, éteinte mais chaude → 1er, éteinte et froide → 3e."
+    },
+    {
+      "id": 3,
+      "badge": "💎",
+      "titre": "Énigme #3",
+      "question": "Je suis plein de trous, mais je retiens l’eau. Qui suis-je ?",
+      "reponse": "Une éponge."
+    },
+    {
+      "id": 4,
+      "badge": "💎",
+      "titre": "Énigme #4",
+      "question": "Un train électrique roule vers le nord. Le vent souffle vers l’ouest. Dans quel sens va la fumée ?",
+      "reponse": "Il n’y a pas de fumée : un train électrique ne fume pas."
+    },
+    {
+      "id": 5,
+      "badge": "💎",
+      "titre": "Énigme #5",
+      "question": "Tu participes à une course. Tu dépasses le deuxième. À quelle position es-tu ?",
+      "reponse": "Deuxième."
+    },
+    {
+      "id": 6,
+      "badge": "💎",
+      "titre": "Énigme #6",
+      "question": "Je commence la nuit et je finis le matin. Qui suis-je ?",
+      "reponse": "La lettre « N »."
+    },
+    {
+      "id": 7,
+      "badge": "💎",
+      "titre": "Énigme #7",
+      "question": "Plus tu en prends, plus tu en laisses derrière toi. Qu’est-ce que c’est ?",
+      "reponse": "Des pas."
+    },
+    {
+      "id": 8,
+      "badge": "💎",
+      "titre": "Énigme #8",
+      "question": "Je n’ai ni bouche ni oreilles, mais je réponds quand on me parle. Qui suis-je ?",
+      "reponse": "Un écho."
+    },
+    {
+      "id": 9,
+      "badge": "💎",
+      "titre": "Énigme #9",
+      "question": "Qu’est-ce qui monte sans jamais redescendre ?",
+      "reponse": "L’âge."
+    },
+    {
+      "id": 10,
+      "badge": "💎",
+      "titre": "Énigme #10",
+      "question": "Avant de m’utiliser, tu dois me casser. Qui suis-je ?",
+      "reponse": "Un œuf."
     }
   ]
 }
