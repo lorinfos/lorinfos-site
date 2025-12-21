@@ -1,0 +1,13 @@
+{
+  "affiliate_url": "TON_LIEN_AFFILIATION_ICI",
+  "enigmes": [
+    {
+      "id": 1,
+      "badge": "💎",
+      "titre": "Énigme #1",
+      "question": "Un père a 3 fils. Chaque fils a une sœur. Combien y a-t-il d’enfants au total ?",
+      "reponse": "4 enfants : 3 fils + 1 sœur (la même sœur).",
+      "astuce": "Si tu veux éviter les spoilers, ne mets pas la réponse en commentaires 😉"
+    }
+  ]
+}
