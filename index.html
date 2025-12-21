@@ -10,6 +10,11 @@
   <style>
     :root{
       --bg:#070708;
+
+      /* + opaque pour éviter les bandes jaunes */
+      --cardA: rgba(18,18,21,.92);
+      --cardB: rgba(12,12,14,.92);
+
       --panel: rgba(255,255,255,.06);
       --panel2: rgba(255,255,255,.08);
       --stroke: rgba(255,255,255,.10);
@@ -34,21 +39,27 @@
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
+
     body{
       margin:0;
-      background: radial-gradient(900px 520px at 50% -10%, rgba(242,211,122,.24), transparent 60%),
-                  radial-gradient(900px 520px at 50% 30%, rgba(215,161,30,.16), transparent 62%),
-                  linear-gradient(180deg, #050506 0%, #09090B 55%, #050506 100%);
+      background:
+        radial-gradient(900px 520px at 50% -10%, rgba(242,211,122,.24), transparent 60%),
+        radial-gradient(900px 520px at 50% 30%, rgba(215,161,30,.16), transparent 62%),
+        linear-gradient(180deg, #050506 0%, #09090B 55%, #050506 100%);
       color:var(--text);
       font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x:hidden;
-      -webkit-tap-highlight-color: transparent; /* supprime les reflets/traits Safari */
+
+      /* iOS/Safari */
+      -webkit-tap-highlight-color: transparent;
     }
 
     a{ color:inherit; text-decoration:none; }
     button{ font:inherit; }
+    button, a{ -webkit-tap-highlight-color: transparent; }
+    button:focus, a:focus{ outline:none; }
 
     .wrap{
       width:min(var(--max), 92vw);
@@ -68,8 +79,9 @@
     .hero:before{
       content:"";
       position:absolute; inset:-2px;
-      background: radial-gradient(420px 240px at 18% 18%, rgba(242,211,122,.22), transparent 60%),
-                  radial-gradient(520px 300px at 70% 0%, rgba(215,161,30,.18), transparent 62%);
+      background:
+        radial-gradient(420px 240px at 18% 18%, rgba(242,211,122,.22), transparent 60%),
+        radial-gradient(520px 300px at 70% 0%, rgba(215,161,30,.18), transparent 62%);
       filter: blur(8px);
       opacity:.95;
       pointer-events:none;
@@ -81,6 +93,7 @@
       gap: 14px 16px;
       align-items:center;
     }
+
     .logo{
       width:72px; height:72px;
       border-radius: 18px;
@@ -111,7 +124,7 @@
       line-height:1.45;
     }
 
-    /* SWITCH BUTTONS (pleine largeur) */
+    /* SWITCH BUTTONS */
     .switch{
       position:relative;
       margin-top: 16px;
@@ -136,6 +149,8 @@
       outline:none;
       position:relative;
       transition: transform .12s ease, filter .12s ease, background .18s ease, border-color .18s ease;
+      -webkit-appearance: none;
+      appearance: none;
     }
     .btn:active{ transform: scale(.99); }
     .btn .emoji{ font-size: 18px; transform: translateY(-1px); }
@@ -145,7 +160,6 @@
       color: rgba(0,0,0,.82);
       border-color: rgba(242,211,122,.35);
     }
-
     .btn.selected{
       border-color: rgba(242,211,122,.55);
       box-shadow: 0 0 0 2px rgba(242,211,122,.18), var(--shadow2);
@@ -183,29 +197,25 @@
     }
     .info strong{ color: rgba(255,255,255,.90); }
 
-    /* CARD */
+    /* CARD (FIX zones jaunes) */
     .card{
       margin-top: 16px;
       padding: 18px 16px;
       border-radius: var(--r-lg);
-      background: rgba(255,255,255,.05);
-      border: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, var(--cardA), var(--cardB));
+      border: 1px solid rgba(255,255,255,.12);
       box-shadow: var(--shadow2);
       position:relative;
       overflow:hidden;
-    }
-    /* IMPORTANT: pas de séparation “jaune” */
-    .card, .card *{
-      outline: none !important;
-      border-color: inherit;
-    }
 
-    /* ✅ FIX iOS (WebKit) : on coupe le backdrop-filter UNIQUEMENT sur les cartes (évite les "carreaux") */
-    .card{
-      -webkit-backdrop-filter: none !important;
-      backdrop-filter: none !important;
-      /* on garde un effet "glass" sans blur (stable iOS) */
-      background: rgba(18,18,20,.72) !important;
+      /* stabilise le rendu iOS/Safari */
+      isolation: isolate;
+      transform: translateZ(0);
+      backface-visibility: hidden;
+      -webkit-backface-visibility: hidden;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      background-clip: padding-box;
     }
 
     .pill{
@@ -215,11 +225,12 @@
       padding: 9px 14px;
       border-radius: 999px;
       background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
+      border: 1px solid rgba(255,255,255,.12);
       color: rgba(255,255,255,.88);
       font-weight: 800;
       letter-spacing: .02em;
     }
+
     .question{
       margin: 16px 2px 14px;
       font-size: clamp(20px, 5.1vw, 28px);
@@ -243,15 +254,11 @@
       cursor:pointer;
       box-shadow: 0 18px 40px rgba(0,0,0,.45);
       outline:none;
+      -webkit-appearance:none;
+      appearance:none;
+      background-clip: padding-box;
     }
     .answer-btn:active{ transform: scale(.99); }
-
-    .hint{
-      margin-top: 10px;
-      color: var(--soft);
-      font-size: 14px;
-      line-height:1.4;
-    }
 
     .linker{
       margin: 14px 0 6px;
@@ -265,15 +272,16 @@
     }
     .linker b{ color: rgba(255,255,255,.88); }
 
-    /* ✅ lien cliquable dans la phrase */
-    .linker a.inline-link{
-      color: rgba(255,255,255,.90);
-      font-weight: 900;
+    /* lien texte cliquable */
+    .inline-link{
+      color: rgba(255,255,255,.88);
       text-decoration: underline;
-      text-decoration-color: rgba(242,211,122,.55);
-      text-underline-offset: 3px;
+      text-decoration-thickness: 2px;
+      text-underline-offset: 4px;
+      text-decoration-color: rgba(242,211,122,.65);
+      cursor: pointer;
     }
-    .linker a.inline-link:active{ opacity:.85; }
+    .inline-link:active{ opacity:.85; }
 
     .empty{
       margin-top: 16px;
@@ -293,7 +301,7 @@
       padding-bottom: 18px;
     }
 
-    /* MODAL (au milieu + blur) */
+    /* MODAL (milieu + blur) */
     .overlay{
       position:fixed;
       inset:0;
@@ -336,6 +344,8 @@
       color: rgba(255,255,255,.90);
       cursor:pointer;
       outline:none;
+      -webkit-appearance:none;
+      appearance:none;
     }
     .modal-body{
       padding: 14px 16px 18px;
@@ -348,7 +358,6 @@
       margin-bottom: 8px;
     }
 
-    /* Accessibility */
     @media (prefers-reduced-motion: reduce){
       *{ transition:none !important; scroll-behavior:auto !important; }
     }
@@ -396,8 +405,7 @@
 
       <div class="linker">
         Tu veux aller plus loin ? Appuie sur
-        <a href="#muscler" class="inline-link" id="inlineMusclerLink">“Muscler son cerveau”</a>
-        🧠
+        <span id="go-muscler" class="inline-link">Muscler son cerveau</span> 🧠
       </div>
     </section>
 
@@ -432,7 +440,6 @@
   </div>
 
   <script>
-    // Helpers
     const $ = (id) => document.getElementById(id);
 
     const tabEnigmes = $("tab-enigmes");
@@ -445,15 +452,13 @@
     const modalTitle = $("modalTitle");
     const modalAnswer = $("modalAnswer");
 
-    const inlineMusclerLink = $("inlineMusclerLink");
+    const goMuscler = $("go-muscler");
 
-    // Prevent Safari "focus line" + keep clean
     function blurActive(){ try{ document.activeElement && document.activeElement.blur(); }catch(e){} }
 
     function setTab(which){
       const isEnigmes = which === "enigmes";
 
-      // Buttons visual + a11y
       tabEnigmes.classList.toggle("primary", isEnigmes);
       tabEnigmes.classList.toggle("selected", isEnigmes);
       tabEnigmes.setAttribute("aria-selected", isEnigmes ? "true" : "false");
@@ -462,14 +467,11 @@
       tabRessources.classList.toggle("selected", !isEnigmes);
       tabRessources.setAttribute("aria-selected", !isEnigmes ? "true" : "false");
 
-      // Show only selected section (retour à l'ancien comportement)
       sectionEnigmes.style.display = isEnigmes ? "block" : "none";
       sectionRessources.style.display = !isEnigmes ? "block" : "none";
 
-      // Update hash (propre)
       location.hash = isEnigmes ? "#enigmes" : "#muscler";
 
-      // scroll top of content (gentil)
       const top = (isEnigmes ? sectionEnigmes : sectionRessources).getBoundingClientRect().top + window.scrollY - 12;
       window.scrollTo({ top, behavior: "smooth" });
 
@@ -479,11 +481,7 @@
     tabEnigmes.addEventListener("click", () => setTab("enigmes"));
     tabRessources.addEventListener("click", () => setTab("muscler"));
 
-    // ✅ lien inline qui bascule proprement sur l'onglet "muscler"
-    inlineMusclerLink.addEventListener("click", (e) => {
-      e.preventDefault();
-      setTab("muscler");
-    });
+    goMuscler.addEventListener("click", () => setTab("muscler"));
 
     function openAnswer(title, answer){
       modalTitle.textContent = title || "Réponse";
@@ -501,14 +499,12 @@
 
     closeModal.addEventListener("click", closeAnswer);
     overlay.addEventListener("click", (e) => {
-      // ferme si click en dehors de la modal
       if(e.target === overlay) closeAnswer();
     });
     document.addEventListener("keydown", (e) => {
       if(e.key === "Escape" && overlay.classList.contains("show")) closeAnswer();
     });
 
-    // Data loading
     async function loadJSON(path){
       const res = await fetch(path, { cache: "no-store" });
       if(!res.ok) throw new Error("Erreur fetch " + path);
@@ -526,7 +522,7 @@
         const card = document.createElement("div");
         card.className = "card";
 
-        const badge = (e.badge || "💎").toString();
+        const badge = (e.badge || "💎").toString(); // tu peux mettre le même badge partout dans ton JSON
         const titre = (e.titre || "Énigme").toString();
         const question = (e.question || "").toString();
         const reponse = (e.reponse || "").toString();
@@ -541,11 +537,11 @@
 
         const btn = card.querySelector(".answer-btn");
         btn.addEventListener("click", () => {
-          // Ouvre l'affiliation dans un nouvel onglet, puis affiche la réponse (UX comme prévu)
           if(affiliate && affiliate.trim() && affiliate !== "TON_LIEN_AFFILIATION_ICI"){
             window.open(affiliate, "_blank", "noopener,noreferrer");
           }
           openAnswer(titre, reponse);
+          blurActive();
         });
 
         root.appendChild(card);
@@ -575,7 +571,6 @@
       });
     }
 
-    // Escape safe
     function escapeHTML(str){
       return String(str)
         .replaceAll("&", "&amp;")
@@ -600,7 +595,6 @@
         $("ressources-list").innerHTML = `<div class="empty">Impossible de charger <b>ressources.json</b>.</div>`;
       }
 
-      // Hash routing
       const h = (location.hash || "").toLowerCase();
       if(h.includes("muscler")) setTab("muscler");
       else setTab("enigmes");
