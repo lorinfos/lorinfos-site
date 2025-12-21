@@ -2,526 +2,561 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#0B0B0B" />
   <title>LORINFOS</title>
   <meta name="description" content="Des énigmes courtes pour tester ta logique. La plupart se trompent." />
 
   <style>
     :root{
-      --gold:#D7A11E;
+      --gold: #D7A11E;
       --gold2:#F2D37A;
-      --ink:#0B0B0D;
-      --panel:rgba(20,20,24,.72);
-      --panel2:rgba(255,255,255,.06);
-      --text:rgba(255,255,255,.92);
-      --muted:rgba(255,255,255,.72);
-      --line:rgba(255,255,255,.10);
-      --shadow:0 18px 50px rgba(0,0,0,.55);
-      --radius:26px;
-      --radius2:18px;
-      --max:860px;
+      --bg: #070708;
+      --panel: rgba(255,255,255,0.06);
+      --panel2: rgba(255,255,255,0.09);
+      --stroke: rgba(255,255,255,0.12);
+      --stroke2: rgba(215,161,30,0.30);
+      --text: rgba(255,255,255,0.92);
+      --muted: rgba(255,255,255,0.65);
+      --shadow: 0 18px 60px rgba(0,0,0,0.55);
+      --radius: 22px;
+      --radius2: 18px;
+      --max: 820px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
-      color:var(--text);
-      background:
-        radial-gradient(1200px 700px at 20% 0%, rgba(215,161,30,.18), transparent 60%),
-        radial-gradient(900px 520px at 85% 15%, rgba(242,211,122,.10), transparent 55%),
-        radial-gradient(1200px 900px at 50% 110%, rgba(0,0,0,.65), rgba(0,0,0,.95)),
-        #07070A;
-      overflow-x:hidden;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      color: var(--text);
+      background: radial-gradient(900px 420px at 50% 0%, rgba(215,161,30,0.22), transparent 60%),
+                  radial-gradient(700px 380px at 20% 20%, rgba(242,211,122,0.12), transparent 60%),
+                  linear-gradient(180deg, #0B0B0C 0%, #050506 100%);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      -webkit-tap-highlight-color: transparent; /* iOS: évite les “flash” bleus */
     }
 
+    a{ color:inherit; text-decoration:none; }
+
     .wrap{
-      width:min(var(--max), calc(100% - 34px));
-      margin:28px auto 46px;
+      width: min(var(--max), 100%);
+      margin: 0 auto;
+      padding: 26px 16px 40px;
     }
 
     .hero{
-      position:relative;
-      border-radius:32px;
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
+      border-radius: 28px;
+      background:
+        radial-gradient(600px 240px at 15% 0%, rgba(215,161,30,0.22), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid var(--stroke);
       box-shadow: var(--shadow);
-      border:1px solid rgba(255,255,255,.10);
-      overflow:hidden;
+      padding: 18px 16px 16px;
+      position: relative;
+      overflow: hidden;
     }
-    .hero::before{
+
+    .hero::after{
       content:"";
       position:absolute; inset:-2px;
-      background:
-        radial-gradient(700px 240px at 35% 15%, rgba(215,161,30,.25), transparent 65%),
-        radial-gradient(680px 260px at 75% 25%, rgba(242,211,122,.14), transparent 62%),
-        linear-gradient(180deg, rgba(0,0,0,.35), rgba(0,0,0,.65));
-      filter:saturate(1.05);
+      background: radial-gradient(520px 220px at 80% 10%, rgba(215,161,30,0.18), transparent 55%);
       pointer-events:none;
     }
-    .heroInner{
-      position:relative;
-      padding:22px 18px 18px;
+
+    .brand{
       display:flex;
       gap:14px;
-      align-items:flex-start;
+      align-items:center;
+      z-index:1;
+      position:relative;
     }
+
     .logo{
       width:62px; height:62px;
-      border-radius:16px;
-      flex:0 0 auto;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.12);
-      display:grid; place-items:center;
-      overflow:hidden;
-      box-shadow: 0 10px 25px rgba(0,0,0,.45);
+      border-radius: 16px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
+      border: 1px solid rgba(255,255,255,0.10);
+      background: rgba(0,0,0,0.35);
+      object-fit: cover;
     }
-    .logo img{width:100%; height:100%; object-fit:cover; display:block;}
 
     .brand h1{
       margin:0;
-      letter-spacing:.08em;
-      font-weight:900;
-      font-size:34px;
-      line-height:1.05;
-      text-transform:uppercase;
-      text-shadow: 0 10px 24px rgba(0,0,0,.55);
+      font-size: 40px;
+      letter-spacing: 0.06em;
+      line-height: 1;
     }
     .brand p{
       margin:8px 0 0;
-      color:var(--muted);
-      font-size:16px;
-      line-height:1.45;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.4;
+      max-width: 420px;
     }
 
-    .actions{
-      position:relative;
-      padding:0 18px 18px;
+    .cta{
+      margin-top: 14px;
       display:grid;
-      gap:12px;
+      grid-template-columns: 1fr;
+      gap: 12px;
+      z-index:1;
+      position:relative;
     }
 
     .btn{
-      width:100%;
-      border:0;
-      border-radius:999px;
-      padding:16px 18px;
-      font-weight:800;
-      font-size:17px;
-      letter-spacing:.01em;
-      cursor:pointer;
+      border: 1px solid var(--stroke);
+      border-radius: 999px;
+      padding: 14px 16px;
+      font-weight: 700;
+      font-size: 18px;
       display:flex;
       align-items:center;
       justify-content:center;
       gap:10px;
-      transition: transform .12s ease, filter .12s ease, box-shadow .12s ease;
+      background: rgba(255,255,255,0.06);
+      box-shadow: 0 14px 38px rgba(0,0,0,0.35);
       user-select:none;
+      transition: transform .08s ease, filter .2s ease, background .2s ease;
+      cursor:pointer;
     }
-    .btn:active{transform:translateY(1px) scale(.995)}
-    .btnGold{
-      color:#1a1200;
-      background:linear-gradient(180deg, var(--gold2), var(--gold));
-      box-shadow: 0 14px 30px rgba(215,161,30,.22), 0 10px 22px rgba(0,0,0,.55);
+    .btn:active{ transform: translateY(1px) scale(0.99); }
+
+    .btn-gold{
+      border-color: rgba(215,161,30,0.35);
+      background: linear-gradient(180deg, var(--gold2), var(--gold));
+      color: #17130A;
+      text-shadow: none;
     }
-    .btnDark{
-      color:var(--text);
-      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.04));
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow: 0 12px 26px rgba(0,0,0,.55);
+    .btn-dark{
+      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
     }
 
-    .section{
-      margin-top:22px;
-    }
-    .section h2{
-      margin:0 0 10px;
-      font-size:42px;
-      line-height:1.02;
-      letter-spacing:.01em;
-      text-shadow: 0 12px 26px rgba(0,0,0,.65);
-    }
-    .section h2 .emoji{filter:drop-shadow(0 8px 14px rgba(0,0,0,.6))}
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.03));
-      border:1px solid rgba(215,161,30,.22);
-      box-shadow: var(--shadow);
-      border-radius:var(--radius);
-      padding:16px;
-      overflow:hidden;
+    .section-title{
+      margin: 18px 2px 10px;
+      font-size: 44px;
+      letter-spacing: -0.02em;
+      display:flex;
+      align-items:center;
+      gap:10px;
     }
 
     .notice{
-      display:flex;
-      gap:12px;
-      align-items:flex-start;
-      color:rgba(255,255,255,.82);
-      border:1px solid rgba(215,161,30,.25);
-      background:linear-gradient(180deg, rgba(215,161,30,.12), rgba(0,0,0,.18));
+      border-radius: var(--radius);
+      padding: 16px 16px;
+      border: 1px solid rgba(215,161,30,0.25);
+      background: linear-gradient(180deg, rgba(215,161,30,0.10), rgba(0,0,0,0.18));
+      box-shadow: 0 18px 50px rgba(0,0,0,0.45);
+      color: rgba(255,255,255,0.86);
+      line-height: 1.45;
     }
-    .notice .icon{font-size:20px; line-height:1.2}
-    .notice strong{color:rgba(255,255,255,.92)}
-    .notice p{margin:0; line-height:1.45}
+    .notice b{ color: rgba(255,255,255,0.95); }
 
-    .grid{
-      margin-top:14px;
+    .list{
+      margin-top: 14px;
       display:grid;
-      gap:14px;
+      gap: 14px;
     }
 
-    .puzzle{
-      border:1px solid rgba(255,255,255,.10);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.025));
-      border-radius:22px;
-      padding:16px;
+    .card{
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border: 1px solid rgba(255,255,255,0.12);
+      box-shadow: 0 18px 55px rgba(0,0,0,0.45);
+      padding: 16px;
+      overflow:hidden;
+      position:relative;
     }
-    .puzzleTop{
-      display:flex;
-      align-items:center;
-      justify-content:space-between;
-      gap:12px;
-      margin-bottom:10px;
-    }
+
     .badge{
       display:inline-flex;
       align-items:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      background:rgba(255,255,255,.06);
-      border:1px solid rgba(255,255,255,.10);
-      font-weight:900;
-      letter-spacing:.02em;
+      gap:8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: rgba(255,255,255,0.88);
+      font-weight: 800;
+      letter-spacing: 0.01em;
     }
+
     .question{
-      margin:0;
-      font-size:20px;
-      line-height:1.35;
-      color:rgba(255,255,255,.92);
+      margin: 12px 0 14px;
+      font-size: 24px;
+      color: rgba(255,255,255,0.92);
+      line-height: 1.25;
     }
+
+    .card .btn{
+      width: 100%;
+      margin-top: 10px;
+    }
+
     .hint{
-      margin:12px 0 0;
-      color:rgba(255,255,255,.70);
-      font-size:14px;
-      line-height:1.45;
+      margin-top: 12px;
+      color: rgba(255,255,255,0.62);
+      font-size: 15px;
+      line-height: 1.35;
     }
 
-    .answerBtn{
-      margin-top:14px;
-      padding:14px 16px;
-      font-size:16px;
-    }
-
-    .resources{
-      display:grid;
-      gap:14px;
-      margin-top:14px;
-    }
-    .resource{
-      border-radius:22px;
-      padding:16px;
-      border:1px solid rgba(255,255,255,.10);
-      background:linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
-      display:grid;
-      gap:10px;
-    }
-    .resource h3{margin:0; font-size:18px}
-    .resource p{margin:0; color:rgba(255,255,255,.72); line-height:1.45}
-    .resource a{
-      display:inline-flex;
-      justify-content:center;
-      align-items:center;
-      gap:10px;
-      text-decoration:none;
-      padding:14px 16px;
-      border-radius:999px;
-      font-weight:900;
-      color:#1a1200;
-      background:linear-gradient(180deg, var(--gold2), var(--gold));
-      box-shadow: 0 12px 26px rgba(215,161,30,.18), 0 10px 22px rgba(0,0,0,.55);
-    }
-
-    .errorBox{
-      margin-top:14px;
-      border-radius:18px;
-      padding:14px;
-      border:1px solid rgba(255,80,80,.30);
-      background:linear-gradient(180deg, rgba(255,80,80,.10), rgba(0,0,0,.20));
-      color:rgba(255,255,255,.90);
-      display:none;
-    }
-    .errorBox code{
-      display:block;
-      margin-top:8px;
-      padding:10px 12px;
-      border-radius:14px;
-      background:rgba(0,0,0,.35);
-      border:1px solid rgba(255,255,255,.10);
-      color:rgba(255,255,255,.85);
-      overflow:auto;
-      font-size:12px;
+    .subtle{
+      margin-top: 12px;
+      border-radius: 999px;
+      padding: 12px 14px;
+      border: 1px solid rgba(255,255,255,0.12);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.75);
+      text-align:center;
+      font-weight: 600;
     }
 
     footer{
-      margin-top:22px;
+      margin-top: 26px;
       text-align:center;
-      color:rgba(255,255,255,.55);
-      font-size:14px;
-      padding:18px 0 8px;
+      color: rgba(255,255,255,0.45);
+      font-size: 14px;
     }
 
-    /* Modal */
-    .modal{
-      position:fixed; inset:0;
-      background:rgba(0,0,0,.55);
+    /* ===== Modal (fix du problème de transparence) ===== */
+    .modalOverlay{
+      position: fixed;
+      inset: 0;
       display:none;
-      align-items:flex-end;
-      justify-content:center;
-      padding:18px;
-      z-index:50;
+      align-items: flex-end;
+      justify-content: center;
+      padding: 16px;
+      z-index: 9999;
+      background: rgba(0,0,0,0.72); /* opaque => texte derrière invisible */
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
     }
-    .modalCard{
-      width:min(720px, 100%);
-      border-radius:26px;
-      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.05));
-      border:1px solid rgba(255,255,255,.14);
-      box-shadow: 0 25px 60px rgba(0,0,0,.70);
-      overflow:hidden;
+    .modalOverlay.show{ display:flex; }
+
+    .modal{
+      width: min(var(--max), 100%);
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(22,22,24,0.96), rgba(10,10,11,0.96));
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 30px 90px rgba(0,0,0,0.65);
+      padding: 14px 14px 16px;
+      max-height: 78vh;
+      overflow:auto;
     }
-    .modalHead{
-      padding:14px 16px;
+
+    .modalTop{
       display:flex;
       align-items:center;
-      justify-content:space-between;
-      gap:10px;
-      border-bottom:1px solid rgba(255,255,255,.10);
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
     }
-    .modalHead strong{font-size:15px; letter-spacing:.02em}
-    .close{
-      border:0;
-      background:rgba(255,255,255,.10);
-      color:rgba(255,255,255,.90);
-      border-radius:12px;
-      padding:10px 12px;
-      font-weight:900;
+    .modalTitle{
+      font-weight: 900;
+      font-size: 18px;
+      color: rgba(255,255,255,0.92);
+    }
+    .x{
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.85);
+      border-radius: 999px;
+      width: 40px;
+      height: 34px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      cursor:pointer;
+      user-select:none;
+    }
+    .x:active{ transform: scale(0.98); }
+
+    .modalBody{
+      color: rgba(255,255,255,0.85);
+      font-size: 16px;
+      line-height: 1.45;
+      white-space: pre-wrap;
+    }
+    .modalBody b{ color: rgba(255,255,255,0.95); }
+
+    .row{
+      display:flex;
+      gap: 10px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .smallBtn{
+      flex: 1;
+      min-width: 140px;
+      border-radius: 14px;
+      padding: 12px 12px;
+      font-weight: 800;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.06);
+      color: rgba(255,255,255,0.90);
       cursor:pointer;
     }
-    .modalBody{
-      padding:14px 16px 16px;
-      color:rgba(255,255,255,.86);
-      line-height:1.5;
-      font-size:16px;
+    .smallBtn.gold{
+      border-color: rgba(215,161,30,0.35);
+      background: linear-gradient(180deg, var(--gold2), var(--gold));
+      color: #17130A;
+    }
+
+    @media (max-width: 420px){
+      .brand h1{ font-size: 34px; }
+      .section-title{ font-size: 38px; }
+      .question{ font-size: 22px; }
     }
   </style>
 </head>
 
 <body>
-  <main class="wrap">
-    <section class="hero" aria-label="En-tête LORINFOS">
-      <div class="heroInner">
-        <div class="logo" aria-label="Logo">
-          <img src="logo.png" alt="Logo LORINFOS">
-        </div>
-        <div class="brand">
+  <div class="wrap">
+    <div class="hero">
+      <div class="brand">
+        <img class="logo" src="logo.png" alt="Logo LORINFOS" />
+        <div>
           <h1>LORINFOS</h1>
-          <p>Des énigmes courtes pour tester ta logique.<br>La plupart se trompent.</p>
+          <p>Des énigmes courtes pour tester ta logique.<br/>La plupart se trompent.</p>
         </div>
       </div>
 
-      <div class="actions">
-        <button class="btn btnGold" type="button" id="goEnigmes">🧩 Énigmes & Réponses</button>
-        <button class="btn btnDark" type="button" id="goRessources">🧠 Muscler son cerveau</button>
+      <div class="cta">
+        <button class="btn btn-gold" id="goEnigmes" type="button">🧩 <span>Énigmes & Réponses</span></button>
+        <button class="btn btn-dark" id="goRessources" type="button">🧠 <span>Muscler son cerveau</span></button>
       </div>
-    </section>
+    </div>
 
-    <section class="section" id="enigmes">
-      <h2><span class="emoji">🧩</span> Énigmes & Réponses</h2>
+    <h2 class="section-title" id="enigmes">🧩 Énigmes & Réponses</h2>
 
-      <div class="card notice">
-        <div class="icon">⚠️</div>
-        <p>
-          <strong>Pour faire vivre le site</strong>, certaines réponses peuvent ouvrir une courte publicité.
-          Ferme simplement l’onglet de pub et reviens ici : <strong>la réponse s’affiche ensuite</strong>.
-        </p>
-      </div>
+    <div class="notice">
+      ⚠️ <b>Pour faire vivre le site</b>, certaines réponses peuvent ouvrir une courte publicité.<br/>
+      Ferme simplement l’onglet de pub et reviens ici : <b>la réponse s’affiche ensuite</b>.
+    </div>
 
-      <div class="errorBox" id="errEnigmes">
-        <strong>Je n’arrive pas à charger <code>enigmes.json</code>.</strong>
-        <div style="height:8px"></div>
-        Vérifie que le fichier est bien à la racine du repo et qu’il s’appelle exactement <code>enigmes.json</code> (minuscule).
-        <code id="errEnigmesDetail"></code>
-      </div>
+    <div class="list" id="enigmesList">
+      <div class="subtle">Chargement des énigmes…</div>
+    </div>
 
-      <div class="grid" id="enigmesList" aria-live="polite"></div>
-    </section>
+    <h2 class="section-title" id="ressources">🧠 Muscler son cerveau</h2>
 
-    <section class="section" id="ressources">
-      <h2><span class="emoji">🧠</span> Muscler son cerveau</h2>
-
-      <div class="errorBox" id="errRessources">
-        <strong>Je n’arrive pas à charger <code>ressources.json</code>.</strong>
-        <div style="height:8px"></div>
-        Vérifie que le fichier est bien à la racine du repo et qu’il s’appelle exactement <code>ressources.json</code>.
-        <code id="errRessourcesDetail"></code>
-      </div>
-
-      <div class="resources" id="ressourcesList" aria-live="polite"></div>
-    </section>
+    <div class="list" id="ressourcesList">
+      <div class="subtle">Chargement des ressources…</div>
+    </div>
 
     <footer>© LORINFOS — Tous droits réservés.</footer>
-  </main>
+  </div>
 
-  <!-- Modal réponse -->
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-label="Réponse">
-    <div class="modalCard">
-      <div class="modalHead">
-        <strong id="modalTitle">Réponse</strong>
-        <button class="close" id="closeModal" type="button">✕</button>
+  <!-- Modal -->
+  <div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" id="modal">
+      <div class="modalTop">
+        <div class="modalTitle" id="modalTitle">Réponse</div>
+        <div class="x" id="modalClose" aria-label="Fermer">✕</div>
       </div>
       <div class="modalBody" id="modalBody"></div>
+      <div class="row" id="modalActions" style="display:none;"></div>
     </div>
   </div>
 
   <script>
-    // Base URL (important sur GitHub Pages + quand il y a un #hash)
-    const base = new URL('.', window.location.href);
-
+    // ===== Helpers =====
     const $ = (id) => document.getElementById(id);
 
-    // Navigation douce
+    function safeText(s){
+      return (s ?? "").toString();
+    }
+
+    // ===== Smooth navigation =====
     $("goEnigmes").addEventListener("click", () => {
-      document.getElementById("enigmes").scrollIntoView({behavior:"smooth", block:"start"});
-      history.replaceState(null, "", "#enigmes");
+      location.hash = "#enigmes";
+      document.querySelector("#enigmes").scrollIntoView({behavior:"smooth", block:"start"});
     });
     $("goRessources").addEventListener("click", () => {
-      document.getElementById("ressources").scrollIntoView({behavior:"smooth", block:"start"});
-      history.replaceState(null, "", "#ressources");
+      location.hash = "#ressources";
+      document.querySelector("#ressources").scrollIntoView({behavior:"smooth", block:"start"});
     });
 
-    // Modal
-    const modal = $("modal");
-    const openModal = (title, html) => {
-      $("modalTitle").textContent = title;
-      $("modalBody").innerHTML = html;
-      modal.style.display = "flex";
-    };
-    const closeModal = () => modal.style.display = "none";
-    $("closeModal").addEventListener("click", closeModal);
-    modal.addEventListener("click", (e) => { if(e.target === modal) closeModal(); });
+    // ===== Modal (opaque + blur + no-scroll behind) =====
+    const overlay = $("modalOverlay");
+    const body = document.body;
 
-    // Fetch helper (petit cache-buster pour éviter Safari qui garde l’ancien JSON)
-    async function fetchJSON(filename){
-      const url = new URL(filename, base);
-      url.searchParams.set("v", Date.now().toString());
-      const res = await fetch(url.toString(), { cache: "no-store" });
-      if(!res.ok) throw new Error(res.status + " " + res.statusText + " — " + url.toString());
+    function openModal(title, bodyText, actions = []){
+      $("modalTitle").textContent = safeText(title || "Info");
+      $("modalBody").textContent = safeText(bodyText);
+
+      const actionsWrap = $("modalActions");
+      actionsWrap.innerHTML = "";
+      if(actions.length){
+        actionsWrap.style.display = "flex";
+        actions.forEach(a => {
+          const b = document.createElement("button");
+          b.className = "smallBtn" + (a.gold ? " gold" : "");
+          b.type = "button";
+          b.textContent = a.label;
+          b.addEventListener("click", a.onClick);
+          actionsWrap.appendChild(b);
+        });
+      }else{
+        actionsWrap.style.display = "none";
+      }
+
+      overlay.classList.add("show");
+      overlay.setAttribute("aria-hidden", "false");
+      body.style.overflow = "hidden";
+    }
+
+    function closeModal(){
+      overlay.classList.remove("show");
+      overlay.setAttribute("aria-hidden", "true");
+      body.style.overflow = "";
+    }
+
+    $("modalClose").addEventListener("click", closeModal);
+    overlay.addEventListener("click", (e) => { if(e.target === overlay) closeModal(); });
+    document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
+
+    // ===== Data loading =====
+    async function fetchJson(path){
+      const res = await fetch(path, { cache: "no-store" }); // évite les caches agressifs
+      if(!res.ok) throw new Error(`HTTP ${res.status} sur ${path}`);
       return await res.json();
     }
 
-    function escapeHTML(str){
-      return String(str).replace(/[&<>"']/g, s => ({
-        "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"
-      }[s]));
+    // ===== Affiliation (global) =====
+    // enigmes.json: { affiliate_url: "...", enigmes: [...] }
+    // ressources.json: { affiliate_url: "...", ressources: [...] }
+    let enigmesAffiliate = "";
+    let ressourcesAffiliate = "";
+
+    function openAffiliateThenShowAnswer(affiliateUrl, answerTitle, answerText){
+      const url = (affiliateUrl || "").trim();
+      // 1) ouvre pub si url, 2) montre la réponse tout de suite (ou après retour)
+      if(url){
+        try{ window.open(url, "_blank", "noopener,noreferrer"); }catch(_){}
+      }
+      openModal(answerTitle, answerText);
     }
 
-    // Rendu énigmes
-    function renderEnigmes(data){
-      const list = $("enigmesList");
-      list.innerHTML = "";
+    // ===== Render enigmes =====
+    function renderEnigmes(list){
+      const wrap = $("enigmesList");
+      wrap.innerHTML = "";
 
-      const affiliateUrl = data?.affiliate_url || "";
-      const enigmes = Array.isArray(data?.enigmes) ? data.enigmes : [];
-
-      if(enigmes.length === 0){
-        list.innerHTML = `<div class="card">Aucune énigme pour l’instant. Ajoute-en une dans <code>enigmes.json</code> ✅</div>`;
+      if(!Array.isArray(list) || list.length === 0){
+        wrap.innerHTML = `<div class="subtle">Aucune énigme pour l’instant. Ajoute-en dans enigmes.json ✅</div>`;
         return;
       }
 
-      for(const e of enigmes){
-        const badge = escapeHTML(e.badge ?? "🧩");
-        const titre = escapeHTML(e.titre ?? "Énigme");
-        const question = escapeHTML(e.question ?? "");
-        const reponse = escapeHTML(e.reponse ?? "");
-        const astuce = escapeHTML(e.astuce ?? "");
+      list.forEach((e) => {
+        const card = document.createElement("div");
+        card.className = "card";
 
-        const card = document.createElement("article");
-        card.className = "puzzle";
+        const badge = document.createElement("div");
+        badge.className = "badge";
+        badge.textContent = `${safeText(e.badge || "💎")} ${safeText(e.titre || "Énigme")}`;
 
-        card.innerHTML = `
-          <div class="puzzleTop">
-            <div class="badge">${badge} <span>${titre}</span></div>
-          </div>
+        const q = document.createElement("div");
+        q.className = "question";
+        q.textContent = safeText(e.question);
 
-          <p class="question">${question}</p>
-
-          <button class="btn btnGold answerBtn" type="button">
-            👉 Voir la réponse
-          </button>
-
-          ${astuce ? `<p class="hint">Astuce : ${astuce}</p>` : ""}
-        `;
-
-        const btn = card.querySelector("button");
+        const btn = document.createElement("button");
+        btn.className = "btn btn-gold";
+        btn.type = "button";
+        btn.innerHTML = `👉 <span>Voir la réponse</span>`;
         btn.addEventListener("click", () => {
-          // Si tu mets un lien d’affiliation global, on ouvre d’abord la pub,
-          // puis on affiche la réponse dans une modal.
-          if(affiliateUrl && affiliateUrl.trim() && !affiliateUrl.includes("TON_LIEN_")){
-            window.open(affiliateUrl, "_blank");
-          }
-          openModal(titre, `<strong>Réponse :</strong><br>${reponse}`);
+          const title = safeText(e.titre || "Réponse");
+          const answer = safeText(e.reponse || "Réponse non disponible.");
+          openAffiliateThenShowAnswer(enigmesAffiliate, title, `Réponse :\n${answer}`);
         });
 
-        list.appendChild(card);
-      }
+        const hint = document.createElement("div");
+        hint.className = "hint";
+        hint.textContent = safeText(e.astuce || "");
+
+        card.appendChild(badge);
+        card.appendChild(q);
+        card.appendChild(btn);
+        if(hint.textContent.trim()) card.appendChild(hint);
+
+        wrap.appendChild(card);
+      });
     }
 
-    // Rendu ressources
-    function renderRessources(data){
-      const list = $("ressourcesList");
-      list.innerHTML = "";
+    // ===== Render ressources =====
+    function renderRessources(list){
+      const wrap = $("ressourcesList");
+      wrap.innerHTML = "";
 
-      const ressources = Array.isArray(data?.ressources) ? data.ressources : [];
-
-      if(ressources.length === 0){
-        list.innerHTML = `<div class="card">Aucune ressource pour l’instant. Ajoute-en dans <code>ressources.json</code> ✅</div>`;
+      if(!Array.isArray(list) || list.length === 0){
+        wrap.innerHTML = `<div class="subtle">Aucune ressource pour l’instant. Ajoute-en dans ressources.json ✅</div>`;
         return;
       }
 
-      for(const r of ressources){
-        const titre = escapeHTML(r.titre ?? "Ressource");
-        const desc = escapeHTML(r.description ?? "");
-        const url = (r.url ?? "").toString().trim();
+      list.forEach((r) => {
+        const card = document.createElement("div");
+        card.className = "card";
 
-        const item = document.createElement("div");
-        item.className = "resource";
+        const badge = document.createElement("div");
+        badge.className = "badge";
+        badge.textContent = `${safeText(r.badge || "🧠")} ${safeText(r.titre || "Ressource")}`;
 
-        item.innerHTML = `
-          <h3>${titre}</h3>
-          ${desc ? `<p>${desc}</p>` : ""}
-          ${url ? `<a href="${url}" target="_blank" rel="noopener">🛒 Voir</a>` : `<p style="opacity:.7">Lien manquant</p>`}
-        `;
+        const desc = document.createElement("div");
+        desc.className = "question";
+        desc.style.fontSize = "20px";
+        desc.style.lineHeight = "1.28";
+        desc.textContent = safeText(r.description || "");
 
-        list.appendChild(item);
-      }
+        const btn = document.createElement("button");
+        btn.className = "btn btn-dark";
+        btn.type = "button";
+        btn.innerHTML = `🛒 <span>Voir / Acheter</span>`;
+        btn.addEventListener("click", () => {
+          // si r.url existe => prioritaire, sinon global ressourcesAffiliate
+          const url = (safeText(r.url).trim() || ressourcesAffiliate || "").trim();
+          if(!url){
+            openModal("Lien indisponible", "Ajoute un lien (url) dans ressources.json, ou un affiliate_url global.");
+            return;
+          }
+          try{ window.open(url, "_blank", "noopener,noreferrer"); }catch(_){}
+        });
+
+        card.appendChild(badge);
+        if(desc.textContent.trim()) card.appendChild(desc);
+        card.appendChild(btn);
+
+        wrap.appendChild(card);
+      });
     }
 
-    // Boot
+    // ===== Init =====
     (async function init(){
-      // Enigmes
       try{
-        const enigmes = await fetchJSON("enigmes.json");
-        renderEnigmes(enigmes);
+        const dataE = await fetchJson("enigmes.json");
+        enigmesAffiliate = safeText(dataE.affiliate_url || "");
+        renderEnigmes(dataE.enigmes || []);
       }catch(err){
-        $("errEnigmes").style.display = "block";
-        $("errEnigmesDetail").textContent = String(err);
+        $("enigmesList").innerHTML =
+          `<div class="subtle">Erreur de chargement (enigmes.json). Vérifie le nom du fichier et le format JSON ✅</div>`;
+        console.error(err);
       }
 
-      // Ressources
       try{
-        const ressources = await fetchJSON("ressources.json");
-        renderRessources(ressources);
+        const dataR = await fetchJson("ressources.json");
+        ressourcesAffiliate = safeText(dataR.affiliate_url || "");
+        renderRessources(dataR.ressources || []);
       }catch(err){
-        $("errRessources").style.display = "block";
-        $("errRessourcesDetail").textContent = String(err);
+        $("ressourcesList").innerHTML =
+          `<div class="subtle">Erreur de chargement (ressources.json). Vérifie le nom du fichier et le format JSON ✅</div>`;
+        console.error(err);
+      }
+
+      // Si on arrive avec un #hash
+      if(location.hash){
+        const id = location.hash.replace("#", "");
+        const el = document.getElementById(id);
+        if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
       }
     })();
   </script>
