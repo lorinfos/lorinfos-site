@@ -3,562 +3,596 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#0B0B0B" />
   <title>LORINFOS</title>
   <meta name="description" content="Des énigmes courtes pour tester ta logique. La plupart se trompent." />
+  <meta name="theme-color" content="#0B0B0D" />
 
   <style>
     :root{
+      /* Spacing scale (8px) */
+      --s1: 8px; --s2: 16px; --s3: 24px; --s4: 32px; --s5: 40px;
+
+      /* Brand */
       --gold: #D7A11E;
       --gold2:#F2D37A;
-      --bg: #070708;
-      --panel: rgba(255,255,255,0.06);
-      --panel2: rgba(255,255,255,0.09);
-      --stroke: rgba(255,255,255,0.12);
-      --stroke2: rgba(215,161,30,0.30);
-      --text: rgba(255,255,255,0.92);
-      --muted: rgba(255,255,255,0.65);
-      --shadow: 0 18px 60px rgba(0,0,0,0.55);
-      --radius: 22px;
-      --radius2: 18px;
-      --max: 820px;
+      --gold3:#B88412;
+
+      /* Base */
+      --bg: #0B0B0D;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.12);
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.70);
+      --muted2: rgba(255,255,255,.55);
+      --shadow: 0 18px 60px rgba(0,0,0,.55);
+
+      --radius-xl: 26px;
+      --radius-lg: 20px;
+      --radius-md: 16px;
+
+      --max: 860px;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial;
+      font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", Segoe UI, Roboto, Helvetica, Arial;
       color: var(--text);
-      background: radial-gradient(900px 420px at 50% 0%, rgba(215,161,30,0.22), transparent 60%),
-                  radial-gradient(700px 380px at 20% 20%, rgba(242,211,122,0.12), transparent 60%),
-                  linear-gradient(180deg, #0B0B0C 0%, #050506 100%);
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-      -webkit-tap-highlight-color: transparent; /* iOS: évite les “flash” bleus */
+      background:
+        radial-gradient(1200px 700px at 20% -10%, rgba(215,161,30,.28), transparent 60%),
+        radial-gradient(900px 650px at 90% 10%, rgba(242,211,122,.12), transparent 55%),
+        radial-gradient(900px 650px at 50% 110%, rgba(215,161,30,.10), transparent 60%),
+        linear-gradient(180deg, #0A0A0C, #070709 40%, #050507);
+      overflow-x:hidden;
     }
 
-    a{ color:inherit; text-decoration:none; }
+    /* iOS: éviter les “bleus” de liens / tap-highlight */
+    a, button{ -webkit-tap-highlight-color: transparent; }
+    a{ color: inherit; text-decoration: none; }
 
     .wrap{
-      width: min(var(--max), 100%);
+      width: min(var(--max), calc(100% - 2*var(--s3)));
       margin: 0 auto;
-      padding: 26px 16px 40px;
+      padding:
+        calc(env(safe-area-inset-top) + var(--s4))
+        0
+        calc(env(safe-area-inset-bottom) + var(--s5))
+        0;
     }
 
     .hero{
-      border-radius: 28px;
-      background:
-        radial-gradient(600px 240px at 15% 0%, rgba(215,161,30,0.22), transparent 60%),
-        linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
+      border-radius: var(--radius-xl);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
       border: 1px solid var(--stroke);
       box-shadow: var(--shadow);
-      padding: 18px 16px 16px;
+      overflow:hidden;
       position: relative;
-      overflow: hidden;
     }
-
-    .hero::after{
+    .hero::before{
       content:"";
-      position:absolute; inset:-2px;
-      background: radial-gradient(520px 220px at 80% 10%, rgba(215,161,30,0.18), transparent 55%);
+      position:absolute; inset:0;
+      background:
+        radial-gradient(700px 250px at 30% 0%, rgba(215,161,30,.22), transparent 60%),
+        radial-gradient(500px 220px at 90% 30%, rgba(242,211,122,.10), transparent 60%);
       pointer-events:none;
     }
-
-    .brand{
-      display:flex;
-      gap:14px;
-      align-items:center;
-      z-index:1;
+    .hero-inner{
       position:relative;
+      padding: var(--s4);
+      display:flex;
+      gap: var(--s3);
+      align-items:flex-start;
     }
 
     .logo{
-      width:62px; height:62px;
-      border-radius: 16px;
-      box-shadow: 0 12px 30px rgba(0,0,0,0.45);
-      border: 1px solid rgba(255,255,255,0.10);
-      background: rgba(0,0,0,0.35);
-      object-fit: cover;
-    }
-
-    .brand h1{
-      margin:0;
-      font-size: 40px;
-      letter-spacing: 0.06em;
-      line-height: 1;
-    }
-    .brand p{
-      margin:8px 0 0;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.4;
-      max-width: 420px;
-    }
-
-    .cta{
-      margin-top: 14px;
+      width: 76px;
+      height: 76px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: 0 12px 30px rgba(0,0,0,.35);
       display:grid;
-      grid-template-columns: 1fr;
-      gap: 12px;
-      z-index:1;
-      position:relative;
+      place-items:center;
+      overflow:hidden;
+      flex: 0 0 auto;
+    }
+    .logo img{
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display:block;
+    }
+
+    .title{
+      margin:0;
+      font-size: 42px;
+      letter-spacing: .08em;
+      font-weight: 800;
+      line-height: 1.05;
+      text-transform: uppercase;
+    }
+    .subtitle{
+      margin: var(--s1) 0 0 0;
+      font-size: 18px;
+      line-height: 1.45;
+      color: var(--muted);
+      max-width: 42ch;
+    }
+
+    .cta-row{
+      margin-top: var(--s3);
+      display:flex;
+      gap: var(--s2);
+      flex-wrap: wrap;
     }
 
     .btn{
-      border: 1px solid var(--stroke);
+      appearance:none;
+      border:0;
+      cursor:pointer;
       border-radius: 999px;
-      padding: 14px 16px;
-      font-weight: 700;
+      padding: 16px 18px;
       font-size: 18px;
-      display:flex;
+      font-weight: 800;
+      display:inline-flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
-      background: rgba(255,255,255,0.06);
-      box-shadow: 0 14px 38px rgba(0,0,0,0.35);
+      gap: 10px;
+      min-width: 240px;
       user-select:none;
-      transition: transform .08s ease, filter .2s ease, background .2s ease;
-      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease;
+      will-change: transform;
     }
-    .btn:active{ transform: translateY(1px) scale(0.99); }
+    .btn:active{ transform: scale(.98); }
 
     .btn-gold{
-      border-color: rgba(215,161,30,0.35);
+      color: #1B1402;
       background: linear-gradient(180deg, var(--gold2), var(--gold));
-      color: #17130A;
-      text-shadow: none;
+      box-shadow: 0 14px 34px rgba(215,161,30,.24), 0 10px 22px rgba(0,0,0,.35);
     }
     .btn-dark{
-      background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.05));
+      color: var(--text);
+      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
+      border: 1px solid rgba(255,255,255,.12);
+      box-shadow: 0 16px 40px rgba(0,0,0,.35);
+    }
+    .btn-dark .label{
+      color: var(--text) !important;
     }
 
+    .section{
+      margin-top: var(--s4);
+    }
     .section-title{
-      margin: 18px 2px 10px;
-      font-size: 44px;
-      letter-spacing: -0.02em;
       display:flex;
       align-items:center;
-      gap:10px;
+      gap: 12px;
+      margin: 0 0 var(--s2) 0;
+      font-size: 44px;
+      line-height: 1.05;
+      letter-spacing: .02em;
+      font-weight: 900;
+      text-shadow: 0 14px 35px rgba(0,0,0,.55);
     }
 
     .notice{
-      border-radius: var(--radius);
-      padding: 16px 16px;
-      border: 1px solid rgba(215,161,30,0.25);
-      background: linear-gradient(180deg, rgba(215,161,30,0.10), rgba(0,0,0,0.18));
-      box-shadow: 0 18px 50px rgba(0,0,0,0.45);
-      color: rgba(255,255,255,0.86);
-      line-height: 1.45;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(215,161,30,.22);
+      background: linear-gradient(180deg, rgba(215,161,30,.10), rgba(255,255,255,.05));
+      box-shadow: 0 14px 40px rgba(0,0,0,.35);
+      padding: var(--s3);
+      color: var(--muted);
+      line-height: 1.5;
     }
-    .notice b{ color: rgba(255,255,255,0.95); }
+    .notice b{ color: var(--text); }
 
-    .list{
-      margin-top: 14px;
+    .grid{
+      margin-top: var(--s3);
       display:grid;
-      gap: 14px;
+      gap: var(--s3);
     }
 
     .card{
-      border-radius: 22px;
-      background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.04));
-      border: 1px solid rgba(255,255,255,0.12);
-      box-shadow: 0 18px 55px rgba(0,0,0,0.45);
-      padding: 16px;
+      border-radius: var(--radius-xl);
+      border: 1px solid var(--stroke);
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
+      box-shadow: 0 16px 50px rgba(0,0,0,.38);
       overflow:hidden;
-      position:relative;
+    }
+    .card-inner{
+      padding: var(--s3);
     }
 
-    .badge{
+    .pill{
       display:inline-flex;
       align-items:center;
-      gap:8px;
-      padding: 8px 12px;
+      gap: 10px;
+      font-weight: 900;
+      padding: 10px 14px;
       border-radius: 999px;
-      background: rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.12);
-      color: rgba(255,255,255,0.88);
-      font-weight: 800;
-      letter-spacing: 0.01em;
+      background: rgba(0,0,0,.25);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--text);
+      box-shadow: 0 10px 25px rgba(0,0,0,.25);
     }
 
-    .question{
-      margin: 12px 0 14px;
+    .q{
+      margin: var(--s2) 0 0 0;
       font-size: 24px;
-      color: rgba(255,255,255,0.92);
-      line-height: 1.25;
-    }
-
-    .card .btn{
-      width: 100%;
-      margin-top: 10px;
+      line-height: 1.35;
+      letter-spacing: .01em;
     }
 
     .hint{
-      margin-top: 12px;
-      color: rgba(255,255,255,0.62);
-      font-size: 15px;
-      line-height: 1.35;
+      margin: var(--s2) 0 0 0;
+      color: var(--muted);
+      font-size: 16px;
+      line-height: 1.45;
     }
 
-    .subtle{
-      margin-top: 12px;
+    .answer-btn{
+      margin-top: var(--s3);
+      width: 100%;
       border-radius: 999px;
-      padding: 12px 14px;
-      border: 1px solid rgba(255,255,255,0.12);
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.75);
+      padding: 18px 18px;
+      font-size: 20px;
+      font-weight: 900;
+      color: #1B1402;
+      background: linear-gradient(180deg, var(--gold2), var(--gold));
+      box-shadow: 0 18px 44px rgba(215,161,30,.22), 0 12px 26px rgba(0,0,0,.35);
+      border: 0;
+      cursor:pointer;
+    }
+    .answer-btn:active{ transform: scale(.99); }
+
+    .resources-empty{
+      margin-top: var(--s2);
+      padding: var(--s3);
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: var(--muted);
       text-align:center;
-      font-weight: 600;
+      font-weight: 700;
+    }
+
+    .resource{
+      display:flex;
+      gap: var(--s2);
+      align-items:flex-start;
+      padding: var(--s3);
+      border-radius: var(--radius-xl);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+    }
+    .resource h3{
+      margin:0;
+      font-size: 18px;
+      font-weight: 900;
+      letter-spacing: .01em;
+    }
+    .resource p{
+      margin: 8px 0 0 0;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 15px;
+    }
+    .resource a{
+      margin-top: 12px;
+      display:inline-flex;
+      align-items:center;
+      gap: 8px;
+      font-weight: 900;
+      color: #1B1402;
+      background: linear-gradient(180deg, var(--gold2), var(--gold));
+      padding: 12px 14px;
+      border-radius: 999px;
+      box-shadow: 0 14px 34px rgba(215,161,30,.18), 0 10px 22px rgba(0,0,0,.30);
     }
 
     footer{
-      margin-top: 26px;
+      margin-top: var(--s5);
       text-align:center;
-      color: rgba(255,255,255,0.45);
+      color: rgba(255,255,255,.50);
       font-size: 14px;
+      letter-spacing: .02em;
     }
 
-    /* ===== Modal (fix du problème de transparence) ===== */
-    .modalOverlay{
+    /* Bottom-sheet réponse (UX 10/10) */
+    .overlay{
       position: fixed;
       inset: 0;
       display:none;
-      align-items: flex-end;
-      justify-content: center;
-      padding: 16px;
+      align-items:flex-end;
+      justify-content:center;
+      padding: 18px;
+      padding-bottom: calc(env(safe-area-inset-bottom) + 18px);
       z-index: 9999;
-      background: rgba(0,0,0,0.72); /* opaque => texte derrière invisible */
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
+      background: rgba(0,0,0,.60);
+      -webkit-backdrop-filter: blur(14px) saturate(120%);
+      backdrop-filter: blur(14px) saturate(120%);
     }
-    .modalOverlay.show{ display:flex; }
+    .overlay.open{ display:flex; }
 
-    .modal{
-      width: min(var(--max), 100%);
+    .sheet{
+      width: min(860px, 100%);
       border-radius: 22px;
-      background: linear-gradient(180deg, rgba(22,22,24,0.96), rgba(10,10,11,0.96));
-      border: 1px solid rgba(255,255,255,0.14);
-      box-shadow: 0 30px 90px rgba(0,0,0,0.65);
-      padding: 14px 14px 16px;
-      max-height: 78vh;
-      overflow:auto;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(18,18,20,.92); /* OPAQUE -> plus de texte derrière */
+      box-shadow: 0 22px 70px rgba(0,0,0,.65);
+      overflow:hidden;
+      transform: translateY(14px);
+      opacity: 0;
+      transition: transform .18s ease, opacity .18s ease;
     }
-
-    .modalTop{
+    .overlay.open .sheet{
+      transform: translateY(0);
+      opacity: 1;
+    }
+    .sheet-head{
       display:flex;
       align-items:center;
-      justify-content: space-between;
+      justify-content:space-between;
+      padding: 16px 16px 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+    }
+    .sheet-title{
+      font-weight: 900;
+      letter-spacing: .02em;
+      display:flex;
+      align-items:center;
       gap: 10px;
+    }
+    .close{
+      appearance:none;
+      border: 1px solid rgba(255,255,255,.16);
+      background: rgba(255,255,255,.06);
+      color: var(--text);
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      cursor:pointer;
+      display:grid;
+      place-items:center;
+      font-size: 18px;
+    }
+    .sheet-body{
+      padding: 16px;
+    }
+    .answer-label{
+      color: rgba(255,255,255,.70);
+      font-weight: 800;
+      letter-spacing: .02em;
       margin-bottom: 10px;
     }
-    .modalTitle{
-      font-weight: 900;
+    .answer-text{
+      margin:0;
       font-size: 18px;
-      color: rgba(255,255,255,0.92);
-    }
-    .x{
-      border: 1px solid rgba(255,255,255,0.18);
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.85);
-      border-radius: 999px;
-      width: 40px;
-      height: 34px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      cursor:pointer;
-      user-select:none;
-    }
-    .x:active{ transform: scale(0.98); }
-
-    .modalBody{
-      color: rgba(255,255,255,0.85);
-      font-size: 16px;
-      line-height: 1.45;
+      line-height: 1.5;
+      color: var(--text);
       white-space: pre-wrap;
     }
-    .modalBody b{ color: rgba(255,255,255,0.95); }
 
-    .row{
-      display:flex;
-      gap: 10px;
-      margin-top: 12px;
-      flex-wrap: wrap;
-    }
-    .smallBtn{
-      flex: 1;
-      min-width: 140px;
-      border-radius: 14px;
-      padding: 12px 12px;
-      font-weight: 800;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.06);
-      color: rgba(255,255,255,0.90);
-      cursor:pointer;
-    }
-    .smallBtn.gold{
-      border-color: rgba(215,161,30,0.35);
-      background: linear-gradient(180deg, var(--gold2), var(--gold));
-      color: #17130A;
-    }
-
-    @media (max-width: 420px){
-      .brand h1{ font-size: 34px; }
-      .section-title{ font-size: 38px; }
-      .question{ font-size: 22px; }
+    /* Responsive */
+    @media (max-width: 520px){
+      .wrap{ width: calc(100% - 2*var(--s2)); }
+      .hero-inner{ padding: var(--s3); gap: var(--s2); }
+      .title{ font-size: 38px; }
+      .section-title{ font-size: 40px; }
+      .btn{ min-width: 100%; }
+      .q{ font-size: 22px; }
     }
   </style>
 </head>
 
 <body>
-  <div class="wrap">
-    <div class="hero">
-      <div class="brand">
-        <img class="logo" src="logo.png" alt="Logo LORINFOS" />
+  <main class="wrap">
+
+    <section class="hero" id="top">
+      <div class="hero-inner">
+        <div class="logo" aria-label="Logo LORINFOS">
+          <img src="logo.png" alt="Logo LORINFOS">
+        </div>
+
         <div>
-          <h1>LORINFOS</h1>
-          <p>Des énigmes courtes pour tester ta logique.<br/>La plupart se trompent.</p>
+          <h1 class="title">LORINFOS</h1>
+          <p class="subtitle">Des énigmes courtes pour tester ta logique.<br/>La plupart se trompent.</p>
+
+          <div class="cta-row">
+            <a class="btn btn-gold" href="#enigmes" aria-label="Aller aux énigmes">
+              <span>🧩</span> <span class="label">Énigmes &amp; Réponses</span>
+            </a>
+            <a class="btn btn-dark" href="#ressources" aria-label="Aller aux ressources">
+              <span>🧠</span> <span class="label">Muscler son cerveau</span>
+            </a>
+          </div>
         </div>
       </div>
+    </section>
 
-      <div class="cta">
-        <button class="btn btn-gold" id="goEnigmes" type="button">🧩 <span>Énigmes & Réponses</span></button>
-        <button class="btn btn-dark" id="goRessources" type="button">🧠 <span>Muscler son cerveau</span></button>
+    <section class="section" id="enigmes">
+      <h2 class="section-title"><span>🧩</span><span>Énigmes &amp; Réponses</span></h2>
+
+      <div class="notice">
+        ⚠️ <b>Pour faire vivre le site</b>, certaines réponses peuvent ouvrir une courte publicité.
+        Ferme simplement l’onglet de pub et reviens ici : <b>la réponse s’affiche ensuite</b>.
       </div>
-    </div>
 
-    <h2 class="section-title" id="enigmes">🧩 Énigmes & Réponses</h2>
+      <div class="grid" id="enigmesList" aria-live="polite"></div>
+    </section>
 
-    <div class="notice">
-      ⚠️ <b>Pour faire vivre le site</b>, certaines réponses peuvent ouvrir une courte publicité.<br/>
-      Ferme simplement l’onglet de pub et reviens ici : <b>la réponse s’affiche ensuite</b>.
-    </div>
-
-    <div class="list" id="enigmesList">
-      <div class="subtle">Chargement des énigmes…</div>
-    </div>
-
-    <h2 class="section-title" id="ressources">🧠 Muscler son cerveau</h2>
-
-    <div class="list" id="ressourcesList">
-      <div class="subtle">Chargement des ressources…</div>
-    </div>
+    <section class="section" id="ressources">
+      <h2 class="section-title"><span>🧠</span><span>Muscler son cerveau</span></h2>
+      <div class="grid" id="ressourcesList" aria-live="polite"></div>
+      <div class="resources-empty" id="ressourcesEmpty" style="display:none;">
+        Aucune ressource pour l’instant. Ajoute-en dans <b>ressources.json</b> ✅
+      </div>
+    </section>
 
     <footer>© LORINFOS — Tous droits réservés.</footer>
-  </div>
+  </main>
 
-  <!-- Modal -->
-  <div class="modalOverlay" id="modalOverlay" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="modal" id="modal">
-      <div class="modalTop">
-        <div class="modalTitle" id="modalTitle">Réponse</div>
-        <div class="x" id="modalClose" aria-label="Fermer">✕</div>
+  <!-- Bottom sheet réponse -->
+  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="sheet" role="document">
+      <div class="sheet-head">
+        <div class="sheet-title" id="sheetTitle">Énigme</div>
+        <button class="close" id="closeBtn" aria-label="Fermer">×</button>
       </div>
-      <div class="modalBody" id="modalBody"></div>
-      <div class="row" id="modalActions" style="display:none;"></div>
+      <div class="sheet-body">
+        <div class="answer-label">Réponse :</div>
+        <p class="answer-text" id="sheetAnswer"></p>
+      </div>
     </div>
   </div>
 
   <script>
-    // ===== Helpers =====
-    const $ = (id) => document.getElementById(id);
+    // IMPORTANT GitHub Pages (repo dans un sous-dossier) : chemins relatifs, pas de "/"
+    const ENIGMES_URL = 'enigmes.json';
+    const RESSOURCES_URL = 'ressources.json';
 
-    function safeText(s){
-      return (s ?? "").toString();
+    const enigmesList = document.getElementById('enigmesList');
+    const ressourcesList = document.getElementById('ressourcesList');
+    const ressourcesEmpty = document.getElementById('ressourcesEmpty');
+
+    const overlay = document.getElementById('overlay');
+    const closeBtn = document.getElementById('closeBtn');
+    const sheetTitle = document.getElementById('sheetTitle');
+    const sheetAnswer = document.getElementById('sheetAnswer');
+
+    let enigmesData = null;
+    let ressourcesData = null;
+
+    function lockScroll(lock){
+      document.body.style.overflow = lock ? 'hidden' : '';
+      document.documentElement.style.overflow = lock ? 'hidden' : '';
     }
 
-    // ===== Smooth navigation =====
-    $("goEnigmes").addEventListener("click", () => {
-      location.hash = "#enigmes";
-      document.querySelector("#enigmes").scrollIntoView({behavior:"smooth", block:"start"});
+    function openSheet(title, answer){
+      sheetTitle.textContent = title || 'Réponse';
+      sheetAnswer.textContent = answer || '';
+      overlay.classList.add('open');
+      overlay.setAttribute('aria-hidden', 'false');
+      lockScroll(true);
+    }
+
+    function closeSheet(){
+      overlay.classList.remove('open');
+      overlay.setAttribute('aria-hidden', 'true');
+      lockScroll(false);
+    }
+
+    overlay.addEventListener('click', (e) => {
+      // clic sur le voile = fermer, clic sur la sheet = ne rien faire
+      if (e.target === overlay) closeSheet();
     });
-    $("goRessources").addEventListener("click", () => {
-      location.hash = "#ressources";
-      document.querySelector("#ressources").scrollIntoView({behavior:"smooth", block:"start"});
+    closeBtn.addEventListener('click', closeSheet);
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && overlay.classList.contains('open')) closeSheet();
     });
 
-    // ===== Modal (opaque + blur + no-scroll behind) =====
-    const overlay = $("modalOverlay");
-    const body = document.body;
-
-    function openModal(title, bodyText, actions = []){
-      $("modalTitle").textContent = safeText(title || "Info");
-      $("modalBody").textContent = safeText(bodyText);
-
-      const actionsWrap = $("modalActions");
-      actionsWrap.innerHTML = "";
-      if(actions.length){
-        actionsWrap.style.display = "flex";
-        actions.forEach(a => {
-          const b = document.createElement("button");
-          b.className = "smallBtn" + (a.gold ? " gold" : "");
-          b.type = "button";
-          b.textContent = a.label;
-          b.addEventListener("click", a.onClick);
-          actionsWrap.appendChild(b);
-        });
-      }else{
-        actionsWrap.style.display = "none";
-      }
-
-      overlay.classList.add("show");
-      overlay.setAttribute("aria-hidden", "false");
-      body.style.overflow = "hidden";
+    function safeText(v){
+      return (v ?? '').toString();
     }
 
-    function closeModal(){
-      overlay.classList.remove("show");
-      overlay.setAttribute("aria-hidden", "true");
-      body.style.overflow = "";
-    }
+    function buildEnigmeCard(item, affiliateUrl){
+      const card = document.createElement('div');
+      card.className = 'card';
+      const badge = safeText(item.badge || '🧩');
+      const titre = safeText(item.titre || 'Énigme');
+      const question = safeText(item.question || '');
+      const astuce = safeText(item.astuce || '');
+      const reponse = safeText(item.reponse || '');
 
-    $("modalClose").addEventListener("click", closeModal);
-    overlay.addEventListener("click", (e) => { if(e.target === overlay) closeModal(); });
-    document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeModal(); });
+      card.innerHTML = `
+        <div class="card-inner">
+          <div class="pill">${badge} <span>${titre}</span></div>
+          <p class="q">${question}</p>
 
-    // ===== Data loading =====
-    async function fetchJson(path){
-      const res = await fetch(path, { cache: "no-store" }); // évite les caches agressifs
-      if(!res.ok) throw new Error(`HTTP ${res.status} sur ${path}`);
-      return await res.json();
-    }
+          <button class="answer-btn" type="button">👉 Voir la réponse</button>
 
-    // ===== Affiliation (global) =====
-    // enigmes.json: { affiliate_url: "...", enigmes: [...] }
-    // ressources.json: { affiliate_url: "...", ressources: [...] }
-    let enigmesAffiliate = "";
-    let ressourcesAffiliate = "";
+          ${astuce ? `<p class="hint">${astuce}</p>` : ''}
+        </div>
+      `;
 
-    function openAffiliateThenShowAnswer(affiliateUrl, answerTitle, answerText){
-      const url = (affiliateUrl || "").trim();
-      // 1) ouvre pub si url, 2) montre la réponse tout de suite (ou après retour)
-      if(url){
-        try{ window.open(url, "_blank", "noopener,noreferrer"); }catch(_){}
-      }
-      openModal(answerTitle, answerText);
-    }
-
-    // ===== Render enigmes =====
-    function renderEnigmes(list){
-      const wrap = $("enigmesList");
-      wrap.innerHTML = "";
-
-      if(!Array.isArray(list) || list.length === 0){
-        wrap.innerHTML = `<div class="subtle">Aucune énigme pour l’instant. Ajoute-en dans enigmes.json ✅</div>`;
-        return;
-      }
-
-      list.forEach((e) => {
-        const card = document.createElement("div");
-        card.className = "card";
-
-        const badge = document.createElement("div");
-        badge.className = "badge";
-        badge.textContent = `${safeText(e.badge || "💎")} ${safeText(e.titre || "Énigme")}`;
-
-        const q = document.createElement("div");
-        q.className = "question";
-        q.textContent = safeText(e.question);
-
-        const btn = document.createElement("button");
-        btn.className = "btn btn-gold";
-        btn.type = "button";
-        btn.innerHTML = `👉 <span>Voir la réponse</span>`;
-        btn.addEventListener("click", () => {
-          const title = safeText(e.titre || "Réponse");
-          const answer = safeText(e.reponse || "Réponse non disponible.");
-          openAffiliateThenShowAnswer(enigmesAffiliate, title, `Réponse :\n${answer}`);
-        });
-
-        const hint = document.createElement("div");
-        hint.className = "hint";
-        hint.textContent = safeText(e.astuce || "");
-
-        card.appendChild(badge);
-        card.appendChild(q);
-        card.appendChild(btn);
-        if(hint.textContent.trim()) card.appendChild(hint);
-
-        wrap.appendChild(card);
+      const btn = card.querySelector('.answer-btn');
+      btn.addEventListener('click', () => {
+        // 1) Ouvre la pub/affiliation (si renseigné)
+        if (affiliateUrl && affiliateUrl.trim() && affiliateUrl !== 'TON_LIEN_AFFILIATION_ICI') {
+          window.open(affiliateUrl, '_blank', 'noopener,noreferrer');
+        }
+        // 2) Affiche la réponse proprement (bottom-sheet lisible)
+        openSheet(titre, reponse);
       });
+
+      return card;
     }
 
-    // ===== Render ressources =====
-    function renderRessources(list){
-      const wrap = $("ressourcesList");
-      wrap.innerHTML = "";
+    function buildResourceCard(r, affiliateUrl){
+      const wrap = document.createElement('div');
+      wrap.className = 'resource';
 
-      if(!Array.isArray(list) || list.length === 0){
-        wrap.innerHTML = `<div class="subtle">Aucune ressource pour l’instant. Ajoute-en dans ressources.json ✅</div>`;
-        return;
-      }
+      const title = safeText(r.titre || r.title || 'Ressource');
+      const desc  = safeText(r.description || '');
+      const link  = safeText(r.lien || r.url || affiliateUrl || '');
 
-      list.forEach((r) => {
-        const card = document.createElement("div");
-        card.className = "card";
-
-        const badge = document.createElement("div");
-        badge.className = "badge";
-        badge.textContent = `${safeText(r.badge || "🧠")} ${safeText(r.titre || "Ressource")}`;
-
-        const desc = document.createElement("div");
-        desc.className = "question";
-        desc.style.fontSize = "20px";
-        desc.style.lineHeight = "1.28";
-        desc.textContent = safeText(r.description || "");
-
-        const btn = document.createElement("button");
-        btn.className = "btn btn-dark";
-        btn.type = "button";
-        btn.innerHTML = `🛒 <span>Voir / Acheter</span>`;
-        btn.addEventListener("click", () => {
-          // si r.url existe => prioritaire, sinon global ressourcesAffiliate
-          const url = (safeText(r.url).trim() || ressourcesAffiliate || "").trim();
-          if(!url){
-            openModal("Lien indisponible", "Ajoute un lien (url) dans ressources.json, ou un affiliate_url global.");
-            return;
-          }
-          try{ window.open(url, "_blank", "noopener,noreferrer"); }catch(_){}
-        });
-
-        card.appendChild(badge);
-        if(desc.textContent.trim()) card.appendChild(desc);
-        card.appendChild(btn);
-
-        wrap.appendChild(card);
-      });
+      wrap.innerHTML = `
+        <div style="flex:1;">
+          <h3>${title}</h3>
+          ${desc ? `<p>${desc}</p>` : ''}
+          ${link ? `<a href="${link}" target="_blank" rel="noopener noreferrer">🛒 Voir</a>` : ''}
+        </div>
+      `;
+      return wrap;
     }
 
-    // ===== Init =====
-    (async function init(){
+    async function loadJson(url){
+      const res = await fetch(url, { cache: 'no-store' });
+      if (!res.ok) throw new Error('HTTP ' + res.status + ' sur ' + url);
+      return res.json();
+    }
+
+    async function init(){
+      // Énigmes
       try{
-        const dataE = await fetchJson("enigmes.json");
-        enigmesAffiliate = safeText(dataE.affiliate_url || "");
-        renderEnigmes(dataE.enigmes || []);
+        enigmesData = await loadJson(ENIGMES_URL);
+        const affiliate = safeText(enigmesData.affiliate_url || enigmesData.affiliateUrl || '');
+
+        const items = Array.isArray(enigmesData.enigmes) ? enigmesData.enigmes : [];
+        enigmesList.innerHTML = '';
+        items.forEach(item => enigmesList.appendChild(buildEnigmeCard(item, affiliate)));
       }catch(err){
-        $("enigmesList").innerHTML =
-          `<div class="subtle">Erreur de chargement (enigmes.json). Vérifie le nom du fichier et le format JSON ✅</div>`;
-        console.error(err);
+        enigmesList.innerHTML = `
+          <div class="notice">
+            ⚠️ Impossible de charger <b>enigmes.json</b>.
+            Vérifie qu’il est bien à la racine du repo et valide JSON.
+          </div>
+        `;
       }
 
+      // Ressources
       try{
-        const dataR = await fetchJson("ressources.json");
-        ressourcesAffiliate = safeText(dataR.affiliate_url || "");
-        renderRessources(dataR.ressources || []);
-      }catch(err){
-        $("ressourcesList").innerHTML =
-          `<div class="subtle">Erreur de chargement (ressources.json). Vérifie le nom du fichier et le format JSON ✅</div>`;
-        console.error(err);
-      }
+        ressourcesData = await loadJson(RESSOURCES_URL);
+        const affiliate = safeText(ressourcesData.affiliate_url || ressourcesData.affiliateUrl || '');
+        const items = Array.isArray(ressourcesData.ressources) ? ressourcesData.ressources : [];
 
-      // Si on arrive avec un #hash
-      if(location.hash){
-        const id = location.hash.replace("#", "");
-        const el = document.getElementById(id);
-        if(el) el.scrollIntoView({behavior:"smooth", block:"start"});
+        ressourcesList.innerHTML = '';
+        if (!items.length){
+          ressourcesEmpty.style.display = 'block';
+        }else{
+          ressourcesEmpty.style.display = 'none';
+          items.forEach(r => ressourcesList.appendChild(buildResourceCard(r, affiliate)));
+        }
+      }catch(err){
+        ressourcesList.innerHTML = '';
+        ressourcesEmpty.style.display = 'block';
       }
-    })();
+    }
+
+    init();
   </script>
 </body>
 </html>
