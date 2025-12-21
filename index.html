@@ -2,597 +2,584 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="viewport"a content="width=device-width, initial-scale=1" />
   <title>LORINFOS</title>
-  <meta name="description" content="Des énigmes courtes pour tester ta logique. La plupart se trompent." />
-  <meta name="theme-color" content="#0B0B0D" />
+  <meta name="description" content="Des énigmes courtes pour tester ta logique." />
+  <meta name="theme-color" content="#0b0b0d" />
+
+  <!-- Font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     :root{
-      /* Spacing scale (8px) */
-      --s1: 8px; --s2: 16px; --s3: 24px; --s4: 32px; --s5: 40px;
-
-      /* Brand */
-      --gold: #D7A11E;
-      --gold2:#F2D37A;
-      --gold3:#B88412;
-
-      /* Base */
-      --bg: #0B0B0D;
+      --bg:#0b0b0d;
       --panel: rgba(255,255,255,.06);
       --panel2: rgba(255,255,255,.08);
-      --stroke: rgba(255,255,255,.12);
-      --text: rgba(255,255,255,.92);
-      --muted: rgba(255,255,255,.70);
-      --muted2: rgba(255,255,255,.55);
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
+      --stroke: rgba(255,255,255,.14);
 
-      --radius-xl: 26px;
-      --radius-lg: 20px;
-      --radius-md: 16px;
+      --text:#f2f2f2;
+      --muted: rgba(242,242,242,.72);
 
-      --max: 860px;
+      --gold1:#F2D37A;
+      --gold2:#D7A11E;
+      --goldGlow: rgba(215,161,30,.35);
+
+      --shadow: 0 18px 55px rgba(0,0,0,.55);
+      --radiusXL: 28px;
+      --radiusL: 22px;
+      --radiusM: 18px;
     }
 
-    *{ box-sizing:border-box; }
-    html,body{ height:100%; }
+    *{box-sizing:border-box}
+    html,body{height:100%}
     body{
       margin:0;
-      font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", Segoe UI, Roboto, Helvetica, Arial;
+      font-family: "Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      background: radial-gradient(1200px 600px at 20% 10%, rgba(215,161,30,.22), transparent 55%),
+                  radial-gradient(900px 500px at 80% 20%, rgba(242,211,122,.15), transparent 55%),
+                  radial-gradient(900px 700px at 50% 90%, rgba(255,255,255,.05), transparent 60%),
+                  var(--bg);
       color: var(--text);
-      background:
-        radial-gradient(1200px 700px at 20% -10%, rgba(215,161,30,.28), transparent 60%),
-        radial-gradient(900px 650px at 90% 10%, rgba(242,211,122,.12), transparent 55%),
-        radial-gradient(900px 650px at 50% 110%, rgba(215,161,30,.10), transparent 60%),
-        linear-gradient(180deg, #0A0A0C, #070709 40%, #050507);
       overflow-x:hidden;
     }
 
-    /* iOS: éviter les “bleus” de liens / tap-highlight */
-    a, button{ -webkit-tap-highlight-color: transparent; }
-    a{ color: inherit; text-decoration: none; }
-
     .wrap{
-      width: min(var(--max), calc(100% - 2*var(--s3)));
-      margin: 0 auto;
-      padding:
-        calc(env(safe-area-inset-top) + var(--s4))
-        0
-        calc(env(safe-area-inset-bottom) + var(--s5))
-        0;
+      width:min(980px, 92vw);
+      margin: 26px auto 40px;
     }
 
+    /* Header card */
     .hero{
-      border-radius: var(--radius-xl);
       background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
-      border: 1px solid var(--stroke);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radiusXL);
       box-shadow: var(--shadow);
-      overflow:hidden;
-      position: relative;
-    }
-    .hero::before{
-      content:"";
-      position:absolute; inset:0;
-      background:
-        radial-gradient(700px 250px at 30% 0%, rgba(215,161,30,.22), transparent 60%),
-        radial-gradient(500px 220px at 90% 30%, rgba(242,211,122,.10), transparent 60%);
-      pointer-events:none;
-    }
-    .hero-inner{
+      padding: 18px 16px 16px;
       position:relative;
-      padding: var(--s4);
-      display:flex;
-      gap: var(--s3);
-      align-items:flex-start;
-    }
-
-    .logo{
-      width: 76px;
-      height: 76px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.10);
-      box-shadow: 0 12px 30px rgba(0,0,0,.35);
-      display:grid;
-      place-items:center;
       overflow:hidden;
-      flex: 0 0 auto;
     }
-    .logo img{
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display:block;
+    .hero:before{
+      content:"";
+      position:absolute; inset:-2px;
+      background: radial-gradient(700px 240px at 10% 0%, rgba(215,161,30,.20), transparent 55%),
+                  radial-gradient(680px 240px at 90% 0%, rgba(242,211,122,.12), transparent 60%);
+      pointer-events:none;
+      filter: blur(2px);
     }
+    .hero > *{position:relative}
 
-    .title{
+    .brand{
+      display:flex;
+      gap: 14px;
+      align-items:center;
+      padding: 6px 2px 2px;
+    }
+    .logo{
+      width:64px;
+      height:64px;
+      border-radius: 18px;
+      box-shadow: 0 10px 30px rgba(0,0,0,.45);
+      object-fit: cover;
+      flex:0 0 auto;
+    }
+    .brandText h1{
       margin:0;
       font-size: 42px;
-      letter-spacing: .08em;
+      letter-spacing: 1.2px;
+      line-height:1.05;
       font-weight: 800;
-      line-height: 1.05;
       text-transform: uppercase;
     }
-    .subtitle{
-      margin: var(--s1) 0 0 0;
-      font-size: 18px;
-      line-height: 1.45;
+    .brandText p{
+      margin:8px 0 0;
       color: var(--muted);
-      max-width: 42ch;
+      line-height:1.4;
+      font-weight: 600;
+      font-size: 15px;
     }
 
-    .cta-row{
-      margin-top: var(--s3);
+    /* Top buttons = full width like before */
+    .topActions{
+      margin-top: 16px;
       display:flex;
-      gap: var(--s2);
-      flex-wrap: wrap;
+      flex-direction:column;
+      gap: 12px;
+      padding: 0 2px 6px;
     }
-
-    .btn{
-      appearance:none;
+    .bigBtn{
+      width:100%;
       border:0;
-      cursor:pointer;
       border-radius: 999px;
       padding: 16px 18px;
-      font-size: 18px;
       font-weight: 800;
-      display:inline-flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
-      min-width: 240px;
-      user-select:none;
-      transition: transform .12s ease, filter .12s ease;
-      will-change: transform;
-    }
-    .btn:active{ transform: scale(.98); }
-
-    .btn-gold{
-      color: #1B1402;
-      background: linear-gradient(180deg, var(--gold2), var(--gold));
-      box-shadow: 0 14px 34px rgba(215,161,30,.24), 0 10px 22px rgba(0,0,0,.35);
-    }
-    .btn-dark{
-      color: var(--text);
-      background: linear-gradient(180deg, rgba(255,255,255,.09), rgba(255,255,255,.05));
-      border: 1px solid rgba(255,255,255,.12);
-      box-shadow: 0 16px 40px rgba(0,0,0,.35);
-    }
-    .btn-dark .label{
-      color: var(--text) !important;
-    }
-
-    .section{
-      margin-top: var(--s4);
-    }
-    .section-title{
+      font-size: 18px;
+      letter-spacing: .2px;
       display:flex;
       align-items:center;
-      gap: 12px;
-      margin: 0 0 var(--s2) 0;
-      font-size: 44px;
-      line-height: 1.05;
-      letter-spacing: .02em;
+      justify-content:center;
+      gap:10px;
+      cursor:pointer;
+      transition: transform .12s ease, filter .12s ease, opacity .12s ease;
+      user-select:none;
+    }
+    .bigBtn:active{ transform: scale(.99); }
+    .bigBtn.primary{
+      color:#1a1300;
+      background: linear-gradient(180deg, var(--gold1), var(--gold2));
+      box-shadow: 0 12px 30px rgba(215,161,30,.25), 0 0 0 1px rgba(0,0,0,.25) inset;
+    }
+    .bigBtn.secondary{
+      color: var(--text);
+      background: linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 14px 30px rgba(0,0,0,.35);
+    }
+    .bigBtn.inactive{
+      opacity: .70;
+      filter: saturate(.95);
+    }
+
+    /* Sections titles */
+    .sectionTitle{
+      margin: 18px 2px 10px;
       font-weight: 900;
-      text-shadow: 0 14px 35px rgba(0,0,0,.55);
+      font-size: 44px;
+      letter-spacing: .2px;
+      display:flex;
+      align-items:flex-start;
+      gap: 10px;
+      line-height: 1.02;
+      text-shadow: 0 10px 40px rgba(0,0,0,.55);
+    }
+    .sectionTitle .emoji{
+      font-size: 36px;
+      filter: drop-shadow(0 12px 18px rgba(0,0,0,.5));
+      margin-top: 3px;
     }
 
-    .notice{
-      border-radius: var(--radius-lg);
-      border: 1px solid rgba(215,161,30,.22);
-      background: linear-gradient(180deg, rgba(215,161,30,.10), rgba(255,255,255,.05));
-      box-shadow: 0 14px 40px rgba(0,0,0,.35);
-      padding: var(--s3);
-      color: var(--muted);
-      line-height: 1.5;
+    /* Info banner */
+    .banner{
+      margin: 10px 2px 22px;
+      padding: 14px 16px;
+      border-radius: var(--radiusL);
+      background: linear-gradient(180deg, rgba(215,161,30,.16), rgba(255,255,255,.05));
+      border: 1px solid rgba(242,211,122,.18);
+      color: rgba(242,242,242,.85);
+      line-height: 1.45;
+      box-shadow: 0 14px 40px rgba(0,0,0,.45);
     }
-    .notice b{ color: var(--text); }
-
-    .grid{
-      margin-top: var(--s3);
-      display:grid;
-      gap: var(--s3);
-    }
-
-    .card{
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--stroke);
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
-      box-shadow: 0 16px 50px rgba(0,0,0,.38);
-      overflow:hidden;
-    }
-    .card-inner{
-      padding: var(--s3);
-    }
-
-    .pill{
+    .banner strong{color: var(--text)}
+    .banner .warn{
       display:inline-flex;
       align-items:center;
-      gap: 10px;
-      font-weight: 900;
-      padding: 10px 14px;
-      border-radius: 999px;
-      background: rgba(0,0,0,.25);
-      border: 1px solid rgba(255,255,255,.14);
-      color: var(--text);
-      box-shadow: 0 10px 25px rgba(0,0,0,.25);
-    }
-
-    .q{
-      margin: var(--s2) 0 0 0;
-      font-size: 24px;
-      line-height: 1.35;
-      letter-spacing: .01em;
-    }
-
-    .hint{
-      margin: var(--s2) 0 0 0;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.45;
-    }
-
-    .answer-btn{
-      margin-top: var(--s3);
-      width: 100%;
-      border-radius: 999px;
-      padding: 18px 18px;
-      font-size: 20px;
-      font-weight: 900;
-      color: #1B1402;
-      background: linear-gradient(180deg, var(--gold2), var(--gold));
-      box-shadow: 0 18px 44px rgba(215,161,30,.22), 0 12px 26px rgba(0,0,0,.35);
-      border: 0;
-      cursor:pointer;
-    }
-    .answer-btn:active{ transform: scale(.99); }
-
-    .resources-empty{
-      margin-top: var(--s2);
-      padding: var(--s3);
-      border-radius: 999px;
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
-      color: var(--muted);
-      text-align:center;
+      gap:10px;
       font-weight: 700;
     }
 
-    .resource{
-      display:flex;
-      gap: var(--s2);
-      align-items:flex-start;
-      padding: var(--s3);
-      border-radius: var(--radius-xl);
-      border: 1px solid rgba(255,255,255,.14);
-      background: rgba(255,255,255,.06);
+    /* Cards */
+    .card{
+      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.045));
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: var(--radiusXL);
+      padding: 16px 16px 18px;
+      box-shadow: var(--shadow);
+      margin: 0 2px 14px;
     }
-    .resource h3{
+    .pill{
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.14);
+      font-weight: 800;
+      letter-spacing: .2px;
+    }
+    .question{
+      margin: 14px 2px 14px;
+      font-size: 22px;
+      line-height: 1.35; /* un peu + aéré */
+      font-weight: 700;
+      color: rgba(242,242,242,.92);
+    }
+    .cta{
+      width:100%;
+      border:0;
+      border-radius: 999px;
+      padding: 14px 16px;
+      font-weight: 900;
+      font-size: 18px;
+      cursor:pointer;
+      background: linear-gradient(180deg, var(--gold1), var(--gold2));
+      color:#1a1300;
+      box-shadow: 0 12px 28px rgba(215,161,30,.22);
+      transition: transform .12s ease;
+    }
+    .cta:active{ transform: scale(.99); }
+    .hint{
+      margin: 10px 2px 0;
+      color: rgba(242,242,242,.72); /* légèrement plus discret */
+      font-weight: 600;
+      line-height:1.35;
+      font-size: 14px;
+    }
+
+    /* Resources */
+    .resourceItem{
+      display:flex;
+      flex-direction:column;
+      gap:10px;
+      padding: 14px 14px 16px;
+      border-radius: var(--radiusL);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.12);
+      margin: 0 2px 12px;
+    }
+    .resourceItem h3{
       margin:0;
       font-size: 18px;
       font-weight: 900;
-      letter-spacing: .01em;
+      letter-spacing: .2px;
     }
-    .resource p{
-      margin: 8px 0 0 0;
-      color: var(--muted);
-      line-height: 1.45;
-      font-size: 15px;
+    .resourceItem p{
+      margin:0;
+      color: rgba(242,242,242,.75);
+      line-height: 1.4;
+      font-weight: 600;
+      font-size: 14px;
     }
-    .resource a{
-      margin-top: 12px;
+    .resourceItem a{
       display:inline-flex;
+      justify-content:center;
       align-items:center;
-      gap: 8px;
-      font-weight: 900;
-      color: #1B1402;
-      background: linear-gradient(180deg, var(--gold2), var(--gold));
-      padding: 12px 14px;
+      gap:10px;
+      width:100%;
+      text-decoration:none;
       border-radius: 999px;
-      box-shadow: 0 14px 34px rgba(215,161,30,.18), 0 10px 22px rgba(0,0,0,.30);
+      padding: 12px 14px;
+      font-weight: 900;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      color: var(--text);
     }
 
     footer{
-      margin-top: var(--s5);
+      margin-top: 18px;
       text-align:center;
-      color: rgba(255,255,255,.50);
-      font-size: 14px;
-      letter-spacing: .02em;
+      color: rgba(242,242,242,.55);
+      font-weight: 700;
+      letter-spacing:.2px;
+      font-size: 13px;
     }
 
-    /* Bottom-sheet réponse (UX 10/10) */
+    /* Modal centered (mi-écran) */
     .overlay{
       position: fixed;
       inset: 0;
       display:none;
-      align-items:flex-end;
+      align-items:center;
       justify-content:center;
       padding: 18px;
-      padding-bottom: calc(env(safe-area-inset-bottom) + 18px);
+      background: rgba(0,0,0,.58);
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
       z-index: 9999;
-      background: rgba(0,0,0,.60);
-      -webkit-backdrop-filter: blur(14px) saturate(120%);
-      backdrop-filter: blur(14px) saturate(120%);
     }
     .overlay.open{ display:flex; }
 
-    .sheet{
-      width: min(860px, 100%);
+    .modal{
+      width: min(560px, 92vw);
       border-radius: 22px;
+      background: rgba(20,20,22,.95);
       border: 1px solid rgba(255,255,255,.14);
-      background: rgba(18,18,20,.92); /* OPAQUE -> plus de texte derrière */
-      box-shadow: 0 22px 70px rgba(0,0,0,.65);
+      box-shadow: 0 24px 80px rgba(0,0,0,.7);
       overflow:hidden;
-      transform: translateY(14px);
-      opacity: 0;
-      transition: transform .18s ease, opacity .18s ease;
+      transform: translateY(6px);
+      animation: pop .16s ease-out forwards;
     }
-    .overlay.open .sheet{
-      transform: translateY(0);
-      opacity: 1;
+    @keyframes pop{
+      to{ transform: translateY(0); }
     }
-    .sheet-head{
+    .modalHeader{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding: 16px 16px 12px 16px;
+      padding: 14px 14px 10px;
       border-bottom: 1px solid rgba(255,255,255,.10);
-      background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
     }
-    .sheet-title{
+    .modalHeader .title{
       font-weight: 900;
-      letter-spacing: .02em;
-      display:flex;
-      align-items:center;
-      gap: 10px;
+      letter-spacing: .2px;
+      font-size: 16px;
+      color: rgba(242,242,242,.95);
     }
-    .close{
-      appearance:none;
-      border: 1px solid rgba(255,255,255,.16);
-      background: rgba(255,255,255,.06);
-      color: var(--text);
-      width: 40px;
-      height: 40px;
+    .closeBtn{
+      width:38px;
+      height:38px;
       border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(255,255,255,.06);
+      color: rgba(242,242,242,.85);
+      font-size: 18px;
       cursor:pointer;
-      display:grid;
-      place-items:center;
-      font-size: 18px;
     }
-    .sheet-body{
-      padding: 16px;
+    .modalBody{
+      padding: 14px 14px 16px;
+      line-height:1.5;
+      color: rgba(242,242,242,.92);
+      font-weight: 700;
     }
-    .answer-label{
-      color: rgba(255,255,255,.70);
+    .modalBody .label{
+      display:block;
+      margin-bottom: 8px;
+      color: rgba(242,242,242,.75);
       font-weight: 800;
-      letter-spacing: .02em;
-      margin-bottom: 10px;
-    }
-    .answer-text{
-      margin:0;
-      font-size: 18px;
-      line-height: 1.5;
-      color: var(--text);
-      white-space: pre-wrap;
+      letter-spacing: .2px;
     }
 
-    /* Responsive */
-    @media (max-width: 520px){
-      .wrap{ width: calc(100% - 2*var(--s2)); }
-      .hero-inner{ padding: var(--s3); gap: var(--s2); }
-      .title{ font-size: 38px; }
-      .section-title{ font-size: 40px; }
-      .btn{ min-width: 100%; }
-      .q{ font-size: 22px; }
+    /* Utilities */
+    .hidden{display:none !important}
+
+    /* Mobile tweaks */
+    @media (max-width:420px){
+      .brandText h1{ font-size: 36px; }
+      .sectionTitle{ font-size: 40px; }
+      .question{ font-size: 20px; }
     }
   </style>
 </head>
 
 <body>
-  <main class="wrap">
-
-    <section class="hero" id="top">
-      <div class="hero-inner">
-        <div class="logo" aria-label="Logo LORINFOS">
-          <img src="logo.png" alt="Logo LORINFOS">
-        </div>
-
-        <div>
-          <h1 class="title">LORINFOS</h1>
-          <p class="subtitle">Des énigmes courtes pour tester ta logique.<br/>La plupart se trompent.</p>
-
-          <div class="cta-row">
-            <a class="btn btn-gold" href="#enigmes" aria-label="Aller aux énigmes">
-              <span>🧩</span> <span class="label">Énigmes &amp; Réponses</span>
-            </a>
-            <a class="btn btn-dark" href="#ressources" aria-label="Aller aux ressources">
-              <span>🧠</span> <span class="label">Muscler son cerveau</span>
-            </a>
-          </div>
+  <div class="wrap">
+    <div class="hero">
+      <div class="brand">
+        <img class="logo" src="logo.png" alt="Logo LORINFOS">
+        <div class="brandText">
+          <h1>LORINFOS</h1>
+          <p>Des énigmes courtes pour tester ta logique.<br>La plupart se trompent.</p>
         </div>
       </div>
-    </section>
 
-    <section class="section" id="enigmes">
-      <h2 class="section-title"><span>🧩</span><span>Énigmes &amp; Réponses</span></h2>
-
-      <div class="notice">
-        ⚠️ <b>Pour faire vivre le site</b>, certaines réponses peuvent ouvrir une courte publicité.
-        Ferme simplement l’onglet de pub et reviens ici : <b>la réponse s’affiche ensuite</b>.
+      <div class="topActions">
+        <button id="btnEnigmes" class="bigBtn primary" type="button">🧩 Énigmes &amp; Réponses</button>
+        <button id="btnRessources" class="bigBtn secondary inactive" type="button">🧠 Muscler son cerveau</button>
       </div>
+    </div>
 
-      <div class="grid" id="enigmesList" aria-live="polite"></div>
-    </section>
+    <!-- ÉNIGMES -->
+    <h2 id="titleEnigmes" class="sectionTitle"><span class="emoji">🧩</span><span>Énigmes &amp;<br>Réponses</span></h2>
 
-    <section class="section" id="ressources">
-      <h2 class="section-title"><span>🧠</span><span>Muscler son cerveau</span></h2>
-      <div class="grid" id="ressourcesList" aria-live="polite"></div>
-      <div class="resources-empty" id="ressourcesEmpty" style="display:none;">
-        Aucune ressource pour l’instant. Ajoute-en dans <b>ressources.json</b> ✅
-      </div>
-    </section>
+    <div class="banner" id="bannerEnigmes">
+      <span class="warn">⚠️ <strong>Pour faire vivre le site</strong>, certaines réponses peuvent ouvrir une courte publicité.</span>
+      <br>
+      Ferme simplement l’onglet de pub et reviens ici : <strong>la réponse s’affiche ensuite</strong>.
+    </div>
+
+    <div id="enigmesContainer"></div>
+
+    <!-- RESSOURCES -->
+    <h2 id="titleRessources" class="sectionTitle"><span class="emoji">🧠</span><span>Muscler son<br>cerveau</span></h2>
+    <div id="ressourcesContainer"></div>
 
     <footer>© LORINFOS — Tous droits réservés.</footer>
-  </main>
+  </div>
 
-  <!-- Bottom sheet réponse -->
-  <div class="overlay" id="overlay" role="dialog" aria-modal="true" aria-hidden="true">
-    <div class="sheet" role="document">
-      <div class="sheet-head">
-        <div class="sheet-title" id="sheetTitle">Énigme</div>
-        <button class="close" id="closeBtn" aria-label="Fermer">×</button>
+  <!-- MODAL -->
+  <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal" role="document">
+      <div class="modalHeader">
+        <div id="modalTitle" class="title">Réponse</div>
+        <button id="closeModal" class="closeBtn" aria-label="Fermer">×</button>
       </div>
-      <div class="sheet-body">
-        <div class="answer-label">Réponse :</div>
-        <p class="answer-text" id="sheetAnswer"></p>
+      <div class="modalBody">
+        <span class="label">Réponse :</span>
+        <div id="modalText"></div>
       </div>
     </div>
   </div>
 
   <script>
-    // IMPORTANT GitHub Pages (repo dans un sous-dossier) : chemins relatifs, pas de "/"
-    const ENIGMES_URL = 'enigmes.json';
-    const RESSOURCES_URL = 'ressources.json';
+    // ---------- Helpers ----------
+    const $ = (id) => document.getElementById(id);
 
-    const enigmesList = document.getElementById('enigmesList');
-    const ressourcesList = document.getElementById('ressourcesList');
-    const ressourcesEmpty = document.getElementById('ressourcesEmpty');
-
-    const overlay = document.getElementById('overlay');
-    const closeBtn = document.getElementById('closeBtn');
-    const sheetTitle = document.getElementById('sheetTitle');
-    const sheetAnswer = document.getElementById('sheetAnswer');
-
-    let enigmesData = null;
-    let ressourcesData = null;
-
-    function lockScroll(lock){
-      document.body.style.overflow = lock ? 'hidden' : '';
-      document.documentElement.style.overflow = lock ? 'hidden' : '';
+    function setHash(section){
+      // section: "enigmes" | "ressources"
+      location.hash = section === "ressources" ? "#ressources" : "#enigmes";
     }
 
-    function openSheet(title, answer){
-      sheetTitle.textContent = title || 'Réponse';
-      sheetAnswer.textContent = answer || '';
-      overlay.classList.add('open');
-      overlay.setAttribute('aria-hidden', 'false');
-      lockScroll(true);
+    function showSection(section){
+      const isEnigmes = section !== "ressources";
+
+      $("titleEnigmes").classList.toggle("hidden", !isEnigmes);
+      $("bannerEnigmes").classList.toggle("hidden", !isEnigmes);
+      $("enigmesContainer").classList.toggle("hidden", !isEnigmes);
+
+      $("titleRessources").classList.toggle("hidden", isEnigmes);
+      $("ressourcesContainer").classList.toggle("hidden", isEnigmes);
+
+      // Buttons states
+      $("btnEnigmes").classList.toggle("primary", isEnigmes);
+      $("btnEnigmes").classList.toggle("secondary", !isEnigmes);
+      $("btnEnigmes").classList.toggle("inactive", !isEnigmes);
+
+      $("btnRessources").classList.toggle("primary", !isEnigmes);
+      $("btnRessources").classList.toggle("secondary", isEnigmes);
+      $("btnRessources").classList.toggle("inactive", isEnigmes);
+
+      // Scroll to top of section smoothly
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    function closeSheet(){
-      overlay.classList.remove('open');
-      overlay.setAttribute('aria-hidden', 'true');
-      lockScroll(false);
+    // ---------- Modal ----------
+    function openModal(title, text){
+      $("modalTitle").textContent = title || "Réponse";
+      $("modalText").textContent = text || "";
+      $("overlay").classList.add("open");
+      $("overlay").setAttribute("aria-hidden", "false");
+      document.body.style.overflow = "hidden"; // bloque scroll derrière
+    }
+    function closeModal(){
+      $("overlay").classList.remove("open");
+      $("overlay").setAttribute("aria-hidden", "true");
+      document.body.style.overflow = "";
     }
 
-    overlay.addEventListener('click', (e) => {
-      // clic sur le voile = fermer, clic sur la sheet = ne rien faire
-      if (e.target === overlay) closeSheet();
+    $("closeModal").addEventListener("click", closeModal);
+    $("overlay").addEventListener("click", (e) => {
+      if (e.target === $("overlay")) closeModal();
     });
-    closeBtn.addEventListener('click', closeSheet);
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape' && overlay.classList.contains('open')) closeSheet();
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") closeModal();
     });
 
-    function safeText(v){
-      return (v ?? '').toString();
+    // ---------- Data loading ----------
+    async function loadJSON(path){
+      const res = await fetch(path, { cache: "no-store" });
+      if(!res.ok) throw new Error("Impossible de charger " + path);
+      return await res.json();
     }
 
-    function buildEnigmeCard(item, affiliateUrl){
-      const card = document.createElement('div');
-      card.className = 'card';
-      const badge = safeText(item.badge || '🧩');
-      const titre = safeText(item.titre || 'Énigme');
-      const question = safeText(item.question || '');
-      const astuce = safeText(item.astuce || '');
-      const reponse = safeText(item.reponse || '');
+    function renderEnigmes(data){
+      const container = $("enigmesContainer");
+      container.innerHTML = "";
 
-      card.innerHTML = `
-        <div class="card-inner">
-          <div class="pill">${badge} <span>${titre}</span></div>
-          <p class="q">${question}</p>
+      const enigmes = (data && data.enigmes) ? data.enigmes : [];
+      if(enigmes.length === 0){
+        container.innerHTML = `
+          <div class="card">
+            <div class="question">Aucune énigme pour l’instant.</div>
+          </div>
+        `;
+        return;
+      }
 
-          <button class="answer-btn" type="button">👉 Voir la réponse</button>
+      enigmes.forEach((e) => {
+        const card = document.createElement("div");
+        card.className = "card";
 
-          ${astuce ? `<p class="hint">${astuce}</p>` : ''}
-        </div>
-      `;
+        const badge = e.badge ? e.badge + " " : "";
+        const titre = e.titre || `Énigme #${e.id || ""}`;
+        const q = e.question || "";
+        const astuce = e.astuce || "";
+        const rep = e.reponse || "";
 
-      const btn = card.querySelector('.answer-btn');
-      btn.addEventListener('click', () => {
-        // 1) Ouvre la pub/affiliation (si renseigné)
-        if (affiliateUrl && affiliateUrl.trim() && affiliateUrl !== 'TON_LIEN_AFFILIATION_ICI') {
-          window.open(affiliateUrl, '_blank', 'noopener,noreferrer');
-        }
-        // 2) Affiche la réponse proprement (bottom-sheet lisible)
-        openSheet(titre, reponse);
+        card.innerHTML = `
+          <div class="pill">${badge}${titre}</div>
+          <div class="question">${q}</div>
+          <button class="cta" type="button">👉 Voir la réponse</button>
+          ${astuce ? `<div class="hint">${astuce}</div>` : ``}
+        `;
+
+        card.querySelector(".cta").addEventListener("click", () => {
+          // Ici tu mettras ton système pub/affiliation si besoin
+          openModal(titre, rep);
+        });
+
+        container.appendChild(card);
       });
-
-      return card;
     }
 
-    function buildResourceCard(r, affiliateUrl){
-      const wrap = document.createElement('div');
-      wrap.className = 'resource';
+    function renderRessources(data){
+      const container = $("ressourcesContainer");
+      container.innerHTML = "";
 
-      const title = safeText(r.titre || r.title || 'Ressource');
-      const desc  = safeText(r.description || '');
-      const link  = safeText(r.lien || r.url || affiliateUrl || '');
+      const ressources = (data && data.ressources) ? data.ressources : [];
 
-      wrap.innerHTML = `
-        <div style="flex:1;">
-          <h3>${title}</h3>
-          ${desc ? `<p>${desc}</p>` : ''}
-          ${link ? `<a href="${link}" target="_blank" rel="noopener noreferrer">🛒 Voir</a>` : ''}
-        </div>
-      `;
-      return wrap;
+      if(ressources.length === 0){
+        container.innerHTML = `
+          <div class="card">
+            <div class="question">Aucune ressource pour l’instant. Ajoute-en dans <strong>ressources.json</strong> ✅</div>
+            <div class="hint">Bientôt disponible 👀</div>
+          </div>
+        `;
+        return;
+      }
+
+      ressources.forEach((r) => {
+        const item = document.createElement("div");
+        item.className = "resourceItem";
+
+        const titre = r.titre || "Ressource";
+        const desc = r.description || "";
+        const url = r.url || "#";
+
+        item.innerHTML = `
+          <h3>${titre}</h3>
+          <p>${desc}</p>
+          <a href="${url}" target="_blank" rel="noopener">🛒 Voir la ressource</a>
+        `;
+        container.appendChild(item);
+      });
     }
 
-    async function loadJson(url){
-      const res = await fetch(url, { cache: 'no-store' });
-      if (!res.ok) throw new Error('HTTP ' + res.status + ' sur ' + url);
-      return res.json();
-    }
+    // ---------- Init ----------
+    (async function init(){
+      // Buttons navigation
+      $("btnEnigmes").addEventListener("click", () => setHash("enigmes"));
+      $("btnRessources").addEventListener("click", () => setHash("ressources"));
 
-    async function init(){
-      // Énigmes
+      // Routing based on hash
+      function applyRoute(){
+        const h = (location.hash || "#enigmes").toLowerCase();
+        const section = h.includes("ressource") ? "ressources" : "enigmes";
+        showSection(section);
+      }
+      window.addEventListener("hashchange", applyRoute);
+
+      // Load data
       try{
-        enigmesData = await loadJson(ENIGMES_URL);
-        const affiliate = safeText(enigmesData.affiliate_url || enigmesData.affiliateUrl || '');
-
-        const items = Array.isArray(enigmesData.enigmes) ? enigmesData.enigmes : [];
-        enigmesList.innerHTML = '';
-        items.forEach(item => enigmesList.appendChild(buildEnigmeCard(item, affiliate)));
+        const enigmesData = await loadJSON("enigmes.json");
+        renderEnigmes(enigmesData);
       }catch(err){
-        enigmesList.innerHTML = `
-          <div class="notice">
-            ⚠️ Impossible de charger <b>enigmes.json</b>.
-            Vérifie qu’il est bien à la racine du repo et valide JSON.
+        console.error(err);
+        $("enigmesContainer").innerHTML = `
+          <div class="card">
+            <div class="question">Erreur : impossible de charger <strong>enigmes.json</strong>.</div>
+            <div class="hint">Vérifie le nom du fichier (minuscules) et qu’il est au même endroit que index.html.</div>
           </div>
         `;
       }
 
-      // Ressources
       try{
-        ressourcesData = await loadJson(RESSOURCES_URL);
-        const affiliate = safeText(ressourcesData.affiliate_url || ressourcesData.affiliateUrl || '');
-        const items = Array.isArray(ressourcesData.ressources) ? ressourcesData.ressources : [];
-
-        ressourcesList.innerHTML = '';
-        if (!items.length){
-          ressourcesEmpty.style.display = 'block';
-        }else{
-          ressourcesEmpty.style.display = 'none';
-          items.forEach(r => ressourcesList.appendChild(buildResourceCard(r, affiliate)));
-        }
+        const ressourcesData = await loadJSON("ressources.json");
+        renderRessources(ressourcesData);
       }catch(err){
-        ressourcesList.innerHTML = '';
-        ressourcesEmpty.style.display = 'block';
+        console.error(err);
+        $("ressourcesContainer").innerHTML = `
+          <div class="card">
+            <div class="question">Erreur : impossible de charger <strong>ressources.json</strong>.</div>
+            <div class="hint">Vérifie le nom du fichier (minuscules) et qu’il est au même endroit que index.html.</div>
+          </div>
+        `;
       }
-    }
 
-    init();
+      // Default route
+      if(!location.hash) location.hash = "#enigmes";
+      applyRoute();
+    })();
   </script>
 </body>
 </html>
