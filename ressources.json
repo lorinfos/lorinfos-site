@@ -1,0 +1,18 @@
+{
+  "titre": "Muscler son cerveau",
+  "sous_titre": "Sélection de livres & ressources (liens affiliés).",
+  "items": [
+    {
+      "badge": "📘",
+      "titre": "Livre : 365 énigmes",
+      "description": "Un format simple pour s’entraîner tous les jours.",
+      "url": "TON_LIEN_AFFILIE_PRODUIT_1"
+    },
+    {
+      "badge": "🧩",
+      "titre": "Jeu : casse-tête",
+      "description": "Idéal pour les routines de logique.",
+      "url": "TON_LIEN_AFFILIE_PRODUIT_2"
+    }
+  ]
+}
