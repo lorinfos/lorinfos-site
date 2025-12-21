@@ -12,36 +12,28 @@
           async src="//gc.zgo.at/count.js"></script>
 
   <style>
+    /* (TON CSS INCHANGÉ) */
     :root{
       --bg:#070708;
       --panel: rgba(255,255,255,.06);
       --panel2: rgba(255,255,255,.08);
       --stroke: rgba(255,255,255,.10);
-
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.72);
       --soft: rgba(255,255,255,.60);
-
       --gold1:#F2D37A;
       --gold2:#D7A11E;
       --gold3:#A87310;
-
       --shadow: 0 18px 50px rgba(0,0,0,.55);
       --shadow2: 0 10px 30px rgba(0,0,0,.45);
-
       --r-xl: 28px;
       --r-lg: 22px;
       --r-md: 18px;
-
       --max: 920px;
     }
-
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
-    html{
-      background:#050506;
-      overscroll-behavior: none;
-    }
+    html{ background:#050506; overscroll-behavior: none; }
     body{
       margin:0;
       min-height: 100svh;
@@ -58,15 +50,9 @@
       -webkit-tap-highlight-color: transparent;
       -webkit-overflow-scrolling: touch;
     }
-
     a{ color:inherit; text-decoration:none; }
     button{ font:inherit; }
-
-    .wrap{
-      width:min(var(--max), 92vw);
-      margin: clamp(18px, 3.2vw, 30px) auto 70px;
-    }
-
+    .wrap{ width:min(var(--max), 92vw); margin: clamp(18px, 3.2vw, 30px) auto 70px; }
     .hero{
       position:relative;
       padding: clamp(18px, 3.5vw, 28px);
@@ -88,12 +74,7 @@
       pointer-events:none;
       z-index:-1;
     }
-    .hero-inner{
-      display:grid;
-      grid-template-columns: 72px 1fr;
-      gap: 14px 16px;
-      align-items:center;
-    }
+    .hero-inner{ display:grid; grid-template-columns: 72px 1fr; gap: 14px 16px; align-items:center; }
     .logo{
       width:72px; height:72px;
       border-radius: 18px;
@@ -104,48 +85,17 @@
       display:flex; align-items:center; justify-content:center;
     }
     .logo img{ width:100%; height:100%; object-fit:cover; display:block; }
-
-    .brand{
-      display:flex;
-      flex-direction:column;
-      gap: 8px;
-    }
-    .brand h1{
-      margin:0;
-      letter-spacing: .14em;
-      font-weight: 900;
-      font-size: clamp(30px, 7vw, 44px);
-      line-height: 1.02;
-    }
-    .brand p{
-      margin:0;
-      color: var(--muted);
-      font-size: clamp(14px, 3.6vw, 18px);
-      line-height:1.45;
-    }
-
+    .brand{ display:flex; flex-direction:column; gap: 8px; }
+    .brand h1{ margin:0; letter-spacing: .14em; font-weight: 900; font-size: clamp(30px, 7vw, 44px); line-height: 1.02; }
+    .brand p{ margin:0; color: var(--muted); font-size: clamp(14px, 3.6vw, 18px); line-height:1.45; }
     @media (max-width: 520px){
-      .hero-inner{
-        grid-template-columns: 1fr;
-        justify-items:center;
-        text-align:center;
-      }
+      .hero-inner{ grid-template-columns: 1fr; justify-items:center; text-align:center; }
       .brand{ align-items:center; }
     }
-
-    .switch{
-      position:relative;
-      margin-top: 16px;
-      display:grid;
-      gap: 12px;
-    }
-
+    .switch{ position:relative; margin-top: 16px; display:grid; gap: 12px; }
     .btn{
       width:100%;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      gap: 10px;
+      display:flex; align-items:center; justify-content:center; gap: 10px;
       padding: 16px 18px;
       border-radius: 999px;
       border: 1px solid rgba(255,255,255,.10);
@@ -162,36 +112,18 @@
     }
     .btn:active{ transform: scale(.99); }
     .btn .emoji{ font-size: 18px; transform: translateY(-1px); }
-
     .btn.primary{
       background: linear-gradient(180deg, rgba(242,211,122,.92), rgba(215,161,30,.92));
       color: rgba(0,0,0,.82);
       border-color: rgba(242,211,122,.35);
     }
-
     .btn.selected{
       border-color: rgba(242,211,122,.55);
       box-shadow: 0 0 0 2px rgba(242,211,122,.18), var(--shadow2);
     }
-
-    .section-title{
-      margin: 22px 2px 12px;
-      display:flex;
-      align-items:flex-end;
-      gap: 10px;
-    }
-    .section-title .big-emoji{
-      font-size: clamp(34px, 9vw, 56px);
-      filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
-    }
-    .section-title h2{
-      margin:0;
-      font-weight: 900;
-      font-size: clamp(34px, 9vw, 58px);
-      line-height: 1.0;
-      letter-spacing: -0.02em;
-    }
-
+    .section-title{ margin: 22px 2px 12px; display:flex; align-items:flex-end; gap: 10px; }
+    .section-title .big-emoji{ font-size: clamp(34px, 9vw, 56px); filter: drop-shadow(0 10px 18px rgba(0,0,0,.55)); }
+    .section-title h2{ margin:0; font-weight: 900; font-size: clamp(34px, 9vw, 58px); line-height: 1.0; letter-spacing: -0.02em; }
     .info{
       margin-top: 10px;
       padding: 16px 16px;
@@ -203,7 +135,6 @@
       line-height:1.5;
     }
     .info strong{ color: rgba(255,255,255,.90); }
-
     .search{
       margin-top: 14px;
       display:flex;
@@ -226,7 +157,6 @@
       appearance:none;
     }
     .search input::placeholder{ color: rgba(255,255,255,.55); }
-
     .clear-btn{
       width:38px; height:38px;
       border-radius: 999px;
@@ -238,14 +168,7 @@
       -webkit-appearance:none;
       appearance:none;
     }
-
-    .search-meta{
-      margin-top: 10px;
-      color: rgba(255,255,255,.62);
-      font-size: 13px;
-      text-align:center;
-    }
-
+    .search-meta{ margin-top: 10px; color: rgba(255,255,255,.62); font-size: 13px; text-align:center; }
     .card{
       margin-top: 16px;
       padding: 18px 16px;
@@ -260,11 +183,7 @@
       appearance:none;
       transform: translateZ(0);
     }
-    .card, .card *{
-      outline: none !important;
-      box-shadow: none;
-    }
-
+    .card, .card *{ outline: none !important; box-shadow: none; }
     .pill{
       display:inline-flex;
       align-items:center;
@@ -277,14 +196,7 @@
       font-weight: 800;
       letter-spacing: .02em;
     }
-
-    .question{
-      margin: 16px 2px 14px;
-      font-size: clamp(20px, 5.1vw, 28px);
-      line-height: 1.28;
-      color: rgba(255,255,255,.92);
-    }
-
+    .question{ margin: 16px 2px 14px; font-size: clamp(20px, 5.1vw, 28px); line-height: 1.28; color: rgba(255,255,255,.92); }
     .answer-btn{
       width:100%;
       display:flex;
@@ -305,7 +217,6 @@
       appearance:none;
     }
     .answer-btn:active{ transform: scale(.99); }
-
     .linker{
       margin: 14px 0 6px;
       padding: 12px 14px;
@@ -323,7 +234,6 @@
       text-underline-offset: 4px;
       text-decoration-thickness: 2px;
     }
-
     .empty{
       margin-top: 16px;
       padding: 14px 14px;
@@ -333,15 +243,7 @@
       color: rgba(255,255,255,.76);
       text-align:center;
     }
-
-    footer{
-      margin-top: 26px;
-      text-align:center;
-      color: rgba(255,255,255,.55);
-      font-size: 13px;
-      padding-bottom: 18px;
-    }
-
+    footer{ margin-top: 26px; text-align:center; color: rgba(255,255,255,.55); font-size: 13px; padding-bottom: 18px; }
     .overlay{
       position:fixed;
       inset:0;
@@ -355,7 +257,6 @@
       -webkit-backdrop-filter: blur(10px);
     }
     .overlay.show{ display:flex; }
-
     .modal{
       width: min(560px, 92vw);
       border-radius: var(--r-xl);
@@ -372,11 +273,7 @@
       padding: 14px 14px 10px 16px;
       border-bottom: 1px solid rgba(255,255,255,.10);
     }
-    .modal-title{
-      font-weight: 900;
-      letter-spacing: .02em;
-      color: rgba(255,255,255,.92);
-    }
+    .modal-title{ font-weight: 900; letter-spacing: .02em; color: rgba(255,255,255,.92); }
     .close{
       width: 40px; height: 40px;
       border-radius: 999px;
@@ -388,17 +285,8 @@
       -webkit-appearance:none;
       appearance:none;
     }
-    .modal-body{
-      padding: 14px 16px 18px;
-      color: rgba(255,255,255,.88);
-      line-height:1.45;
-    }
-    .modal-body .label{
-      color: rgba(255,255,255,.65);
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
+    .modal-body{ padding: 14px 16px 18px; color: rgba(255,255,255,.88); line-height:1.45; }
+    .modal-body .label{ color: rgba(255,255,255,.65); font-weight: 800; margin-bottom: 8px; }
     @media (prefers-reduced-motion: reduce){
       *{ transition:none !important; scroll-behavior:auto !important; }
     }
@@ -407,13 +295,11 @@
 
 <body>
   <div class="wrap">
-
     <section class="hero">
       <div class="hero-inner">
         <div class="logo" aria-label="Logo LORINFOS">
           <img src="logo.png" alt="Logo LORINFOS" />
         </div>
-
         <div class="brand">
           <h1>LORINFOS</h1>
           <p>Des énigmes courtes pour tester ta logique.<br/>La plupart se trompent.</p>
@@ -459,14 +345,10 @@
         <div class="big-emoji">🧠</div>
         <h2>Muscler son<br/>cerveau</h2>
       </div>
-
       <div id="ressources-list"></div>
     </section>
 
-    <footer>
-      © LORINFOS — Tous droits réservés.
-    </footer>
-
+    <footer>© LORINFOS — Tous droits réservés.</footer>
   </div>
 
   <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
@@ -483,35 +365,28 @@
   </div>
 
   <script>
-    /* -----------------------------
-       GoatCounter: events "macro"
-       Objectif: DATA AGREGEE (pas de /enigme/xx, pas de /search?q=)
-    ------------------------------*/
-    function gcEvent(name, payload = {}) {
+    /* -------------------------------------------------
+      GOAL: KPI MACRO (peu de data) + "nombre de personnes"
+      => on compte 1 fois par SESSION (sessionStorage)
+    -------------------------------------------------- */
+
+    function gcEventOncePerSession(name) {
       try {
+        const key = "gc_once_" + name;
+        if (sessionStorage.getItem(key) === "1") return; // déjà compté cette session
+        sessionStorage.setItem(key, "1");
+
         if (window.goatcounter && typeof window.goatcounter.count === "function") {
           window.goatcounter.count({
-            path: "/event/" + String(name || "unknown"),
-            title: String(name || "unknown"),
-            event: true,
-            ...payload
+            path: "/event/" + String(name),
+            title: String(name),
+            event: true
           });
         }
-      } catch(e) {}
+      } catch (e) {}
     }
 
-    // Debounce helper (évite de spam)
-    function debounce(fn, delay = 600){
-      let t;
-      return (...args) => {
-        clearTimeout(t);
-        t = setTimeout(() => fn(...args), delay);
-      };
-    }
-
-    /* -----------------------------
-       App
-    ------------------------------*/
+    // Helpers
     const $ = (id) => document.getElementById(id);
 
     const tabEnigmes = $("tab-enigmes");
@@ -531,9 +406,9 @@
 
     let ALL_ENIGMES = [];
     let AFFILIATE_URL = "";
-    let CURRENT_TAB = "enigmes";         // évite event tab au chargement
-    let TAB_INIT_DONE = false;           // empêche event tab lors du routage initial
-    let SEARCH_HAS_BEEN_USED = false;    // compte 1x par "session" de recherche
+
+    let CURRENT_TAB = "enigmes";
+    let TAB_INIT_DONE = false;
 
     function blurActive(){ try{ document.activeElement && document.activeElement.blur(); }catch(e){} }
 
@@ -541,9 +416,8 @@
       const isEnigmes = which === "enigmes";
       const nextTab = isEnigmes ? "enigmes" : "muscler";
 
-      // Track seulement si: (1) pas l'init, (2) changement réel d'onglet
       if (TAB_INIT_DONE && CURRENT_TAB !== nextTab) {
-        gcEvent(nextTab === "enigmes" ? "tab_enigmes" : "tab_muscler", { referrer: origin });
+        gcEventOncePerSession(nextTab === "enigmes" ? "tab_enigmes" : "tab_muscler");
       }
 
       CURRENT_TAB = nextTab;
@@ -573,7 +447,8 @@
 
     linkToMuscler.addEventListener("click", (e) => {
       e.preventDefault();
-      gcEvent("link_to_muscler", { referrer: "cta" });
+      gcEventOncePerSession("tab_muscler");      // KPI: personnes qui vont sur muscler
+      gcEventOncePerSession("link_to_muscler");  // KPI: personnes qui cliquent le CTA
       setTab("muscler", "cta_link");
     });
 
@@ -582,24 +457,23 @@
       modalAnswer.textContent = answer || "";
       overlay.classList.add("show");
       overlay.setAttribute("aria-hidden", "false");
-      gcEvent("open_answer");
+
+      // KPI: personnes qui voient au moins 1 réponse
+      gcEventOncePerSession("answer_view");
+
       blurActive();
     }
 
     function closeAnswer(){
-      // évite de spam: si déjà fermé, on n'envoie rien
       if (!overlay.classList.contains("show")) return;
       overlay.classList.remove("show");
       overlay.setAttribute("aria-hidden", "true");
-      gcEvent("close_answer");
       blurActive();
     }
 
     closeModal.addEventListener("click", closeAnswer);
     overlay.addEventListener("click", (e) => { if(e.target === overlay) closeAnswer(); });
-    document.addEventListener("keydown", (e) => {
-      if(e.key === "Escape") closeAnswer();
-    });
+    document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeAnswer(); });
 
     async function loadJSON(path){
       const res = await fetch(path, { cache: "no-store" });
@@ -609,11 +483,9 @@
 
     function renderEnigmes(data){
       const list = (data && data.enigmes) ? [...data.enigmes] : [];
-      list.sort((a,b) => (b.id ?? 0) - (a.id ?? 0)); // dernières en haut
-
+      list.sort((a,b) => (b.id ?? 0) - (a.id ?? 0));
       ALL_ENIGMES = list;
       AFFILIATE_URL = (data && data.affiliate_url) ? data.affiliate_url : "";
-
       applyFilter(true);
     }
 
@@ -634,16 +506,6 @@
         searchMeta.style.display = "block";
         searchMeta.textContent = `${filtered.length} résultat(s) pour “${searchInput.value.trim()}”`;
       }
-
-      // Tracking "recherche utilisée" (macro, sans mots)
-      if(!isInit && q && !SEARCH_HAS_BEEN_USED){
-        gcEvent("search_used");
-        SEARCH_HAS_BEEN_USED = true;
-      }
-      // reset quand on vide
-      if(!q){
-        SEARCH_HAS_BEEN_USED = false;
-      }
     }
 
     function renderEnigmesList(list){
@@ -659,29 +521,23 @@
         const card = document.createElement("div");
         card.className = "card";
 
-        const badge = "🧠";
         const titre = (e.titre || "Énigme").toString();
         const question = (e.question || "").toString();
         const reponse = (e.reponse || "").toString();
 
         card.innerHTML = `
-          <div class="pill"><span>${badge}</span><span>${escapeHTML(titre)}</span></div>
+          <div class="pill"><span>🧠</span><span>${escapeHTML(titre)}</span></div>
           <div class="question">${escapeHTML(question)}</div>
-          <button class="answer-btn" type="button">
-            <span>👉</span> Voir la réponse
-          </button>
+          <button class="answer-btn" type="button"><span>👉</span> Voir la réponse</button>
         `;
 
         const btn = card.querySelector(".answer-btn");
         btn.addEventListener("click", () => {
-          gcEvent("click_answer");
-
-          // pub/affiliation (macro)
+          // KPI: personnes qui ouvrent un lien affilié (au moins 1 fois / session)
           if(AFFILIATE_URL && AFFILIATE_URL.trim() && AFFILIATE_URL !== "TON_LIEN_AFFILIATION_ICI"){
-            gcEvent("affiliate_open", { referrer: "answer_button" });
+            gcEventOncePerSession("affiliate_open");
             window.open(AFFILIATE_URL, "_blank", "noopener,noreferrer");
           }
-
           openAnswer(titre, reponse);
         });
 
@@ -694,7 +550,6 @@
       root.innerHTML = "";
 
       const list = (data && data.ressources) ? data.ressources : [];
-
       if(!list.length){
         root.innerHTML = `<div class="empty">Aucune ressource pour l’instant. Bientôt disponible 👀✅</div>`;
         return;
@@ -713,9 +568,9 @@
           <a class="answer-btn" href="${url}" target="_blank" rel="noopener noreferrer">Voir</a>
         `;
 
-        // Tracking clic sur une ressource (monétisation)
+        // KPI: personnes qui cliquent une ressource (au moins 1 fois / session)
         const link = card.querySelector("a.answer-btn");
-        link.addEventListener("click", () => gcEvent("resource_click"));
+        link.addEventListener("click", () => gcEventOncePerSession("resource_click"));
 
         root.appendChild(card);
       });
@@ -730,22 +585,12 @@
         .replaceAll("'", "&#039;");
     }
 
-    // Search: debounce (anti-spam)
-    const debouncedTrackFilter = debounce(() => applyFilter(false), 600);
-
-    searchInput?.addEventListener("input", () => {
-      // UI instant
-      applyFilter(true);
-      // tracking macro après pause
-      debouncedTrackFilter();
-    });
-
+    // Search UI (pas de tracking, car tu n’en veux pas dans tes KPI)
+    searchInput?.addEventListener("input", () => applyFilter(true));
     clearSearch?.addEventListener("click", () => {
-      const hadValue = !!searchInput.value.trim();
       searchInput.value = "";
       applyFilter(false);
       searchInput.focus();
-      if(hadValue) gcEvent("search_clear");
     });
 
     async function init(){
@@ -773,11 +618,11 @@
         setTab("enigmes", "hash");
       }
 
-      // à partir de maintenant, on track les changements d'onglets
       TAB_INIT_DONE = true;
 
-      // page view "macro" (optionnel)
-      gcEvent("page_loaded");
+      // Important:
+      // Le "nombre total de personnes qui arrivent au site" = METRIQUE "Visits" de GoatCounter (sessions).
+      // On ne force pas un event custom ici, sinon tu doubles l’info.
     }
 
     init();
