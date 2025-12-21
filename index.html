@@ -2,386 +2,409 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>LORINFOS</title>
   <meta name="description" content="Des énigmes courtes pour tester ta logique. La plupart se trompent." />
+  <meta name="theme-color" content="#0b0b0d" />
 
   <style>
     :root{
-      --bg:#0a0a0c;
-      --panel:rgba(255,255,255,.06);
-      --panel2:rgba(255,255,255,.08);
-      --stroke:rgba(255,255,255,.12);
-      --text:#f2f2f2;
-      --muted:rgba(242,242,242,.72);
+      --bg:#070708;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.10);
+
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.72);
+      --soft: rgba(255,255,255,.60);
 
       --gold1:#F2D37A;
       --gold2:#D7A11E;
-      --gold3:#9a740a;
+      --gold3:#A87310;
 
-      --shadow: 0 18px 60px rgba(0,0,0,.55);
-      --radius: 28px;
-      --radius2: 22px;
-      --max: 560px;
+      --shadow: 0 18px 50px rgba(0,0,0,.55);
+      --shadow2: 0 10px 30px rgba(0,0,0,.45);
+
+      --r-xl: 28px;
+      --r-lg: 22px;
+      --r-md: 18px;
+
+      --max: 920px;
     }
 
-    *{box-sizing:border-box}
-    html,body{height:100%}
+    *{ box-sizing:border-box; }
+    html,body{ height:100%; }
     body{
       margin:0;
+      background: radial-gradient(900px 520px at 50% -10%, rgba(242,211,122,.24), transparent 60%),
+                  radial-gradient(900px 520px at 50% 30%, rgba(215,161,30,.16), transparent 62%),
+                  linear-gradient(180deg, #050506 0%, #09090B 55%, #050506 100%);
       color:var(--text);
-      font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", Segoe UI, Roboto, Arial, "Noto Sans", "Helvetica Neue", sans-serif;
-      background:
-        radial-gradient(900px 420px at 30% 0%, rgba(242,211,122,.22), transparent 60%),
-        radial-gradient(900px 520px at 70% 5%, rgba(215,161,30,.16), transparent 55%),
-        radial-gradient(1000px 600px at 50% 45%, rgba(255,255,255,.04), transparent 62%),
-        linear-gradient(180deg, #0a0a0c 0%, #070709 70%, #060607 100%);
+      font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       overflow-x:hidden;
+      -webkit-tap-highlight-color: transparent; /* supprime les reflets/traits Safari */
     }
+
+    a{ color:inherit; text-decoration:none; }
+    button{ font:inherit; }
 
     .wrap{
-      width:100%;
-      max-width:var(--max);
-      margin:0 auto;
-      padding:22px 16px 30px;
+      width:min(var(--max), 92vw);
+      margin: clamp(18px, 3.2vw, 30px) auto 70px;
     }
 
-    /* CARD */
-    .card{
-      background:linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.05));
-      border:1px solid var(--stroke);
-      border-radius:var(--radius);
-      box-shadow:var(--shadow);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-
-    /* HEADER */
+    /* HERO */
     .hero{
-      padding:18px 18px 16px;
       position:relative;
+      padding: clamp(18px, 3.5vw, 28px);
+      border-radius: var(--r-xl);
+      background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow);
       overflow:hidden;
     }
-    .hero::before{
+    .hero:before{
       content:"";
       position:absolute; inset:-2px;
-      background:
-        radial-gradient(600px 240px at 30% 10%, rgba(242,211,122,.22), transparent 60%),
-        radial-gradient(560px 260px at 80% 10%, rgba(215,161,30,.14), transparent 60%);
-      filter: blur(0.2px);
+      background: radial-gradient(420px 240px at 18% 18%, rgba(242,211,122,.22), transparent 60%),
+                  radial-gradient(520px 300px at 70% 0%, rgba(215,161,30,.18), transparent 62%);
+      filter: blur(8px);
+      opacity:.95;
       pointer-events:none;
     }
-    .hero > *{position:relative}
-
-    .brand{
+    .hero-inner{
+      position:relative;
       display:grid;
       grid-template-columns: 72px 1fr;
-      gap:14px;
+      gap: 14px 16px;
       align-items:center;
-      margin-bottom:14px;
     }
     .logo{
       width:72px; height:72px;
-      border-radius:18px;
-      display:block;
-      box-shadow: 0 14px 28px rgba(0,0,0,.35);
-      border:1px solid rgba(255,255,255,.14);
-      background:rgba(0,0,0,.35);
-      object-fit:cover;
+      border-radius: 18px;
+      box-shadow: 0 12px 26px rgba(0,0,0,.55);
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(0,0,0,.25);
+      overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
     }
-    .title{
+    .logo img{ width:100%; height:100%; object-fit:cover; display:block; }
+
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+    }
+    .brand h1{
       margin:0;
-      font-weight:900;
-      letter-spacing:.06em;
-      font-size:42px;
-      line-height:1.0;
-      text-transform:uppercase;
+      letter-spacing: .14em;
+      font-weight: 900;
+      font-size: clamp(30px, 7vw, 44px);
+      line-height: 1.02;
     }
-    .subtitle{
-      margin:8px 0 0;
-      color:var(--muted);
-      font-size:18px;
+    .brand p{
+      margin:0;
+      color: var(--muted);
+      font-size: clamp(14px, 3.6vw, 18px);
       line-height:1.45;
     }
 
-    /* TOP BUTTONS (full width, centered) */
-    .navBtns{
+    /* SWITCH BUTTONS (pleine largeur) */
+    .switch{
+      position:relative;
+      margin-top: 16px;
       display:grid;
-      gap:12px;
-      margin-top:10px;
+      gap: 12px;
     }
+
     .btn{
       width:100%;
-      border:0;
-      cursor:pointer;
-      border-radius:999px;
-      padding:16px 18px;
-      font-weight:800;
-      font-size:18px;
-      letter-spacing:.01em;
       display:flex;
       align-items:center;
       justify-content:center;
-      gap:10px;
-      transition: transform .08s ease, filter .15s ease, opacity .15s ease;
+      gap: 10px;
+      padding: 16px 18px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.85);
+      box-shadow: var(--shadow2);
+      cursor:pointer;
       user-select:none;
-      -webkit-tap-highlight-color: transparent;
+      outline:none;
+      position:relative;
+      transition: transform .12s ease, filter .12s ease, background .18s ease, border-color .18s ease;
     }
     .btn:active{ transform: scale(.99); }
-    .btnGold{
-      color:#1a1404;
-      background:linear-gradient(180deg, var(--gold1), var(--gold2));
-      box-shadow: 0 16px 34px rgba(215,161,30,.18), inset 0 1px 0 rgba(255,255,255,.35);
-    }
-    .btnDark{
-      color:var(--text);
-      background:linear-gradient(180deg, rgba(255,255,255,.10), rgba(255,255,255,.06));
-      border:1px solid rgba(255,255,255,.12);
-      box-shadow: 0 18px 36px rgba(0,0,0,.35), inset 0 1px 0 rgba(255,255,255,.10);
-    }
-    .btn .emoji{filter:saturate(1.2)}
-    .btnActive{
-      outline: 2px solid rgba(242,211,122,.35);
-      outline-offset: 2px;
+    .btn .emoji{ font-size: 18px; transform: translateY(-1px); }
+
+    .btn.primary{
+      background: linear-gradient(180deg, rgba(242,211,122,.92), rgba(215,161,30,.92));
+      color: rgba(0,0,0,.82);
+      border-color: rgba(242,211,122,.35);
     }
 
-    /* SECTIONS */
-    .sectionTitle{
+    .btn.selected{
+      border-color: rgba(242,211,122,.55);
+      box-shadow: 0 0 0 2px rgba(242,211,122,.18), var(--shadow2);
+    }
+
+    /* SECTION TITLES */
+    .section-title{
+      margin: 22px 2px 12px;
       display:flex;
-      align-items:center;
-      gap:12px;
-      margin:22px 0 14px;
-      font-size:46px;
-      line-height:1.05;
-      font-weight:950;
-      letter-spacing:-.02em;
+      align-items:flex-end;
+      gap: 10px;
     }
-    .sectionTitle .ico{ font-size:40px; filter:saturate(1.2); }
-
-    .notice{
-      padding:16px 16px;
-      border-radius:var(--radius2);
-      border:1px solid rgba(242,211,122,.22);
-      background: linear-gradient(180deg, rgba(215,161,30,.14), rgba(255,255,255,.04));
-      color: rgba(242,242,242,.85);
-      line-height:1.45;
+    .section-title .big-emoji{
+      font-size: clamp(34px, 9vw, 56px);
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.55));
     }
-    .notice b{ color:#fff; }
-
-    /* LIST */
-    .list{ display:grid; gap:14px; margin-top:14px; }
-
-    .puzzle{
-      padding:16px 16px 14px;
-      border-radius:var(--radius2);
-      border:1px solid rgba(255,255,255,.12);
-      background: linear-gradient(180deg, rgba(255,255,255,.07), rgba(255,255,255,.04));
-      box-shadow: 0 14px 32px rgba(0,0,0,.35);
+    .section-title h2{
+      margin:0;
+      font-weight: 900;
+      font-size: clamp(34px, 9vw, 58px);
+      line-height: 1.0;
+      letter-spacing: -0.02em;
     }
 
-    .badge{
+    /* INFO CARD */
+    .info{
+      margin-top: 10px;
+      padding: 16px 16px;
+      border-radius: var(--r-lg);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(242,211,122,.22);
+      box-shadow: var(--shadow2);
+      color: var(--muted);
+      line-height:1.5;
+    }
+    .info strong{ color: rgba(255,255,255,.90); }
+
+    /* CARD */
+    .card{
+      margin-top: 16px;
+      padding: 18px 16px;
+      border-radius: var(--r-lg);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      box-shadow: var(--shadow2);
+      position:relative;
+      overflow:hidden;
+    }
+    /* IMPORTANT: pas de séparation “jaune” */
+    .card, .card *{
+      outline: none !important;
+      border-color: inherit;
+    }
+
+    .pill{
       display:inline-flex;
       align-items:center;
-      gap:10px;
-      padding:10px 14px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(0,0,0,.25);
-      font-weight:900;
-      letter-spacing:.01em;
-      margin-bottom:10px;
-      width:fit-content;
+      gap: 10px;
+      padding: 9px 14px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.10);
+      color: rgba(255,255,255,.88);
+      font-weight: 800;
+      letter-spacing: .02em;
     }
-    .badge .bico{ font-size:18px; }
-
     .question{
-      font-size:28px;
-      line-height:1.22;
-      color:rgba(255,255,255,.92);
-      margin:0 0 14px;
+      margin: 16px 2px 14px;
+      font-size: clamp(20px, 5.1vw, 28px);
+      line-height: 1.28;
+      color: rgba(255,255,255,.92);
     }
 
-    .answerBtn{
+    .answer-btn{
       width:100%;
-      border:0;
-      cursor:pointer;
-      border-radius:999px;
-      padding:16px 18px;
-      font-weight:900;
-      font-size:20px;
       display:flex;
       align-items:center;
       justify-content:center;
       gap:10px;
-      background:linear-gradient(180deg, var(--gold1), var(--gold2));
-      color:#1a1404;
-      box-shadow: 0 16px 34px rgba(215,161,30,.16), inset 0 1px 0 rgba(255,255,255,.35);
-      -webkit-tap-highlight-color: transparent;
+      padding: 14px 16px;
+      border-radius: 999px;
+      border: 0;
+      background: linear-gradient(180deg, rgba(242,211,122,.94), rgba(215,161,30,.94));
+      color: rgba(0,0,0,.82);
+      font-weight: 900;
+      letter-spacing: .01em;
+      cursor:pointer;
+      box-shadow: 0 18px 40px rgba(0,0,0,.45);
+      outline:none;
     }
-    .answerBtn:active{ transform: scale(.99); }
+    .answer-btn:active{ transform: scale(.99); }
 
-    .bridge{
-      margin-top:14px;
-      padding:14px 16px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      color:rgba(242,242,242,.82);
+    .hint{
+      margin-top: 10px;
+      color: var(--soft);
+      font-size: 14px;
+      line-height:1.4;
+    }
+
+    .linker{
+      margin: 14px 0 6px;
+      padding: 12px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.72);
       text-align:center;
       line-height:1.35;
     }
+    .linker b{ color: rgba(255,255,255,.88); }
 
-    /* RESOURCES */
-    .resourceEmpty{
-      padding:14px 16px;
-      border-radius:999px;
-      border:1px solid rgba(255,255,255,.12);
-      background: rgba(255,255,255,.05);
-      color:rgba(242,242,242,.82);
+    .empty{
+      margin-top: 16px;
+      padding: 14px 14px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      color: rgba(255,255,255,.76);
       text-align:center;
     }
 
-    /* FOOTER */
     footer{
-      margin-top:18px;
+      margin-top: 26px;
       text-align:center;
-      color:rgba(242,242,242,.52);
-      font-size:14px;
-      letter-spacing:.02em;
+      color: rgba(255,255,255,.55);
+      font-size: 13px;
+      padding-bottom: 18px;
     }
 
-    /* MODAL (centered) */
+    /* MODAL (au milieu + blur) */
     .overlay{
-      position:fixed; inset:0;
-      background: rgba(0,0,0,.42);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
+      position:fixed;
+      inset:0;
       display:none;
       align-items:center;
       justify-content:center;
-      padding:18px;
-      z-index:9999;
+      padding: 22px;
+      z-index: 999;
+      background: rgba(0,0,0,.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
     }
     .overlay.show{ display:flex; }
 
     .modal{
-      width:100%;
-      max-width:520px;
-      border-radius:24px;
-      border:1px solid rgba(255,255,255,.14);
-      background: linear-gradient(180deg, rgba(25,25,28,.88), rgba(10,10,12,.88));
-      box-shadow: 0 26px 80px rgba(0,0,0,.65);
+      width: min(560px, 92vw);
+      border-radius: var(--r-xl);
+      border: 1px solid rgba(255,255,255,.14);
+      background: rgba(25,25,28,.72);
+      box-shadow: 0 28px 80px rgba(0,0,0,.65);
       overflow:hidden;
     }
-    .modalHead{
+    .modal-head{
       display:flex;
       align-items:center;
       justify-content:space-between;
-      padding:14px 14px 10px;
-      border-bottom:1px solid rgba(255,255,255,.10);
+      padding: 14px 14px 10px 16px;
+      border-bottom: 1px solid rgba(255,255,255,.10);
     }
-    .modalTitle{
-      font-weight:950;
-      letter-spacing:.01em;
-      display:flex;
-      align-items:center;
-      gap:10px;
-      color:rgba(255,255,255,.92);
+    .modal-title{
+      font-weight: 900;
+      letter-spacing: .02em;
+      color: rgba(255,255,255,.92);
     }
     .close{
-      border:1px solid rgba(255,255,255,.16);
+      width: 40px; height: 40px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.14);
       background: rgba(255,255,255,.06);
-      color:rgba(255,255,255,.9);
-      width:42px; height:42px;
-      border-radius:999px;
+      color: rgba(255,255,255,.90);
       cursor:pointer;
-      font-size:20px;
-      display:flex;
-      align-items:center;
-      justify-content:center;
-      -webkit-tap-highlight-color: transparent;
+      outline:none;
     }
-    .modalBody{
-      padding:14px 16px 16px;
-      color:rgba(242,242,242,.92);
+    .modal-body{
+      padding: 14px 16px 18px;
+      color: rgba(255,255,255,.88);
       line-height:1.45;
-      font-size:18px;
     }
-    .modalBody .label{
-      color:rgba(242,242,242,.70);
-      font-weight:800;
-      margin-bottom:8px;
+    .modal-body .label{
+      color: rgba(255,255,255,.65);
+      font-weight: 800;
+      margin-bottom: 8px;
     }
 
-    /* Small helpers */
-    .hidden{ display:none !important; }
-
-    /* Prevent iOS weird zoom on inputs (we have none, but keep stable) */
-    @media (max-width:420px){
-      .title{ font-size:38px; }
-      .sectionTitle{ font-size:42px; }
-      .question{ font-size:26px; }
+    /* Accessibility */
+    @media (prefers-reduced-motion: reduce){
+      *{ transition:none !important; scroll-behavior:auto !important; }
     }
   </style>
 </head>
 
 <body>
-  <main class="wrap">
-    <section class="card hero" aria-label="En-tête LORINFOS">
-      <div class="brand">
-        <img class="logo" src="logo.png" alt="Logo LORINFOS" />
-        <div>
-          <h1 class="title">LORINFOS</h1>
-          <p class="subtitle">
-            Des énigmes courtes pour tester ta logique.<br/>
-            La plupart se trompent.
-          </p>
+  <div class="wrap">
+
+    <section class="hero">
+      <div class="hero-inner">
+        <div class="logo" aria-label="Logo LORINFOS">
+          <img src="logo.png" alt="Logo LORINFOS" />
+        </div>
+
+        <div class="brand">
+          <h1>LORINFOS</h1>
+          <p>Des énigmes courtes pour tester ta logique.<br/>La plupart se trompent.</p>
         </div>
       </div>
 
-      <div class="navBtns">
-        <button id="btnEnigmes" class="btn btnGold btnActive" type="button" aria-controls="enigmes">
+      <div class="switch" role="tablist" aria-label="Navigation">
+        <button id="tab-enigmes" class="btn primary selected" role="tab" aria-selected="true" aria-controls="section-enigmes">
           <span class="emoji">🧩</span> Énigmes &amp; Réponses
         </button>
-        <button id="btnRessources" class="btn btnDark" type="button" aria-controls="ressources">
+        <button id="tab-ressources" class="btn" role="tab" aria-selected="false" aria-controls="section-ressources">
           <span class="emoji">🧠</span> Muscler son cerveau
         </button>
       </div>
     </section>
 
-    <section id="enigmes" aria-label="Énigmes">
-      <h2 class="sectionTitle"><span class="ico">🧩</span> Énigmes &amp;<br/>Réponses</h2>
-
-      <div class="notice">
-        <b>⚠️</b> Pour faire vivre le site, certaines réponses peuvent ouvrir une courte publicité.
-        Ferme simplement l’onglet de pub et reviens ici : <b>la réponse s’affiche ensuite.</b>
+    <!-- SECTION: ENIGMES -->
+    <section id="section-enigmes" style="display:block;">
+      <div class="section-title">
+        <div class="big-emoji">🧩</div>
+        <h2>Énigmes &amp;<br/>Réponses</h2>
       </div>
 
-      <div id="enigmesList" class="list" aria-live="polite"></div>
+      <div class="info">
+        <strong>⚠️</strong> Pour faire vivre le site, certaines réponses peuvent ouvrir une courte publicité.
+        Ferme simplement l’onglet de pub et reviens ici : <strong>la réponse s’affiche ensuite.</strong>
+      </div>
 
-      <div class="bridge" id="bridgeToBrain">
+      <div id="enigmes-list"></div>
+
+      <div class="linker">
         Tu veux aller plus loin ? Appuie sur <b>“Muscler son cerveau”</b> juste au-dessus 🧠
       </div>
     </section>
 
-    <section id="ressources" aria-label="Ressources" style="margin-top:18px;">
-      <h2 class="sectionTitle"><span class="ico">🧠</span> Muscler son<br/>cerveau</h2>
-      <div id="ressourcesBox" class="resourceEmpty">
-        Aucune ressource pour l’instant. Ajoute-en dans <b>ressources.json</b> ✅
+    <!-- SECTION: RESSOURCES -->
+    <section id="section-ressources" style="display:none;">
+      <div class="section-title">
+        <div class="big-emoji">🧠</div>
+        <h2>Muscler son<br/>cerveau</h2>
       </div>
+
+      <div id="ressources-list"></div>
     </section>
 
-    <footer>© LORINFOS — Tous droits réservés.</footer>
-  </main>
+    <footer>
+      © LORINFOS — Tous droits réservés.
+    </footer>
+
+  </div>
 
   <!-- MODAL -->
-  <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal">
-      <div class="modalHead">
-        <div id="modalTitle" class="modalTitle">Énigme</div>
-        <button id="closeModal" class="close" type="button" aria-label="Fermer">×</button>
+      <div class="modal-head">
+        <div id="modalTitle" class="modal-title">Énigme</div>
+        <button id="closeModal" class="close" aria-label="Fermer">✕</button>
       </div>
-      <div class="modalBody">
+      <div class="modal-body">
         <div class="label">Réponse :</div>
         <div id="modalAnswer"></div>
       </div>
@@ -389,226 +412,171 @@
   </div>
 
   <script>
-    // --------- Utils
+    // Helpers
     const $ = (id) => document.getElementById(id);
 
-    function safeText(v){
-      return String(v ?? "").replace(/\s+/g, " ").trim();
-    }
+    const tabEnigmes = $("tab-enigmes");
+    const tabRessources = $("tab-ressources");
+    const sectionEnigmes = $("section-enigmes");
+    const sectionRessources = $("section-ressources");
 
-    function scrollToSection(id){
-      const el = $(id);
-      if(!el) return;
-      const top = el.getBoundingClientRect().top + window.scrollY - 10;
-      window.scrollTo({ top, behavior: "smooth" });
-    }
-
-    // --------- Modal
     const overlay = $("overlay");
+    const closeModal = $("closeModal");
     const modalTitle = $("modalTitle");
     const modalAnswer = $("modalAnswer");
-    const closeModalBtn = $("closeModal");
 
-    function openModal({ title, answer }){
-      modalTitle.textContent = title || "Énigme";
+    // Prevent Safari "focus line" + keep clean
+    function blurActive(){ try{ document.activeElement && document.activeElement.blur(); }catch(e){} }
+
+    function setTab(which){
+      const isEnigmes = which === "enigmes";
+
+      // Buttons visual + a11y
+      tabEnigmes.classList.toggle("primary", isEnigmes);
+      tabEnigmes.classList.toggle("selected", isEnigmes);
+      tabEnigmes.setAttribute("aria-selected", isEnigmes ? "true" : "false");
+
+      tabRessources.classList.toggle("primary", !isEnigmes);
+      tabRessources.classList.toggle("selected", !isEnigmes);
+      tabRessources.setAttribute("aria-selected", !isEnigmes ? "true" : "false");
+
+      // Show only selected section (retour à l'ancien comportement)
+      sectionEnigmes.style.display = isEnigmes ? "block" : "none";
+      sectionRessources.style.display = !isEnigmes ? "block" : "none";
+
+      // Update hash (propre)
+      location.hash = isEnigmes ? "#enigmes" : "#muscler";
+
+      // scroll top of content (gentil)
+      const top = (isEnigmes ? sectionEnigmes : sectionRessources).getBoundingClientRect().top + window.scrollY - 12;
+      window.scrollTo({ top, behavior: "smooth" });
+
+      blurActive();
+    }
+
+    tabEnigmes.addEventListener("click", () => setTab("enigmes"));
+    tabRessources.addEventListener("click", () => setTab("muscler"));
+
+    function openAnswer(title, answer){
+      modalTitle.textContent = title || "Réponse";
       modalAnswer.textContent = answer || "";
       overlay.classList.add("show");
       overlay.setAttribute("aria-hidden", "false");
-      document.body.style.overflow = "hidden";
+      blurActive();
     }
 
-    function closeModal(){
+    function closeAnswer(){
       overlay.classList.remove("show");
       overlay.setAttribute("aria-hidden", "true");
-      document.body.style.overflow = "";
+      blurActive();
     }
 
-    closeModalBtn.addEventListener("click", closeModal);
+    closeModal.addEventListener("click", closeAnswer);
     overlay.addEventListener("click", (e) => {
-      if(e.target === overlay) closeModal();
+      // ferme si click en dehors de la modal
+      if(e.target === overlay) closeAnswer();
     });
     document.addEventListener("keydown", (e) => {
-      if(e.key === "Escape" && overlay.classList.contains("show")) closeModal();
+      if(e.key === "Escape" && overlay.classList.contains("show")) closeAnswer();
     });
 
-    // --------- Navigation buttons
-    const btnEnigmes = $("btnEnigmes");
-    const btnRessources = $("btnRessources");
-
-    function setActive(btn){
-      [btnEnigmes, btnRessources].forEach(b => b.classList.remove("btnActive"));
-      btn.classList.add("btnActive");
-    }
-
-    btnEnigmes.addEventListener("click", () => {
-      setActive(btnEnigmes);
-      scrollToSection("enigmes");
-      history.replaceState(null, "", "#enigmes");
-    });
-
-    btnRessources.addEventListener("click", () => {
-      setActive(btnRessources);
-      scrollToSection("ressources");
-      history.replaceState(null, "", "#muscler");
-    });
-
-    // --------- Data loading
-    let enigmesAffiliate = "";
-    let ressourcesAffiliate = "";
-
+    // Data loading
     async function loadJSON(path){
-      const r = await fetch(path, { cache: "no-store" });
-      if(!r.ok) throw new Error(`Impossible de charger ${path} (${r.status})`);
-      return await r.json();
+      const res = await fetch(path, { cache: "no-store" });
+      if(!res.ok) throw new Error("Erreur fetch " + path);
+      return res.json();
     }
 
-    function renderEnigmes(enigmes){
-      const list = $("enigmesList");
-      list.innerHTML = "";
+    function renderEnigmes(data){
+      const root = $("enigmes-list");
+      root.innerHTML = "";
 
-      if(!Array.isArray(enigmes) || enigmes.length === 0){
-        const empty = document.createElement("div");
-        empty.className = "resourceEmpty";
-        empty.textContent = "Aucune énigme pour l’instant. Ajoute-en dans enigmes.json ✅";
-        list.appendChild(empty);
-        return;
-      }
+      const list = (data && data.enigmes) ? data.enigmes : [];
+      const affiliate = (data && data.affiliate_url) ? data.affiliate_url : "";
 
-      enigmes.forEach((e, idx) => {
-        const id = e.id ?? (idx+1);
-        const badge = safeText(e.badge || "💎");
-        const titre = safeText(e.titre || `Énigme #${id}`);
-        const question = safeText(e.question);
-        const reponse = safeText(e.reponse);
+      list.forEach((e) => {
+        const card = document.createElement("div");
+        card.className = "card";
 
-        const card = document.createElement("article");
-        card.className = "puzzle";
+        const badge = (e.badge || "💎").toString();
+        const titre = (e.titre || "Énigme").toString();
+        const question = (e.question || "").toString();
+        const reponse = (e.reponse || "").toString();
 
-        const top = document.createElement("div");
-        top.className = "badge";
-        top.innerHTML = `<span class="bico">${badge}</span><span>${titre}</span>`;
+        card.innerHTML = `
+          <div class="pill"><span>${badge}</span><span>${titre}</span></div>
+          <div class="question">${escapeHTML(question)}</div>
+          <button class="answer-btn" type="button">
+            <span>👉</span> Voir la réponse
+          </button>
+        `;
 
-        const q = document.createElement("p");
-        q.className = "question";
-        q.textContent = question;
-
-        const btn = document.createElement("button");
-        btn.className = "answerBtn";
-        btn.type = "button";
-        btn.innerHTML = `👉 <span>Voir la réponse</span>`;
-
+        const btn = card.querySelector(".answer-btn");
         btn.addEventListener("click", () => {
-          // 1) Pub / affiliation (si renseigné)
-          const link = (enigmesAffiliate && !enigmesAffiliate.includes("TON_LIEN")) ? enigmesAffiliate : "";
-          if(link){
-            // Ouverture directe sur le clic (meilleur sur iOS / moins bloqué)
-            window.open(link, "_blank", "noopener,noreferrer");
+          // Ouvre l'affiliation dans un nouvel onglet, puis affiche la réponse (UX comme prévu)
+          if(affiliate && affiliate.trim() && affiliate !== "TON_LIEN_AFFILIATION_ICI"){
+            window.open(affiliate, "_blank", "noopener,noreferrer");
           }
-          // 2) Modal centrée avec réponse
-          openModal({ title: titre, answer: reponse });
+          openAnswer(titre, reponse);
         });
 
-        card.appendChild(top);
-        card.appendChild(q);
-        card.appendChild(btn);
-
-        list.appendChild(card);
+        root.appendChild(card);
       });
     }
 
     function renderRessources(data){
-      // Format attendu (simple) :
-      // { "affiliate_url": "...", "ressources": [ { "titre": "...", "desc": "...", "url": "..." } ] }
-      // Si vide => on garde le message "Aucune ressource..."
-      const box = $("ressourcesBox");
+      const root = $("ressources-list");
+      root.innerHTML = "";
 
-      const ressources = data?.ressources;
-      if(!Array.isArray(ressources) || ressources.length === 0){
-        box.className = "resourceEmpty";
-        box.innerHTML = `Aucune ressource pour l’instant. Ajoute-en dans <b>ressources.json</b> ✅`;
+      const list = (data && data.ressources) ? data.ressources : [];
+
+      if(!list.length){
+        root.innerHTML = `<div class="empty">Aucune ressource pour l’instant. Bientôt disponible 👀✅</div>`;
         return;
       }
 
-      // Remplace l'affichage vide par une liste simple, propre
-      box.className = "list";
-      box.innerHTML = "";
-
-      ressources.forEach((r, idx) => {
-        const titre = safeText(r.titre || `Ressource #${idx+1}`);
-        const desc = safeText(r.description || r.desc || "");
-        const url = safeText(r.url || "");
-
-        const card = document.createElement("article");
-        card.className = "puzzle";
-
-        const head = document.createElement("div");
-        head.className = "badge";
-        head.innerHTML = `<span class="bico">📚</span><span>${titre}</span>`;
-
-        const p = document.createElement("p");
-        p.className = "question";
-        p.style.fontSize = "20px";
-        p.style.lineHeight = "1.35";
-        p.style.marginBottom = "12px";
-        p.textContent = desc || "Ressource recommandée par LORINFOS.";
-
-        const btn = document.createElement("a");
-        btn.className = "answerBtn";
-        btn.style.textDecoration = "none";
-        btn.style.display = "flex";
-        btn.style.alignItems = "center";
-        btn.style.justifyContent = "center";
-        btn.href = url || ressourcesAffiliate || "#";
-        btn.target = "_blank";
-        btn.rel = "noopener noreferrer";
-        btn.textContent = "Voir la ressource";
-
-        card.appendChild(head);
-        card.appendChild(p);
-        card.appendChild(btn);
-
-        box.appendChild(card);
+      // Si tu ajoutes des ressources plus tard, on pourra faire des “cards produits” clean ici.
+      list.forEach((r) => {
+        const card = document.createElement("div");
+        card.className = "card";
+        card.innerHTML = `
+          <div class="pill"><span>📌</span><span>${escapeHTML(r.titre || "Ressource")}</span></div>
+          <div class="question" style="font-size:18px;opacity:.95">${escapeHTML(r.description || "")}</div>
+          <a class="answer-btn" href="${r.url || "#"}" target="_blank" rel="noopener noreferrer">Voir</a>
+        `;
+        root.appendChild(card);
       });
+    }
+
+    // Escape safe
+    function escapeHTML(str){
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
     }
 
     async function init(){
       try{
-        const [enigmesData, ressourcesData] = await Promise.allSettled([
-          loadJSON("enigmes.json"),
-          loadJSON("ressources.json")
-        ]);
-
-        // Enigmes
-        if(enigmesData.status === "fulfilled"){
-          enigmesAffiliate = safeText(enigmesData.value.affiliate_url || "");
-          renderEnigmes(enigmesData.value.enigmes || []);
-        } else {
-          renderEnigmes([]);
-        }
-
-        // Ressources
-        if(ressourcesData.status === "fulfilled"){
-          ressourcesAffiliate = safeText(ressourcesData.value.affiliate_url || "");
-          renderRessources(ressourcesData.value);
-        } else {
-          renderRessources({ ressources: [] });
-        }
-
-        // Hash navigation
-        const h = (location.hash || "").toLowerCase();
-        if(h.includes("muscl") || h.includes("ressource")){
-          setActive(btnRessources);
-          scrollToSection("ressources");
-        } else if(h.includes("enigme")){
-          setActive(btnEnigmes);
-          scrollToSection("enigmes");
-        }
+        const enigmes = await loadJSON("enigmes.json");
+        renderEnigmes(enigmes);
       }catch(err){
-        // Fallback minimal
-        console.error(err);
-        renderEnigmes([]);
-        renderRessources({ ressources: [] });
+        $("enigmes-list").innerHTML = `<div class="empty">Impossible de charger <b>enigmes.json</b>.</div>`;
       }
+
+      try{
+        const ressources = await loadJSON("ressources.json");
+        renderRessources(ressources);
+      }catch(err){
+        $("ressources-list").innerHTML = `<div class="empty">Impossible de charger <b>ressources.json</b>.</div>`;
+      }
+
+      // Hash routing
+      const h = (location.hash || "").toLowerCase();
+      if(h.includes("muscler")) setTab("muscler");
+      else setTab("enigmes");
     }
 
     init();
