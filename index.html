@@ -7,6 +7,10 @@
   <meta name="description" content="Des énigmes courtes pour tester ta logique. La plupart se trompent." />
   <meta name="theme-color" content="#0b0b0d" />
 
+  <!-- GoatCounter (privacy-friendly analytics) -->
+  <script data-goatcounter="https://lorinfos.goatcounter.com/count"
+          async src="//gc.zgo.at/count.js"></script>
+
   <style>
     :root{
       --bg:#070708;
@@ -121,7 +125,7 @@
       line-height:1.45;
     }
 
-    /* Mobile: logo + texte centrés (alignement “parfait”) */
+    /* Mobile: logo + texte centrés */
     @media (max-width: 520px){
       .hero-inner{
         grid-template-columns: 1fr;
@@ -131,7 +135,7 @@
       .brand{ align-items:center; }
     }
 
-    /* SWITCH BUTTONS (pleine largeur) */
+    /* SWITCH BUTTONS */
     .switch{
       position:relative;
       margin-top: 16px;
@@ -261,9 +265,8 @@
       outline:none;
       -webkit-appearance:none;
       appearance:none;
-      transform: translateZ(0); /* réduit artefacts de rendu iOS */
+      transform: translateZ(0);
     }
-    /* Pas de “traits” (focus/outline) */
     .card, .card *{
       outline: none !important;
       box-shadow: none;
@@ -346,7 +349,7 @@
       padding-bottom: 18px;
     }
 
-    /* MODAL (au milieu + blur) */
+    /* MODAL */
     .overlay{
       position:fixed;
       inset:0;
@@ -404,7 +407,6 @@
       margin-bottom: 8px;
     }
 
-    /* Accessibilité */
     @media (prefers-reduced-motion: reduce){
       *{ transition:none !important; scroll-behavior:auto !important; }
     }
@@ -493,6 +495,20 @@
   </div>
 
   <script>
+    // GoatCounter helper (events)
+    function gcEvent(event, payload = {}) {
+      try {
+        if (window.goatcounter && typeof window.goatcounter.count === "function") {
+          window.goatcounter.count({
+            path: "/event/" + encodeURIComponent(event),
+            title: event,
+            event: true,
+            ...payload
+          });
+        }
+      } catch(e) {}
+    }
+
     // Helpers
     const $ = (id) => document.getElementById(id);
 
@@ -514,7 +530,6 @@
     let ALL_ENIGMES = [];
     let AFFILIATE_URL = "";
 
-    // Prevent Safari focus artifacts
     function blurActive(){ try{ document.activeElement && document.activeElement.blur(); }catch(e){} }
 
     function setTab(which){
@@ -534,7 +549,9 @@
       // Hash routing
       history.replaceState(null, "", isEnigmes ? "#enigmes" : "#muscler");
 
-      // scroll doux sur la section visible
+      // event tracking
+      gcEvent("tab_switch", { referrer: isEnigmes ? "enigmes" : "muscler" });
+
       const target = (isEnigmes ? sectionEnigmes : sectionRessources);
       const top = target.getBoundingClientRect().top + window.scrollY - 12;
       window.scrollTo({ top, behavior: "smooth" });
@@ -547,32 +564,32 @@
 
     linkToMuscler.addEventListener("click", (e) => {
       e.preventDefault();
+      gcEvent("link_to_muscler");
       setTab("muscler");
     });
 
-    function openAnswer(title, answer){
+    function openAnswer(title, answer, id){
       modalTitle.textContent = title || "Réponse";
       modalAnswer.textContent = answer || "";
       overlay.classList.add("show");
       overlay.setAttribute("aria-hidden", "false");
+      gcEvent("open_answer", { path: "/enigme/" + (id ?? "unknown") });
       blurActive();
     }
 
     function closeAnswer(){
       overlay.classList.remove("show");
       overlay.setAttribute("aria-hidden", "true");
+      gcEvent("close_answer");
       blurActive();
     }
 
     closeModal.addEventListener("click", closeAnswer);
-    overlay.addEventListener("click", (e) => {
-      if(e.target === overlay) closeAnswer();
-    });
+    overlay.addEventListener("click", (e) => { if(e.target === overlay) closeAnswer(); });
     document.addEventListener("keydown", (e) => {
       if(e.key === "Escape" && overlay.classList.contains("show")) closeAnswer();
     });
 
-    // Data loading
     async function loadJSON(path){
       const res = await fetch(path, { cache: "no-store" });
       if(!res.ok) throw new Error("Erreur fetch " + path);
@@ -581,11 +598,11 @@
 
     function renderEnigmes(data){
       const list = (data && data.enigmes) ? [...data.enigmes] : [];
-      // Dernières en haut
-      list.sort((a,b) => (b.id ?? 0) - (a.id ?? 0));
+      list.sort((a,b) => (b.id ?? 0) - (a.id ?? 0)); // dernières en haut
 
       ALL_ENIGMES = list;
       AFFILIATE_URL = (data && data.affiliate_url) ? data.affiliate_url : "";
+
       applyFilter();
     }
 
@@ -595,7 +612,6 @@
       const filtered = !q ? ALL_ENIGMES : ALL_ENIGMES.filter(e => {
         const titre = (e.titre || "").toString().toLowerCase();
         const question = (e.question || "").toString().toLowerCase();
-        // Pas de "reponse" ici => évite les spoilers via recherche
         return titre.includes(q) || question.includes(q);
       });
 
@@ -606,6 +622,7 @@
       }else{
         searchMeta.style.display = "block";
         searchMeta.textContent = `${filtered.length} résultat(s) pour “${searchInput.value.trim()}”`;
+        gcEvent("search", { path: "/search?q=" + encodeURIComponent(searchInput.value.trim()) });
       }
     }
 
@@ -622,10 +639,11 @@
         const card = document.createElement("div");
         card.className = "card";
 
-        const badge = "🧠"; // Badge UNIQUE partout (comme demandé)
+        const badge = "🧠";
         const titre = (e.titre || "Énigme").toString();
         const question = (e.question || "").toString();
         const reponse = (e.reponse || "").toString();
+        const id = e.id ?? "";
 
         card.innerHTML = `
           <div class="pill"><span>${badge}</span><span>${escapeHTML(titre)}</span></div>
@@ -637,10 +655,14 @@
 
         const btn = card.querySelector(".answer-btn");
         btn.addEventListener("click", () => {
+          gcEvent("click_answer", { path: "/enigme/" + id });
+
           if(AFFILIATE_URL && AFFILIATE_URL.trim() && AFFILIATE_URL !== "TON_LIEN_AFFILIATION_ICI"){
+            gcEvent("affiliate_open", { path: "/affiliate/open" });
             window.open(AFFILIATE_URL, "_blank", "noopener,noreferrer");
           }
-          openAnswer(titre, reponse);
+
+          openAnswer(titre, reponse, id);
         });
 
         root.appendChild(card);
@@ -670,7 +692,6 @@
       });
     }
 
-    // Escape safe
     function escapeHTML(str){
       return String(str)
         .replaceAll("&", "&amp;")
@@ -686,6 +707,7 @@
       searchInput.value = "";
       applyFilter();
       searchInput.focus();
+      gcEvent("search_clear");
     });
 
     async function init(){
@@ -706,6 +728,8 @@
       const h = (location.hash || "").toLowerCase();
       if(h.includes("muscler")) setTab("muscler");
       else setTab("enigmes");
+
+      gcEvent("page_loaded");
     }
 
     init();
