@@ -484,22 +484,22 @@
 
   <script>
     /* -----------------------------
-       GoatCounter: events "clean"
+       GoatCounter: events "macro"
+       (aucun /enigme/xx, aucun /search?q=)
     ------------------------------*/
-    function gcEvent(event, payload = {}) {
+    function gcEvent(name) {
       try {
         if (window.goatcounter && typeof window.goatcounter.count === "function") {
           window.goatcounter.count({
-            path: "/event/" + encodeURIComponent(event),
-            title: event,
-            event: true,
-            ...payload
+            path: "/event/" + name,
+            title: name,
+            event: true
           });
         }
       } catch(e) {}
     }
 
-    // Debounce helper (évite le spam d'events)
+    // Debounce helper (évite de spam)
     function debounce(fn, delay = 600){
       let t;
       return (...args) => {
@@ -530,7 +530,8 @@
 
     let ALL_ENIGMES = [];
     let AFFILIATE_URL = "";
-    let CURRENT_TAB = "enigmes"; // évite d'envoyer tab_switch au chargement
+    let CURRENT_TAB = "enigmes"; // pour éviter un event tab au chargement
+    let SEARCH_HAS_BEEN_USED = false; // pour éviter trop d'events
 
     function blurActive(){ try{ document.activeElement && document.activeElement.blur(); }catch(e){} }
 
@@ -538,9 +539,8 @@
       const isEnigmes = which === "enigmes";
       const nextTab = isEnigmes ? "enigmes" : "muscler";
 
-      // Evite "tab_switch" si on est déjà dessus
       if (CURRENT_TAB !== nextTab) {
-        gcEvent("tab_switch", { path: "/tab/" + nextTab, referrer: origin });
+        gcEvent(nextTab === "enigmes" ? "tab_enigmes" : "tab_muscler");
         CURRENT_TAB = nextTab;
       }
 
@@ -569,29 +569,23 @@
 
     linkToMuscler.addEventListener("click", (e) => {
       e.preventDefault();
-      gcEvent("link_to_muscler", { path: "/cta/link_to_muscler" });
+      gcEvent("link_to_muscler");
       setTab("muscler", "cta_link");
     });
 
-    function openAnswer(title, answer, id){
+    function openAnswer(title, answer){
       modalTitle.textContent = title || "Réponse";
       modalAnswer.textContent = answer || "";
       overlay.classList.add("show");
       overlay.setAttribute("aria-hidden", "false");
-
-      // Event utile (sans spoiler)
-      gcEvent("open_answer", {
-        path: "/enigme/" + (id ?? "unknown"),
-        title: (title || "enigme").slice(0, 80)
-      });
-
+      gcEvent("open_answer");
       blurActive();
     }
 
     function closeAnswer(){
       overlay.classList.remove("show");
       overlay.setAttribute("aria-hidden", "true");
-      gcEvent("close_answer", { path: "/modal/close" });
+      gcEvent("close_answer");
       blurActive();
     }
 
@@ -614,7 +608,7 @@
       ALL_ENIGMES = list;
       AFFILIATE_URL = (data && data.affiliate_url) ? data.affiliate_url : "";
 
-      applyFilter(true); // true = initial render
+      applyFilter(true);
     }
 
     function applyFilter(isInit = false){
@@ -635,9 +629,13 @@
         searchMeta.textContent = `${filtered.length} résultat(s) pour “${searchInput.value.trim()}”`;
       }
 
-      // On ne track pas "search" au chargement (sinon bruit)
-      if(!isInit && q){
-        gcEvent("search", { path: "/search?q=" + encodeURIComponent(searchInput.value.trim()) });
+      // Tracking "recherche utilisée" (sans mots)
+      if(!isInit && q && !SEARCH_HAS_BEEN_USED){
+        gcEvent("search_used");
+        SEARCH_HAS_BEEN_USED = true;
+      }
+      if(!q){
+        SEARCH_HAS_BEEN_USED = false;
       }
     }
 
@@ -658,7 +656,6 @@
         const titre = (e.titre || "Énigme").toString();
         const question = (e.question || "").toString();
         const reponse = (e.reponse || "").toString();
-        const id = e.id ?? "";
 
         card.innerHTML = `
           <div class="pill"><span>${badge}</span><span>${escapeHTML(titre)}</span></div>
@@ -670,14 +667,14 @@
 
         const btn = card.querySelector(".answer-btn");
         btn.addEventListener("click", () => {
-          gcEvent("click_answer", { path: "/enigme/" + id });
+          gcEvent("click_answer");
 
           if(AFFILIATE_URL && AFFILIATE_URL.trim() && AFFILIATE_URL !== "TON_LIEN_AFFILIATION_ICI"){
-            gcEvent("affiliate_open", { path: "/affiliate/open", referrer: "answer_button" });
+            gcEvent("affiliate_open");
             window.open(AFFILIATE_URL, "_blank", "noopener,noreferrer");
           }
 
-          openAnswer(titre, reponse, id);
+          openAnswer(titre, reponse);
         });
 
         root.appendChild(card);
@@ -695,7 +692,7 @@
         return;
       }
 
-      list.forEach((r, idx) => {
+      list.forEach((r) => {
         const card = document.createElement("div");
         card.className = "card";
 
@@ -708,15 +705,9 @@
           <a class="answer-btn" href="${url}" target="_blank" rel="noopener noreferrer">Voir</a>
         `;
 
-        // Track clic ressource (monétisation)
+        // Tracking clic sur une ressource (monétisation)
         const link = card.querySelector("a.answer-btn");
-        link.addEventListener("click", () => {
-          gcEvent("resource_click", {
-            path: "/ressource/" + (idx + 1),
-            title: title.slice(0, 80),
-            referrer: "ressources_tab"
-          });
-        });
+        link.addEventListener("click", () => gcEvent("resource_click"));
 
         root.appendChild(card);
       });
@@ -732,12 +723,13 @@
     }
 
     // Search: debounce (anti-spam)
-    const trackableFilter = debounce(() => applyFilter(false), 600);
+    const debouncedTrackFilter = debounce(() => applyFilter(false), 600);
 
     searchInput?.addEventListener("input", () => {
-      // Filtre UI instant, event après debounce
+      // Update UI instant
       applyFilter(true);
-      trackableFilter();
+      // Track (macro) après pause
+      debouncedTrackFilter();
     });
 
     clearSearch?.addEventListener("click", () => {
@@ -745,7 +737,7 @@
       searchInput.value = "";
       applyFilter(false);
       searchInput.focus();
-      if(hadValue) gcEvent("search_clear", { path: "/search/clear" });
+      if(hadValue) gcEvent("search_clear");
     });
 
     async function init(){
@@ -763,7 +755,7 @@
         $("ressources-list").innerHTML = `<div class="empty">Impossible de charger <b>ressources.json</b>.</div>`;
       }
 
-      // Route initiale SANS event "tab_switch"
+      // Route initiale SANS event tab
       const h = (location.hash || "").toLowerCase();
       if(h.includes("muscler")) {
         CURRENT_TAB = "muscler";
@@ -773,8 +765,7 @@
         setTab("enigmes", "hash");
       }
 
-      // Event “page_loaded” (optionnel, propre)
-      gcEvent("page_loaded", { path: "/event/page_loaded" });
+      gcEvent("page_loaded");
     }
 
     init();
