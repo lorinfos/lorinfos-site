@@ -9,11 +9,10 @@
 
   <style>
     :root{
-      --bgSolid:#050506;
-
-      /* cards (opaque) */
-      --cardA: rgba(16,16,18,.96);
-      --cardB: rgba(10,10,12,.96);
+      --bg:#070708;
+      --panel: rgba(255,255,255,.06);
+      --panel2: rgba(255,255,255,.08);
+      --stroke: rgba(255,255,255,.10);
 
       --text: rgba(255,255,255,.92);
       --muted: rgba(255,255,255,.72);
@@ -21,51 +20,43 @@
 
       --gold1:#F2D37A;
       --gold2:#D7A11E;
+      --gold3:#A87310;
 
       --shadow: 0 18px 50px rgba(0,0,0,.55);
       --shadow2: 0 10px 30px rgba(0,0,0,.45);
 
       --r-xl: 28px;
       --r-lg: 22px;
+      --r-md: 18px;
 
       --max: 920px;
     }
 
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
-
+    html{
+      background:#050506; /* évite tout flash blanc iOS */
+      overscroll-behavior: none;
+    }
     body{
       margin:0;
-      background: var(--bgSolid); /* fond stable -> plus d’artefacts */
+      min-height: 100svh;
+      background-color:#050506;
+      background:
+        radial-gradient(900px 520px at 50% -10%, rgba(242,211,122,.24), transparent 60%),
+        radial-gradient(900px 520px at 50% 30%, rgba(215,161,30,.16), transparent 62%),
+        linear-gradient(180deg, #050506 0%, #09090B 55%, #050506 100%);
       color:var(--text);
       font-family: ui-sans-serif, system-ui, -apple-system, "SF Pro Display", "SF Pro Text", Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x:hidden;
-
-      -webkit-tap-highlight-color: transparent;
-      overscroll-behavior: none; /* limite les effets “rubber band” */
-    }
-
-    /* calque fixe pour les dégradés (évite le “tiling” Safari) */
-    body::before{
-      content:"";
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      pointer-events:none;
-      background:
-        radial-gradient(900px 520px at 50% -10%, rgba(242,211,122,.24), transparent 60%),
-        radial-gradient(900px 520px at 50% 30%, rgba(215,161,30,.16), transparent 62%),
-        linear-gradient(180deg, #050506 0%, #09090B 55%, #050506 100%);
-      transform: translateZ(0);
-      will-change: transform;
+      -webkit-tap-highlight-color: transparent; /* supprime reflets/traits iOS */
+      -webkit-overflow-scrolling: touch;
     }
 
     a{ color:inherit; text-decoration:none; }
     button{ font:inherit; }
-    button, a{ -webkit-tap-highlight-color: transparent; }
-    button:focus, a:focus{ outline:none; }
 
     .wrap{
       width:min(var(--max), 92vw);
@@ -81,6 +72,7 @@
       border: 1px solid rgba(255,255,255,.10);
       box-shadow: var(--shadow);
       overflow:hidden;
+      isolation:isolate;
     }
     .hero:before{
       content:"";
@@ -91,9 +83,9 @@
       filter: blur(8px);
       opacity:.95;
       pointer-events:none;
+      z-index:-1;
     }
     .hero-inner{
-      position:relative;
       display:grid;
       grid-template-columns: 72px 1fr;
       gap: 14px 16px;
@@ -110,7 +102,11 @@
     }
     .logo img{ width:100%; height:100%; object-fit:cover; display:block; }
 
-    .brand{ display:flex; flex-direction:column; gap: 8px; }
+    .brand{
+      display:flex;
+      flex-direction:column;
+      gap: 8px;
+    }
     .brand h1{
       margin:0;
       letter-spacing: .14em;
@@ -125,8 +121,23 @@
       line-height:1.45;
     }
 
-    /* SWITCH */
-    .switch{ margin-top: 16px; display:grid; gap: 12px; }
+    /* Mobile: logo + texte centrés (alignement “parfait”) */
+    @media (max-width: 520px){
+      .hero-inner{
+        grid-template-columns: 1fr;
+        justify-items:center;
+        text-align:center;
+      }
+      .brand{ align-items:center; }
+    }
+
+    /* SWITCH BUTTONS (pleine largeur) */
+    .switch{
+      position:relative;
+      margin-top: 16px;
+      display:grid;
+      gap: 12px;
+    }
 
     .btn{
       width:100%;
@@ -143,9 +154,10 @@
       cursor:pointer;
       user-select:none;
       outline:none;
-      -webkit-appearance:none;
-      appearance:none;
-      transition: transform .12s ease, background .18s ease, border-color .18s ease;
+      position:relative;
+      transition: transform .12s ease, filter .12s ease, background .18s ease, border-color .18s ease;
+      -webkit-appearance: none;
+      appearance: none;
     }
     .btn:active{ transform: scale(.99); }
     .btn .emoji{ font-size: 18px; transform: translateY(-1px); }
@@ -155,12 +167,13 @@
       color: rgba(0,0,0,.82);
       border-color: rgba(242,211,122,.35);
     }
+
     .btn.selected{
       border-color: rgba(242,211,122,.55);
       box-shadow: 0 0 0 2px rgba(242,211,122,.18), var(--shadow2);
     }
 
-    /* TITRES */
+    /* SECTION TITLES */
     .section-title{
       margin: 22px 2px 12px;
       display:flex;
@@ -179,7 +192,7 @@
       letter-spacing: -0.02em;
     }
 
-    /* INFO */
+    /* INFO CARD */
     .info{
       margin-top: 10px;
       padding: 16px 16px;
@@ -192,22 +205,68 @@
     }
     .info strong{ color: rgba(255,255,255,.90); }
 
-    /* CARD (sans backdrop-filter -> plus d’artefacts) */
+    /* SEARCH */
+    .search{
+      margin-top: 14px;
+      display:flex;
+      gap: 10px;
+      align-items:center;
+      padding: 10px 12px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.04);
+      box-shadow: var(--shadow2);
+    }
+    .search input{
+      flex:1;
+      border:0;
+      outline:none;
+      background:transparent;
+      color: rgba(255,255,255,.92);
+      font-size: 15px;
+      -webkit-appearance:none;
+      appearance:none;
+    }
+    .search input::placeholder{ color: rgba(255,255,255,.55); }
+
+    .clear-btn{
+      width:38px; height:38px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,.10);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.85);
+      cursor:pointer;
+      outline:none;
+      -webkit-appearance:none;
+      appearance:none;
+    }
+
+    .search-meta{
+      margin-top: 10px;
+      color: rgba(255,255,255,.62);
+      font-size: 13px;
+      text-align:center;
+    }
+
+    /* CARD */
     .card{
       margin-top: 16px;
       padding: 18px 16px;
       border-radius: var(--r-lg);
-      background: linear-gradient(180deg, var(--cardA), var(--cardB));
-      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
       box-shadow: var(--shadow2);
       position:relative;
       overflow:hidden;
-
-      isolation: isolate;
-      transform: translateZ(0);
-      backface-visibility: hidden;
-      -webkit-backface-visibility: hidden;
-      background-clip: padding-box;
+      outline:none;
+      -webkit-appearance:none;
+      appearance:none;
+      transform: translateZ(0); /* réduit artefacts de rendu iOS */
+    }
+    /* Pas de “traits” (focus/outline) */
+    .card, .card *{
+      outline: none !important;
+      box-shadow: none;
     }
 
     .pill{
@@ -217,7 +276,7 @@
       padding: 9px 14px;
       border-radius: 999px;
       background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
+      border: 1px solid rgba(255,255,255,.10);
       color: rgba(255,255,255,.88);
       font-weight: 800;
       letter-spacing: .02em;
@@ -248,7 +307,6 @@
       outline:none;
       -webkit-appearance:none;
       appearance:none;
-      background-clip: padding-box;
     }
     .answer-btn:active{ transform: scale(.99); }
 
@@ -262,16 +320,13 @@
       text-align:center;
       line-height:1.35;
     }
-
     .inline-link{
       color: rgba(255,255,255,.88);
+      font-weight: 900;
       text-decoration: underline;
-      text-decoration-thickness: 2px;
       text-underline-offset: 4px;
-      text-decoration-color: rgba(242,211,122,.65);
-      cursor: pointer;
+      text-decoration-thickness: 2px;
     }
-    .inline-link:active{ opacity:.85; }
 
     .empty{
       margin-top: 16px;
@@ -291,7 +346,7 @@
       padding-bottom: 18px;
     }
 
-    /* MODAL (on garde blur ici, c’est stable) */
+    /* MODAL (au milieu + blur) */
     .overlay{
       position:fixed;
       inset:0;
@@ -313,6 +368,7 @@
       background: rgba(25,25,28,.72);
       box-shadow: 0 28px 80px rgba(0,0,0,.65);
       overflow:hidden;
+      transform: translateZ(0);
     }
     .modal-head{
       display:flex;
@@ -348,6 +404,7 @@
       margin-bottom: 8px;
     }
 
+    /* Accessibilité */
     @media (prefers-reduced-motion: reduce){
       *{ transition:none !important; scroll-behavior:auto !important; }
     }
@@ -379,6 +436,7 @@
       </div>
     </section>
 
+    <!-- SECTION: ENIGMES -->
     <section id="section-enigmes" style="display:block;">
       <div class="section-title">
         <div class="big-emoji">🧩</div>
@@ -390,14 +448,21 @@
         Ferme simplement l’onglet de pub et reviens ici : <strong>la réponse s’affiche ensuite.</strong>
       </div>
 
+      <!-- Recherche -->
+      <div class="search" role="search" aria-label="Rechercher une énigme">
+        <input id="searchInput" type="search" placeholder="Rechercher une énigme (ex: train, soeur, course…)" autocomplete="off" />
+        <button id="clearSearch" class="clear-btn" type="button" aria-label="Effacer">✕</button>
+      </div>
+      <div id="searchMeta" class="search-meta" style="display:none;"></div>
+
       <div id="enigmes-list"></div>
 
       <div class="linker">
-        Tu veux aller plus loin ? Appuie sur
-        <span id="go-muscler" class="inline-link">Muscler son cerveau</span> 🧠
+        Tu veux aller plus loin ? Appuie sur “<a class="inline-link" href="#muscler" id="linkToMuscler">Muscler son cerveau</a>” 🧠
       </div>
     </section>
 
+    <!-- SECTION: RESSOURCES -->
     <section id="section-ressources" style="display:none;">
       <div class="section-title">
         <div class="big-emoji">🧠</div>
@@ -413,6 +478,7 @@
 
   </div>
 
+  <!-- MODAL -->
   <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal">
       <div class="modal-head">
@@ -427,6 +493,7 @@
   </div>
 
   <script>
+    // Helpers
     const $ = (id) => document.getElementById(id);
 
     const tabEnigmes = $("tab-enigmes");
@@ -439,8 +506,15 @@
     const modalTitle = $("modalTitle");
     const modalAnswer = $("modalAnswer");
 
-    const goMuscler = $("go-muscler");
+    const searchInput = $("searchInput");
+    const clearSearch = $("clearSearch");
+    const searchMeta  = $("searchMeta");
+    const linkToMuscler = $("linkToMuscler");
 
+    let ALL_ENIGMES = [];
+    let AFFILIATE_URL = "";
+
+    // Prevent Safari focus artifacts
     function blurActive(){ try{ document.activeElement && document.activeElement.blur(); }catch(e){} }
 
     function setTab(which){
@@ -457,9 +531,12 @@
       sectionEnigmes.style.display = isEnigmes ? "block" : "none";
       sectionRessources.style.display = !isEnigmes ? "block" : "none";
 
-      location.hash = isEnigmes ? "#enigmes" : "#muscler";
+      // Hash routing
+      history.replaceState(null, "", isEnigmes ? "#enigmes" : "#muscler");
 
-      const top = (isEnigmes ? sectionEnigmes : sectionRessources).getBoundingClientRect().top + window.scrollY - 12;
+      // scroll doux sur la section visible
+      const target = (isEnigmes ? sectionEnigmes : sectionRessources);
+      const top = target.getBoundingClientRect().top + window.scrollY - 12;
       window.scrollTo({ top, behavior: "smooth" });
 
       blurActive();
@@ -467,7 +544,11 @@
 
     tabEnigmes.addEventListener("click", () => setTab("enigmes"));
     tabRessources.addEventListener("click", () => setTab("muscler"));
-    goMuscler.addEventListener("click", () => setTab("muscler"));
+
+    linkToMuscler.addEventListener("click", (e) => {
+      e.preventDefault();
+      setTab("muscler");
+    });
 
     function openAnswer(title, answer){
       modalTitle.textContent = title || "Réponse";
@@ -484,49 +565,80 @@
     }
 
     closeModal.addEventListener("click", closeAnswer);
-    overlay.addEventListener("click", (e) => { if(e.target === overlay) closeAnswer(); });
-    document.addEventListener("keydown", (e) => { if(e.key === "Escape" && overlay.classList.contains("show")) closeAnswer(); });
+    overlay.addEventListener("click", (e) => {
+      if(e.target === overlay) closeAnswer();
+    });
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape" && overlay.classList.contains("show")) closeAnswer();
+    });
 
+    // Data loading
     async function loadJSON(path){
       const res = await fetch(path, { cache: "no-store" });
       if(!res.ok) throw new Error("Erreur fetch " + path);
       return res.json();
     }
 
-    function escapeHTML(str){
-      return String(str)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+    function renderEnigmes(data){
+      const list = (data && data.enigmes) ? [...data.enigmes] : [];
+      // Dernières en haut
+      list.sort((a,b) => (b.id ?? 0) - (a.id ?? 0));
+
+      ALL_ENIGMES = list;
+      AFFILIATE_URL = (data && data.affiliate_url) ? data.affiliate_url : "";
+      applyFilter();
     }
 
-    function renderEnigmes(data){
+    function applyFilter(){
+      const q = (searchInput?.value || "").trim().toLowerCase();
+
+      const filtered = !q ? ALL_ENIGMES : ALL_ENIGMES.filter(e => {
+        const titre = (e.titre || "").toString().toLowerCase();
+        const question = (e.question || "").toString().toLowerCase();
+        // Pas de "reponse" ici => évite les spoilers via recherche
+        return titre.includes(q) || question.includes(q);
+      });
+
+      renderEnigmesList(filtered);
+
+      if(!q){
+        searchMeta.style.display = "none";
+      }else{
+        searchMeta.style.display = "block";
+        searchMeta.textContent = `${filtered.length} résultat(s) pour “${searchInput.value.trim()}”`;
+      }
+    }
+
+    function renderEnigmesList(list){
       const root = $("enigmes-list");
       root.innerHTML = "";
 
-      const list = (data && data.enigmes) ? data.enigmes : [];
-      const affiliate = (data && data.affiliate_url) ? data.affiliate_url : "";
+      if(!list.length){
+        root.innerHTML = `<div class="empty">Aucune énigme ne correspond à ta recherche.</div>`;
+        return;
+      }
 
       list.forEach((e) => {
         const card = document.createElement("div");
         card.className = "card";
 
-        const badge = (e.badge || "💎").toString();
+        const badge = "🧠"; // Badge UNIQUE partout (comme demandé)
         const titre = (e.titre || "Énigme").toString();
         const question = (e.question || "").toString();
         const reponse = (e.reponse || "").toString();
 
         card.innerHTML = `
-          <div class="pill"><span>${badge}</span><span>${titre}</span></div>
+          <div class="pill"><span>${badge}</span><span>${escapeHTML(titre)}</span></div>
           <div class="question">${escapeHTML(question)}</div>
-          <button class="answer-btn" type="button"><span>👉</span> Voir la réponse</button>
+          <button class="answer-btn" type="button">
+            <span>👉</span> Voir la réponse
+          </button>
         `;
 
-        card.querySelector(".answer-btn").addEventListener("click", () => {
-          if(affiliate && affiliate.trim() && affiliate !== "TON_LIEN_AFFILIATION_ICI"){
-            window.open(affiliate, "_blank", "noopener,noreferrer");
+        const btn = card.querySelector(".answer-btn");
+        btn.addEventListener("click", () => {
+          if(AFFILIATE_URL && AFFILIATE_URL.trim() && AFFILIATE_URL !== "TON_LIEN_AFFILIATION_ICI"){
+            window.open(AFFILIATE_URL, "_blank", "noopener,noreferrer");
           }
           openAnswer(titre, reponse);
         });
@@ -540,6 +652,7 @@
       root.innerHTML = "";
 
       const list = (data && data.ressources) ? data.ressources : [];
+
       if(!list.length){
         root.innerHTML = `<div class="empty">Aucune ressource pour l’instant. Bientôt disponible 👀✅</div>`;
         return;
@@ -549,13 +662,31 @@
         const card = document.createElement("div");
         card.className = "card";
         card.innerHTML = `
-          <div class="pill"><span>📌</span><span>${escapeHTML(r.titre || "Ressource")}</span></div>
+          <div class="pill"><span>🧠</span><span>${escapeHTML(r.titre || "Ressource")}</span></div>
           <div class="question" style="font-size:18px;opacity:.95">${escapeHTML(r.description || "")}</div>
           <a class="answer-btn" href="${r.url || "#"}" target="_blank" rel="noopener noreferrer">Voir</a>
         `;
         root.appendChild(card);
       });
     }
+
+    // Escape safe
+    function escapeHTML(str){
+      return String(str)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+    }
+
+    // Search events
+    searchInput?.addEventListener("input", applyFilter);
+    clearSearch?.addEventListener("click", () => {
+      searchInput.value = "";
+      applyFilter();
+      searchInput.focus();
+    });
 
     async function init(){
       try{
