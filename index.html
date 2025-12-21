@@ -39,7 +39,7 @@
     *{ box-sizing:border-box; }
     html,body{ height:100%; }
     html{
-      background:#050506; /* évite tout flash blanc iOS */
+      background:#050506;
       overscroll-behavior: none;
     }
     body{
@@ -55,7 +55,7 @@
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x:hidden;
-      -webkit-tap-highlight-color: transparent; /* supprime reflets/traits iOS */
+      -webkit-tap-highlight-color: transparent;
       -webkit-overflow-scrolling: touch;
     }
 
@@ -67,7 +67,6 @@
       margin: clamp(18px, 3.2vw, 30px) auto 70px;
     }
 
-    /* HERO */
     .hero{
       position:relative;
       padding: clamp(18px, 3.5vw, 28px);
@@ -125,7 +124,6 @@
       line-height:1.45;
     }
 
-    /* Mobile: logo + texte centrés */
     @media (max-width: 520px){
       .hero-inner{
         grid-template-columns: 1fr;
@@ -135,7 +133,6 @@
       .brand{ align-items:center; }
     }
 
-    /* SWITCH BUTTONS */
     .switch{
       position:relative;
       margin-top: 16px;
@@ -177,7 +174,6 @@
       box-shadow: 0 0 0 2px rgba(242,211,122,.18), var(--shadow2);
     }
 
-    /* SECTION TITLES */
     .section-title{
       margin: 22px 2px 12px;
       display:flex;
@@ -196,7 +192,6 @@
       letter-spacing: -0.02em;
     }
 
-    /* INFO CARD */
     .info{
       margin-top: 10px;
       padding: 16px 16px;
@@ -209,7 +204,6 @@
     }
     .info strong{ color: rgba(255,255,255,.90); }
 
-    /* SEARCH */
     .search{
       margin-top: 14px;
       display:flex;
@@ -252,7 +246,6 @@
       text-align:center;
     }
 
-    /* CARD */
     .card{
       margin-top: 16px;
       padding: 18px 16px;
@@ -349,7 +342,6 @@
       padding-bottom: 18px;
     }
 
-    /* MODAL */
     .overlay{
       position:fixed;
       inset:0;
@@ -438,7 +430,6 @@
       </div>
     </section>
 
-    <!-- SECTION: ENIGMES -->
     <section id="section-enigmes" style="display:block;">
       <div class="section-title">
         <div class="big-emoji">🧩</div>
@@ -450,7 +441,6 @@
         Ferme simplement l’onglet de pub et reviens ici : <strong>la réponse s’affiche ensuite.</strong>
       </div>
 
-      <!-- Recherche -->
       <div class="search" role="search" aria-label="Rechercher une énigme">
         <input id="searchInput" type="search" placeholder="Rechercher une énigme (ex: train, soeur, course…)" autocomplete="off" />
         <button id="clearSearch" class="clear-btn" type="button" aria-label="Effacer">✕</button>
@@ -464,7 +454,6 @@
       </div>
     </section>
 
-    <!-- SECTION: RESSOURCES -->
     <section id="section-ressources" style="display:none;">
       <div class="section-title">
         <div class="big-emoji">🧠</div>
@@ -480,7 +469,6 @@
 
   </div>
 
-  <!-- MODAL -->
   <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal">
       <div class="modal-head">
@@ -495,7 +483,9 @@
   </div>
 
   <script>
-    // GoatCounter helper (events)
+    /* -----------------------------
+       GoatCounter: events "clean"
+    ------------------------------*/
     function gcEvent(event, payload = {}) {
       try {
         if (window.goatcounter && typeof window.goatcounter.count === "function") {
@@ -509,7 +499,18 @@
       } catch(e) {}
     }
 
-    // Helpers
+    // Debounce helper (évite le spam d'events)
+    function debounce(fn, delay = 600){
+      let t;
+      return (...args) => {
+        clearTimeout(t);
+        t = setTimeout(() => fn(...args), delay);
+      };
+    }
+
+    /* -----------------------------
+       App
+    ------------------------------*/
     const $ = (id) => document.getElementById(id);
 
     const tabEnigmes = $("tab-enigmes");
@@ -529,11 +530,19 @@
 
     let ALL_ENIGMES = [];
     let AFFILIATE_URL = "";
+    let CURRENT_TAB = "enigmes"; // évite d'envoyer tab_switch au chargement
 
     function blurActive(){ try{ document.activeElement && document.activeElement.blur(); }catch(e){} }
 
-    function setTab(which){
+    function setTab(which, origin = "ui"){
       const isEnigmes = which === "enigmes";
+      const nextTab = isEnigmes ? "enigmes" : "muscler";
+
+      // Evite "tab_switch" si on est déjà dessus
+      if (CURRENT_TAB !== nextTab) {
+        gcEvent("tab_switch", { path: "/tab/" + nextTab, referrer: origin });
+        CURRENT_TAB = nextTab;
+      }
 
       tabEnigmes.classList.toggle("primary", isEnigmes);
       tabEnigmes.classList.toggle("selected", isEnigmes);
@@ -546,11 +555,7 @@
       sectionEnigmes.style.display = isEnigmes ? "block" : "none";
       sectionRessources.style.display = !isEnigmes ? "block" : "none";
 
-      // Hash routing
       history.replaceState(null, "", isEnigmes ? "#enigmes" : "#muscler");
-
-      // event tracking
-      gcEvent("tab_switch", { referrer: isEnigmes ? "enigmes" : "muscler" });
 
       const target = (isEnigmes ? sectionEnigmes : sectionRessources);
       const top = target.getBoundingClientRect().top + window.scrollY - 12;
@@ -559,13 +564,13 @@
       blurActive();
     }
 
-    tabEnigmes.addEventListener("click", () => setTab("enigmes"));
-    tabRessources.addEventListener("click", () => setTab("muscler"));
+    tabEnigmes.addEventListener("click", () => setTab("enigmes", "button"));
+    tabRessources.addEventListener("click", () => setTab("muscler", "button"));
 
     linkToMuscler.addEventListener("click", (e) => {
       e.preventDefault();
-      gcEvent("link_to_muscler");
-      setTab("muscler");
+      gcEvent("link_to_muscler", { path: "/cta/link_to_muscler" });
+      setTab("muscler", "cta_link");
     });
 
     function openAnswer(title, answer, id){
@@ -573,14 +578,20 @@
       modalAnswer.textContent = answer || "";
       overlay.classList.add("show");
       overlay.setAttribute("aria-hidden", "false");
-      gcEvent("open_answer", { path: "/enigme/" + (id ?? "unknown") });
+
+      // Event utile (sans spoiler)
+      gcEvent("open_answer", {
+        path: "/enigme/" + (id ?? "unknown"),
+        title: (title || "enigme").slice(0, 80)
+      });
+
       blurActive();
     }
 
     function closeAnswer(){
       overlay.classList.remove("show");
       overlay.setAttribute("aria-hidden", "true");
-      gcEvent("close_answer");
+      gcEvent("close_answer", { path: "/modal/close" });
       blurActive();
     }
 
@@ -603,10 +614,10 @@
       ALL_ENIGMES = list;
       AFFILIATE_URL = (data && data.affiliate_url) ? data.affiliate_url : "";
 
-      applyFilter();
+      applyFilter(true); // true = initial render
     }
 
-    function applyFilter(){
+    function applyFilter(isInit = false){
       const q = (searchInput?.value || "").trim().toLowerCase();
 
       const filtered = !q ? ALL_ENIGMES : ALL_ENIGMES.filter(e => {
@@ -622,6 +633,10 @@
       }else{
         searchMeta.style.display = "block";
         searchMeta.textContent = `${filtered.length} résultat(s) pour “${searchInput.value.trim()}”`;
+      }
+
+      // On ne track pas "search" au chargement (sinon bruit)
+      if(!isInit && q){
         gcEvent("search", { path: "/search?q=" + encodeURIComponent(searchInput.value.trim()) });
       }
     }
@@ -658,7 +673,7 @@
           gcEvent("click_answer", { path: "/enigme/" + id });
 
           if(AFFILIATE_URL && AFFILIATE_URL.trim() && AFFILIATE_URL !== "TON_LIEN_AFFILIATION_ICI"){
-            gcEvent("affiliate_open", { path: "/affiliate/open" });
+            gcEvent("affiliate_open", { path: "/affiliate/open", referrer: "answer_button" });
             window.open(AFFILIATE_URL, "_blank", "noopener,noreferrer");
           }
 
@@ -680,14 +695,29 @@
         return;
       }
 
-      list.forEach((r) => {
+      list.forEach((r, idx) => {
         const card = document.createElement("div");
         card.className = "card";
+
+        const title = (r.titre || "Ressource").toString();
+        const url = (r.url || "#").toString();
+
         card.innerHTML = `
-          <div class="pill"><span>🧠</span><span>${escapeHTML(r.titre || "Ressource")}</span></div>
+          <div class="pill"><span>🧠</span><span>${escapeHTML(title)}</span></div>
           <div class="question" style="font-size:18px;opacity:.95">${escapeHTML(r.description || "")}</div>
-          <a class="answer-btn" href="${r.url || "#"}" target="_blank" rel="noopener noreferrer">Voir</a>
+          <a class="answer-btn" href="${url}" target="_blank" rel="noopener noreferrer">Voir</a>
         `;
+
+        // Track clic ressource (monétisation)
+        const link = card.querySelector("a.answer-btn");
+        link.addEventListener("click", () => {
+          gcEvent("resource_click", {
+            path: "/ressource/" + (idx + 1),
+            title: title.slice(0, 80),
+            referrer: "ressources_tab"
+          });
+        });
+
         root.appendChild(card);
       });
     }
@@ -701,13 +731,21 @@
         .replaceAll("'", "&#039;");
     }
 
-    // Search events
-    searchInput?.addEventListener("input", applyFilter);
+    // Search: debounce (anti-spam)
+    const trackableFilter = debounce(() => applyFilter(false), 600);
+
+    searchInput?.addEventListener("input", () => {
+      // Filtre UI instant, event après debounce
+      applyFilter(true);
+      trackableFilter();
+    });
+
     clearSearch?.addEventListener("click", () => {
+      const hadValue = !!searchInput.value.trim();
       searchInput.value = "";
-      applyFilter();
+      applyFilter(false);
       searchInput.focus();
-      gcEvent("search_clear");
+      if(hadValue) gcEvent("search_clear", { path: "/search/clear" });
     });
 
     async function init(){
@@ -725,11 +763,18 @@
         $("ressources-list").innerHTML = `<div class="empty">Impossible de charger <b>ressources.json</b>.</div>`;
       }
 
+      // Route initiale SANS event "tab_switch"
       const h = (location.hash || "").toLowerCase();
-      if(h.includes("muscler")) setTab("muscler");
-      else setTab("enigmes");
+      if(h.includes("muscler")) {
+        CURRENT_TAB = "muscler";
+        setTab("muscler", "hash");
+      } else {
+        CURRENT_TAB = "enigmes";
+        setTab("enigmes", "hash");
+      }
 
-      gcEvent("page_loaded");
+      // Event “page_loaded” (optionnel, propre)
+      gcEvent("page_loaded", { path: "/event/page_loaded" });
     }
 
     init();
