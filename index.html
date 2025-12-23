@@ -243,6 +243,28 @@
       text-align:center;
     }
     footer{ margin-top: 26px; text-align:center; color: rgba(255,255,255,.55); font-size: 13px; padding-bottom: 18px; }
+
+    /* Footer links */
+    .footer-links{
+      margin-top: 10px;
+      display:flex;
+      gap: 10px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
+    .footer-link-btn{
+      border: 1px solid rgba(255,255,255,.12);
+      background: rgba(255,255,255,.06);
+      color: rgba(255,255,255,.82);
+      border-radius: 999px;
+      padding: 10px 14px;
+      cursor:pointer;
+      box-shadow: var(--shadow2);
+      -webkit-appearance:none;
+      appearance:none;
+    }
+    .footer-link-btn:active{ transform: scale(.99); }
+
     .overlay{
       position:fixed;
       inset:0;
@@ -257,13 +279,16 @@
     }
     .overlay.show{ display:flex; }
     .modal{
-      width: min(560px, 92vw);
+      width: min(720px, 92vw);
       border-radius: var(--r-xl);
       border: 1px solid rgba(255,255,255,.14);
       background: rgba(25,25,28,.72);
       box-shadow: 0 28px 80px rgba(0,0,0,.65);
       overflow:hidden;
       transform: translateZ(0);
+      max-height: min(78vh, 720px);
+      display:flex;
+      flex-direction:column;
     }
     .modal-head{
       display:flex;
@@ -284,8 +309,23 @@
       -webkit-appearance:none;
       appearance:none;
     }
-    .modal-body{ padding: 14px 16px 18px; color: rgba(255,255,255,.88); line-height:1.45; }
-    .modal-body .label{ color: rgba(255,255,255,.65); font-weight: 800; margin-bottom: 8px; }
+    .modal-body{
+      padding: 14px 16px 18px;
+      color: rgba(255,255,255,.88);
+      line-height:1.55;
+      overflow:auto;
+    }
+    .modal-body .label{ color: rgba(255,255,255,.65); font-weight: 900; margin: 14px 0 8px; }
+    .legal-block{
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: var(--r-lg);
+      padding: 14px 14px;
+      box-shadow: var(--shadow2);
+      white-space: pre-wrap;
+    }
+    .legal-block a{ text-decoration: underline; text-underline-offset: 4px; }
+
     @media (prefers-reduced-motion: reduce){
       *{ transition:none !important; scroll-behavior:auto !important; }
     }
@@ -347,9 +387,18 @@
       <div id="ressources-list"></div>
     </section>
 
-    <footer>© LORINFOS — Tous droits réservés.</footer>
+    <footer>
+      © LORINFOS — Tous droits réservés.
+      <div class="footer-links">
+        <button id="openLegal" class="footer-link-btn" type="button">Mentions légales & confidentialité</button>
+        <a class="footer-link-btn" href="mailto:lorinfos@gmail.com" style="display:inline-flex;align-items:center;gap:8px;">
+          Contact
+        </a>
+      </div>
+    </footer>
   </div>
 
+  <!-- Modal Réponse -->
   <div id="overlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal">
       <div class="modal-head">
@@ -363,6 +412,119 @@
     </div>
   </div>
 
+  <!-- Modal Mentions légales -->
+  <div id="legalOverlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal">
+      <div class="modal-head">
+        <div class="modal-title">Mentions légales & confidentialité</div>
+        <button id="closeLegal" class="close" aria-label="Fermer">✕</button>
+      </div>
+      <div class="modal-body">
+        <div class="legal-block">
+📄 MENTIONS LÉGALES – LORINFOS
+
+Éditeur du site
+Le présent site est édité par une personne physique, agissant à titre personnel.
+
+Nom / Pseudonyme : Laurent Faux
+Responsable de la publication : Laurent Faux
+Contact : lorinfos@gmail.com
+
+L’éditeur assure seul la responsabilité éditoriale du contenu publié sur le site.
+
+Hébergement
+Le site est hébergé par :
+GitHub, Inc.
+88 Colin P. Kelly Jr. Street
+San Francisco, CA 94107
+États-Unis
+https://pages.github.com
+
+Objet du site
+Le site LORINFOS a pour objet la diffusion de contenus à caractère pédagogique, ludique et informatif, notamment sous forme d’énigmes, de raisonnements logiques et d’explications associées.
+
+📄 PROPRIÉTÉ INTELLECTUELLE & RESPONSABILITÉ ÉDITORIALE
+
+Contenus publiés
+L’ensemble des contenus présents sur le site LORINFOS (incluant, sans s’y limiter, les énigmes, titres, formulations, questions, explications, commentaires, mises en forme et structures éditoriales) relève de la responsabilité éditoriale exclusive de l’éditeur.
+
+Les contenus proposés s’inscrivent dans une démarche pédagogique, culturelle et de divertissement, fondée sur des idées générales, principes logiques, raisonnements abstraits ou concepts intellectuels librement accessibles, qui ne constituent pas en tant que tels des œuvres protégeables par le droit d’auteur.
+
+Traitement éditorial et inspiration
+Certaines énigmes peuvent reposer sur des concepts, problématiques ou raisonnements largement diffusés ou accessibles publiquement, notamment sur des plateformes ouvertes ou des espaces publics en ligne.
+
+Dans tous les cas, les contenus publiés font l’objet d’un traitement éditorial propre, pouvant inclure notamment :
+• une adaptation linguistique,
+• une reformulation partielle ou totale,
+• une restructuration de la question,
+• une contextualisation,
+• une explication indépendante.
+
+Les formes finales publiées (présentation, formulation, organisation, explication) constituent des créations éditoriales originales, relevant du choix, de l’analyse et de la responsabilité de l’éditeur.
+
+Absence de paternité exclusive sur les idées
+L’éditeur du site ne revendique aucune paternité exclusive sur les idées, raisonnements ou principes logiques généraux pouvant sous-tendre les énigmes proposées.
+Le site a pour vocation de proposer une interprétation, une présentation et une explication pédagogiques de problématiques intellectuelles, sans appropriation des idées elles-mêmes.
+
+Illustrations et visuels
+Les visuels présents sur le site sont :
+• soit des créations originales,
+• soit des illustrations génériques,
+• soit des contenus générés par des outils d’intelligence artificielle.
+Ils ne représentent pas de personnes réelles identifiables et ne visent aucune appropriation d’œuvres protégées.
+
+Reproduction
+Toute reproduction, représentation, diffusion ou exploitation, totale ou partielle, des contenus du site sans autorisation préalable est interdite conformément aux dispositions du Code de la propriété intellectuelle.
+
+(Précision) Cette interdiction concerne la reproduction de la forme éditoriale, de la présentation et des formulations originales, et non les idées, raisonnements ou principes abstraits.
+
+📄 UTILISATION D’OUTILS D’INTELLIGENCE ARTIFICIELLE
+Certains contenus textuels ou descriptifs publiés sur le site peuvent avoir été assistés par des outils d’intelligence artificielle.
+L’éditeur demeure seul responsable du choix, de la validation, de la publication et de la mise en ligne des contenus, qui relèvent d’un contrôle humain et d’une responsabilité éditoriale assumée.
+
+📄 LIMITATION DE RESPONSABILITÉ
+Les contenus diffusés sur le site LORINFOS sont fournis à titre pédagogique, informatif et ludique.
+L’éditeur s’efforce d’assurer l’exactitude et la cohérence des informations proposées, sans garantir l’absence totale d’erreurs ou d’omissions.
+L’éditeur ne saurait être tenu responsable de l’utilisation ou de l’interprétation faite par les utilisateurs des contenus publiés sur le site.
+
+📄 POLITIQUE DE CONFIDENTIALITÉ (RGPD)
+
+Données personnelles
+À ce jour, le site LORINFOS :
+• ne propose aucun formulaire,
+• ne permet pas la création de compte utilisateur,
+• ne collecte aucun e-mail,
+• ne collecte aucune donnée permettant d’identifier directement un utilisateur.
+
+Mesure d’audience
+Le site utilise l’outil GoatCounter à des fins de mesure d’audience.
+Cet outil :
+• ne dépose aucun cookie,
+• ne procède à aucun profilage,
+• ne permet aucune identification individuelle,
+• collecte uniquement des données statistiques anonymisées (visites, pages consultées, interactions générales).
+Aucun consentement préalable n’est requis pour ce traitement.
+
+Droits des utilisateurs
+Conformément au Règlement (UE) 2016/679 (RGPD), toute personne peut exercer ses droits (information, accès, rectification, opposition) en contactant l’éditeur à l’adresse indiquée dans les mentions légales.
+
+📄 POLITIQUE RELATIVE AUX COOKIES
+À ce jour, le site LORINFOS ne dépose aucun cookie publicitaire ni traceur de suivi nécessitant le recueil du consentement de l’utilisateur.
+En cas d’évolution future du site (notamment intégration de services publicitaires ou de partenaires tiers), une mise à jour de la présente politique sera effectuée et, le cas échéant, un mécanisme de recueil du consentement sera mis en place conformément à la réglementation en vigueur.
+
+📄 AFFILIATION & PUBLICITÉ (INFORMATION PRÉVENTIVE)
+Le site LORINFOS est susceptible de contenir, à l’avenir, des liens vers des produits, services ou ressources externes.
+Certains de ces liens pourront être des liens affiliés, permettant à l’éditeur de percevoir une commission en cas d’achat ou d’action réalisée par l’utilisateur, sans surcoût pour ce dernier.
+À ce jour, aucun partenariat commercial actif n’est en place.
+
+📄 CONTACT & SIGNALEMENT
+Pour toute question, remarque ou signalement relatif aux contenus publiés sur le site, l’utilisateur est invité à contacter l’éditeur à l’adresse indiquée dans les mentions légales.
+Toute demande sera examinée de bonne foi, sans reconnaissance préalable de responsabilité.
+        </div>
+      </div>
+    </div>
+  </div>
+
   <script>
     /* -------------------------------------------------
       GOAL: KPI MACRO (peu de data) + "nombre de personnes"
@@ -372,7 +534,7 @@
     function gcEventOncePerSession(name) {
       try {
         const key = "gc_once_" + name;
-        if (sessionStorage.getItem(key) === "1") return; // déjà compté cette session
+        if (sessionStorage.getItem(key) === "1") return;
         sessionStorage.setItem(key, "1");
 
         if (window.goatcounter && typeof window.goatcounter.count === "function") {
@@ -393,10 +555,16 @@
     const sectionEnigmes = $("section-enigmes");
     const sectionRessources = $("section-ressources");
 
+    // Modal Réponse
     const overlay = $("overlay");
     const closeModal = $("closeModal");
     const modalTitle = $("modalTitle");
     const modalAnswer = $("modalAnswer");
+
+    // Modal Mentions
+    const legalOverlay = $("legalOverlay");
+    const openLegal = $("openLegal");
+    const closeLegal = $("closeLegal");
 
     const searchInput = $("searchInput");
     const clearSearch = $("clearSearch");
@@ -446,8 +614,8 @@
 
     linkToMuscler.addEventListener("click", (e) => {
       e.preventDefault();
-      gcEventOncePerSession("tab_muscler");      // KPI: personnes qui vont sur muscler
-      gcEventOncePerSession("link_to_muscler");  // KPI: personnes qui cliquent le CTA
+      gcEventOncePerSession("tab_muscler");
+      gcEventOncePerSession("link_to_muscler");
       setTab("muscler", "cta_link");
     });
 
@@ -456,10 +624,7 @@
       modalAnswer.textContent = answer || "";
       overlay.classList.add("show");
       overlay.setAttribute("aria-hidden", "false");
-
-      // KPI: personnes qui voient au moins 1 réponse
       gcEventOncePerSession("answer_view");
-
       blurActive();
     }
 
@@ -470,9 +635,32 @@
       blurActive();
     }
 
+    // Mentions légales modal
+    function openLegalModal(){
+      legalOverlay.classList.add("show");
+      legalOverlay.setAttribute("aria-hidden", "false");
+      blurActive();
+    }
+    function closeLegalModal(){
+      if (!legalOverlay.classList.contains("show")) return;
+      legalOverlay.classList.remove("show");
+      legalOverlay.setAttribute("aria-hidden", "true");
+      blurActive();
+    }
+
+    openLegal?.addEventListener("click", openLegalModal);
+    closeLegal?.addEventListener("click", closeLegalModal);
+    legalOverlay?.addEventListener("click", (e) => { if(e.target === legalOverlay) closeLegalModal(); });
+
     closeModal.addEventListener("click", closeAnswer);
     overlay.addEventListener("click", (e) => { if(e.target === overlay) closeAnswer(); });
-    document.addEventListener("keydown", (e) => { if(e.key === "Escape") closeAnswer(); });
+
+    document.addEventListener("keydown", (e) => {
+      if(e.key === "Escape") {
+        closeAnswer();
+        closeLegalModal();
+      }
+    });
 
     async function loadJSON(path){
       const res = await fetch(path, { cache: "no-store" });
@@ -532,7 +720,6 @@
 
         const btn = card.querySelector(".answer-btn");
         btn.addEventListener("click", () => {
-          // KPI: personnes qui ouvrent un lien affilié (au moins 1 fois / session)
           if(AFFILIATE_URL && AFFILIATE_URL.trim() && AFFILIATE_URL !== "TON_LIEN_AFFILIATION_ICI"){
             gcEventOncePerSession("affiliate_open");
             window.open(AFFILIATE_URL, "_blank", "noopener,noreferrer");
@@ -567,7 +754,6 @@
           <a class="answer-btn" href="${url}" target="_blank" rel="noopener noreferrer">Voir</a>
         `;
 
-        // KPI: personnes qui cliquent une ressource (au moins 1 fois / session)
         const link = card.querySelector("a.answer-btn");
         link.addEventListener("click", () => gcEventOncePerSession("resource_click"));
 
@@ -584,7 +770,6 @@
         .replaceAll("'", "&#039;");
     }
 
-    // Search UI (pas de tracking, car tu n’en veux pas dans tes KPI)
     searchInput?.addEventListener("input", () => applyFilter(true));
     clearSearch?.addEventListener("click", () => {
       searchInput.value = "";
@@ -607,7 +792,6 @@
         $("ressources-list").innerHTML = `<div class="empty">Impossible de charger <b>ressources.json</b>.</div>`;
       }
 
-      // Route initiale SANS event tab
       const h = (location.hash || "").toLowerCase();
       if(h.includes("muscler")) {
         CURRENT_TAB = "muscler";
@@ -618,10 +802,6 @@
       }
 
       TAB_INIT_DONE = true;
-
-      // Important:
-      // Le "nombre total de personnes qui arrivent au site" = METRIQUE "Visits" de GoatCounter (sessions).
-      // On ne force pas un event custom ici, sinon tu doubles l’info.
     }
 
     init();
