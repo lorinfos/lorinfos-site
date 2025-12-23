@@ -11,7 +11,7 @@
       "id": 2,
       "titre": "Énigme 2",
       "question": "Tu as 3 interrupteurs dans une pièce. Une ampoule est dans la pièce d’à côté. Tu ne peux ouvrir la porte qu’une seule fois. Comment savoir quel interrupteur allume l’ampoule ?",
-      "reponse": "En utilisant la chaleur - un interrupteur chauffe l’ampoule, un autre l’allume."
+      "reponse": "En utilisant la chaleur - tu allumes un interrupteur quelques minutes, tu l’éteins, tu en allumes un autre puis tu ouvres la porte."
     },
     {
       "id": 3,
@@ -23,7 +23,7 @@
       "id": 4,
       "titre": "Énigme 4",
       "question": "Un train électrique roule vers le nord. Le vent souffle vers l’ouest. Dans quel sens va la fumée ?",
-      "reponse": "Aucun - un train électrique ne produit pas de fumée."
+      "reponse": "Aucune - un train électrique ne produit pas de fumée."
     },
     {
       "id": 5,
@@ -35,13 +35,13 @@
       "id": 6,
       "titre": "Énigme 6",
       "question": "Je commence la nuit et je finis le matin. Qui suis-je ?",
-      "reponse": "La lettre N - au début de “nuit” et à la fin de “matin”."
+      "reponse": "La lettre N - elle est au début de nuit et à la fin de matin."
     },
     {
       "id": 7,
       "titre": "Énigme 7",
       "question": "Plus tu en prends, plus tu en laisses derrière toi. Qu’est-ce que c’est ?",
-      "reponse": "Des pas - chaque pas laisse une trace."
+      "reponse": "Des pas - chaque pas laisse une trace derrière toi."
     },
     {
       "id": 8,
@@ -95,7 +95,7 @@
       "id": 16,
       "titre": "Énigme 16",
       "question": "Quel groupe est vraiment debout ?",
-      "reponse": "B - l’orientation des pieds et la gravité montrent que seul B est à l’endroit."
+      "reponse": "B - l’orientation des pieds et la gravité montrent que seul le groupe B est à l’endroit."
     },
     {
       "id": 17,
@@ -113,19 +113,19 @@
       "id": 19,
       "titre": "Énigme 19",
       "question": "Qui supporte le plus de poids ?",
-      "reponse": "B - le support central concentre la charge."
+      "reponse": "B - le support central concentre la plus grande charge."
     },
     {
       "id": 20,
       "titre": "Énigme 20",
       "question": "Quel réservoir se remplit en premier ?",
-      "reponse": "A - les autres conduits sont bloqués."
+      "reponse": "A - les autres conduits sont bloqués, l’eau reste donc dans A."
     },
     {
       "id": 21,
       "titre": "Énigme 21",
       "question": "Qui est le meurtrier ?",
-      "reponse": "B - un indice physique direct le relie à la victime."
+      "reponse": "B - il présente un indice physique direct contrairement aux autres."
     },
     {
       "id": 22,
@@ -137,25 +137,25 @@
       "id": 23,
       "titre": "Énigme 23",
       "question": "Qu’est-ce qui a des clés mais n’ouvre aucune porte ?",
-      "reponse": "Un piano - ses clés servent à faire de la musique."
+      "reponse": "Un piano - ses clés servent à jouer de la musique."
     },
     {
       "id": 24,
       "titre": "Énigme 24",
       "question": "Qu’est-ce qui est toujours devant toi mais que tu ne peux jamais atteindre ?",
-      "reponse": "Le futur - il avance constamment."
+      "reponse": "Le futur - il avance toujours avec le temps."
     },
     {
       "id": 25,
       "titre": "Énigme 25",
       "question": "Qu’est-ce qui peut être cassé sans jamais être touché ?",
-      "reponse": "Une promesse - elle peut être rompue par des paroles."
+      "reponse": "Une promesse - elle peut être rompue uniquement par des paroles."
     },
     {
       "id": 26,
       "titre": "Énigme 26",
       "question": "Qu’est-ce qui devient plus humide en séchant ?",
-      "reponse": "Une serviette - elle absorbe l’eau."
+      "reponse": "Une serviette - elle absorbe l’eau en séchant autre chose."
     },
     {
       "id": 27,
@@ -167,13 +167,13 @@
       "id": 28,
       "titre": "Énigme 28",
       "question": "Qu’est-ce qui tombe sans jamais se blesser ?",
-      "reponse": "La pluie - elle tombe naturellement."
+      "reponse": "La pluie - elle tombe continuellement sans jamais se casser."
     },
     {
       "id": 29,
       "titre": "Énigme 29",
       "question": "Qui est le coupable ?",
-      "reponse": "B - les traces sur ses mains montrent un contact direct."
+      "reponse": "B - les traces visibles sur ses mains montrent un contact direct."
     },
     {
       "id": 30,
