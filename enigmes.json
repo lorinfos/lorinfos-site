@@ -1,12 +1,16 @@
 {
   "affiliate_url": "",
+  "monetized_url": "TON_LIEN_MONETISE_ICI",
   "enigmes": [
     {
       "id": 1,
       "titre": "Énigme 1",
-      "question": "Un père a 3 fils. Chaque fils a une sœur. Combien y a-t-il d’enfants au total ?",
-      "reponse": "4 - les trois fils ont tous la même sœur, il n’y a donc qu’une seule fille."
-    },
+      "question": "…",
+      "reponse": "…",
+      "monetized_url": ""
+    }
+  ]
+},
     {
       "id": 2,
       "titre": "Énigme 2",
