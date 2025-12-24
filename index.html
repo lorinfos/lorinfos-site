@@ -361,9 +361,9 @@
         <h2>Énigmes &amp;<br/>Réponses</h2>
       </div>
 
-      <!-- IMPORTANT: cohérent avec ta V2 => pas de pubs / pas d'affiliation "à ce jour" -->
+      <!-- Cohérent avec ta V2 : pas de pub "à ce jour" -> mais la V2 prévoit l'évolution future -->
       <div class="info">
-        <strong>ℹ️</strong> À ce jour, le site ne diffuse <strong>aucune publicité</strong> et n’utilise <strong>aucun lien affilié</strong>.
+        <strong>ℹ️</strong> Le site peut, à l’avenir, intégrer de la publicité ou des liens d’affiliation.
       </div>
 
       <div class="search" role="search" aria-label="Rechercher une énigme">
@@ -594,6 +594,7 @@ Toute demande sera examinée de bonne foi, sans reconnaissance préalable de res
 
     let ALL_ENIGMES = [];
     let AFFILIATE_URL = "";
+    let MONETIZED_URL_DEFAULT = ""; // <-- NEW
 
     let CURRENT_TAB = "enigmes";
     let TAB_INIT_DONE = false;
@@ -693,10 +694,13 @@ Toute demande sera examinée de bonne foi, sans reconnaissance préalable de res
       list.sort((a,b) => (b.id ?? 0) - (a.id ?? 0));
       ALL_ENIGMES = list;
 
-      // Si tu n'as pas encore d'affiliation => mets affiliate_url = "" dans enigmes.json
+      // (garde pour plus tard si tu veux de l'affiliation)
       AFFILIATE_URL = (data && data.affiliate_url) ? data.affiliate_url : "";
 
-      applyFilter(true);
+      // NEW: lien monétisé global (couche 1)
+      MONETIZED_URL_DEFAULT = (data && data.monetized_url) ? data.monetized_url : "";
+
+      applyFilter();
     }
 
     function applyFilter(){
@@ -743,11 +747,13 @@ Toute demande sera examinée de bonne foi, sans reconnaissance préalable de res
 
         const btn = card.querySelector(".answer-btn");
         btn.addEventListener("click", () => {
-          // N'ouvrira rien tant que affiliate_url est vide ou "TON_LIEN_AFFILIATION_ICI"
-          if(AFFILIATE_URL && AFFILIATE_URL.trim() && AFFILIATE_URL !== "TON_LIEN_AFFILIATION_ICI"){
-            gcEventOncePerSession("affiliate_open");
-            window.open(AFFILIATE_URL, "_blank", "noopener,noreferrer");
+          // Couche 1: ouverture d'un lien monétisé (nouvel onglet), puis affichage de la réponse
+          const link = (MONETIZED_URL_DEFAULT || "").trim();
+          if (link && link !== "TON_LIEN_MONETISE_ICI") {
+            gcEventOncePerSession("monetized_open");
+            window.open(link, "_blank", "noopener,noreferrer");
           }
+
           openAnswer(titre, reponse);
         });
 
