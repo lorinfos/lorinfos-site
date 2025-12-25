@@ -181,6 +181,19 @@
       "titre": "Énigme 30",
       "question": "Qu’est-ce qui disparaît dès que tu dis son nom ?",
       "reponse": "Le silence - le simple fait de parler le fait disparaître."
-    }
+    },
+    {
+  "id": 31,
+  "titre": "Os à compléter",
+  "question": "Quelle pièce numérotée s’insère parfaitement pour compléter la forme de l’os ?",
+  "reponse": "6 - C’est la seule pièce dont les courbes et les angles correspondent exactement à l’espace manquant."
+    },
+    {
+  "id": 32,
+  "titre": "Calcul animaux",
+  "question": "En respectant les équations entre le renard, l’ours et le lion, quel est le résultat du dernier calcul ?",
+  "reponse": "14 - Le renard vaut 9, trois ours valent 4 donc un ours vaut 4/3, le lion vaut 2 et le calcul final donne 2 + (4/3 × 9)."
+   }
+    
   ]
 }
