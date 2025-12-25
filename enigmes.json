@@ -161,26 +161,26 @@
     {
       "id": 27,
       "titre": "Énigme 27",
-      "question": "Qu’est-ce qui a des mains mais ne peut pas applaudir ?",
-      "reponse": "Une horloge - ses aiguilles sont appelées des mains."
+      "question": "Combien pèse une boule d’après l’équilibre de la balance ?",
+      "reponse": "2 kg - Cinq boules plus 4 kg égalent une boule plus 12 kg, ce qui donne une boule à 2 kg."
     },
     {
       "id": 28,
       "titre": "Énigme 28",
-      "question": "Qu’est-ce qui tombe sans jamais se blesser ?",
-      "reponse": "La pluie - elle tombe continuellement sans jamais se casser."
+      "question": "Quel chemin permet réellement au poussin de sortir du labyrinthe ?",
+      "reponse": "C - C’est le seul chemin continu qui relie le centre du labyrinthe à une sortie sans être bloqué."
     },
     {
       "id": 29,
       "titre": "Énigme 29",
-      "question": "Qui est le coupable ?",
-      "reponse": "B - les traces visibles sur ses mains montrent un contact direct."
+      "question": "Combien de loups peux-tu repérer sur cette image ?",
+      "reponse": "15"
     },
     {
       "id": 30,
       "titre": "Énigme 30",
-      "question": "Qu’est-ce qui disparaît dès que tu dis son nom ?",
-      "reponse": "Le silence - le simple fait de parler le fait disparaître."
+      "question": "Quel est le seul chemin qui permet au chat d’atteindre réellement le bol de lait ?",
+      "reponse": "B - C’est le seul trajet continu qui ne se coupe pas et mène directement du chat jusqu’au bol."
     },
     {
     "id": 31,
@@ -192,7 +192,7 @@
     "id": 32,
     "titre": "Énigme 32",
     "question": "Quel est le résultat du dernier calcul avec le renard, l’ours et le lion ?",
-    "reponse": "14 - On lit l’image ligne par ligne : 1. 🦊 + 🦊 = 18 donc 🦊 = 9. 2. (3 🐻) + 🦊 = 13 donc 3🐻 + 9 = 13, 3🐻 = 4 et 🐻 = 4/3. 3. (3 🐻) − 🦁 = 2 donc 4 − 🦁 = 2 et 🦁 = 2. Dernière ligne, priorité à la multiplication : 🦁 + 🐻 × 🦊 = 2 + (4/3)×9 = 2 + 12 = 14."
+    "reponse": "14 - On lit l’image ligne par ligne : 1, 🦊 + 🦊 = 18 donc 🦊 = 9. 2, (3 🐻) + 🦊 = 13 donc 3🐻 + 9 = 13, 3🐻 = 4 et 🐻 = 4/3. 3. (3 🐻) − 🦁 = 2 donc 4 − 🦁 = 2 et 🦁 = 2. Dernière ligne, priorité à la multiplication : 🦁 + 🐻 × 🦊 = 2 + (4/3)×9 = 2 + 12 = 14."
   } 
   ]
 }
