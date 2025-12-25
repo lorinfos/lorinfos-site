@@ -201,12 +201,10 @@
   "reponse": "9 - On calcule d’abord la parenthèse (1 + 2) = 3, ce qui donne 6 ÷ 2 × 3. La division et la multiplication ont la même priorité, donc on calcule de gauche à droite : 6 ÷ 2 = 3, puis 3 × 3 = 9."
 },
     {
-      "id": 34,
-      "titre": "Énigme 34",
-      "question": "Quel banc se déforme le plus sous le poids : A ou B ?",
-      "reponse": "Le banc A (poutre circulaire) se déforme le plus. - Même si les deux poutres ont la même surface, leur rigidité en flexion dépend de la répartition de la matière.
-À surface égale, une poutre carrée possède un moment d’inertie plus élevé qu’une poutre circulaire, ce qui la rend plus rigide.
-👉 La poutre circulaire résiste donc moins à la flexion et se plie davantage."
-    }
+  "id": 34,
+  "titre": "Énigme 34",
+  "question": "Quel banc se déforme le plus sous le poids : A ou B ?",
+  "reponse": "Le banc A (poutre circulaire) se déforme le plus. - Même si les deux poutres ont la même surface, leur rigidité en flexion dépend de la répartition de la matière.\nÀ surface égale, une poutre carrée possède un moment d’inertie plus élevé qu’une poutre circulaire, ce qui la rend plus rigide.\n👉 La poutre circulaire résiste donc moins à la flexion et se plie davantage."
+}
   ]
 }
