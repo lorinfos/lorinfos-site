@@ -192,7 +192,7 @@
   "id": 32,
   "titre": "Énigme 32",
   "question": "Quel est le résultat du dernier calcul avec le renard, l’ours et le lion ?",
-  "reponse": "14 - On lit l’image ligne par ligne :\n1. 🦊 + 🦊 = 18 donc 🦊 = 9\n2. (3 🐻) + 🦊 = 13 donc 3🐻 + 9 = 13, 3🐻 = 4 et 🐻 = 4/3\n3. (3 🐻) − 🦁 = 2 donc 4 − 🦁 = 2 et 🦁 = 2\n\nDernière ligne (priorité à la multiplication) :\n🦁 + 🐻 × 🦊 = 2 + (4/3)×9 = 2 + 12 = 14."
+  "reponse": "14 - On lit l’image ligne par ligne : 🦊 + 🦊 = 18, donc 🦊 = 9. (3 🐻) + 🦊 = 13, donc 3🐻 + 9 = 13, d’où 3🐻 = 4 et 🐻 = 4/3. (3 🐻) − 🦁 = 2, donc 4 − 🦁 = 2 et 🦁 = 2. Dernière ligne, priorité à la multiplication : 🦁 + 🐻 × 🦊 = 2 + (4/3)×9 = 2 + 12 = 14"
 }
   ]
 }
