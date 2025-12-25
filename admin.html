@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LORINFOS — Admin JSON</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial;margin:20px;max-width:900px}
+    h1{margin:0 0 8px}
+    .muted{color:#666;margin:0 0 18px}
+    label{display:block;font-weight:700;margin:14px 0 6px}
+    input, textarea{width:100%;padding:12px;border:1px solid #ddd;border-radius:10px;font-size:16px}
+    textarea{min-height:120px;resize:vertical}
+    .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+    button{padding:12px 14px;border:0;border-radius:12px;font-weight:800;cursor:pointer}
+    .primary{background:#111;color:#fff}
+    .secondary{background:#eee}
+    .pill{display:inline-block;background:#f5f5f5;border:1px solid #e5e5e5;border-radius:999px;padding:8px 12px;font-weight:700}
+    pre{background:#0b0b0d;color:#fff;padding:14px;border-radius:14px;overflow:auto;white-space:pre-wrap}
+    .ok{color:#0a7d2a;font-weight:800}
+    .warn{color:#a35b00;font-weight:800}
+    .small{font-size:13px;color:#666;margin-top:8px}
+  </style>
+</head>
+<body>
+
+  <h1>Admin — Générateur d’énigme JSON</h1>
+  <p class="muted">Tu remplis <b>Question</b> + <b>Réponse</b>, puis tu cliques <b>Générer</b> → <b>Copier</b> → tu colles à la fin de <code>enigmes.json</code>.</p>
+
+  <div class="row">
+    <span class="pill">Prochain ID : <span id="nextId">34</span></span>
+    <span class="pill">Titre auto : <span id="nextTitle">Énigme 34</span></span>
+  </div>
+
+  <label for="question">Question</label>
+  <textarea id="question" placeholder="Écris la question (claire, compréhensible sans l’image)…"></textarea>
+
+  <label for="reponse">Réponse (format obligatoire)</label>
+  <textarea id="reponse" placeholder="Ex: B - explication courte (pas de “Réponse :”)"></textarea>
+  <div class="small">Rappel : dans ton site, le champ <code>reponse</code> ne doit jamais contenir “Réponse :”. Et le séparateur doit être <b> - </b> (tiret simple).</div>
+
+  <div class="row">
+    <button class="primary" id="btnGenerate" type="button">Générer</button>
+    <button class="secondary" id="btnCopy" type="button">Copier</button>
+    <button class="secondary" id="btnClear" type="button">Vider</button>
+    <span id="status"></span>
+  </div>
+
+  <label>Bloc JSON prêt à coller</label>
+  <pre id="output">Clique “Générer”.</pre>
+
+  <p class="small"><span class="warn">Important</span> : colle ce bloc <b>juste avant</b> le <code>]</code> final du tableau <code>"enigmes"</code> dans <code>enigmes.json</code>.</p>
+
+  <script>
+    // ---- Réglage : tu as dit être à l'énigme 33, donc on démarre à 34 ----
+    const START_NEXT_ID = 34;
+
+    const nextIdEl = document.getElementById("nextId");
+    const nextTitleEl = document.getElementById("nextTitle");
+    const questionEl = document.getElementById("question");
+    const reponseEl = document.getElementById("reponse");
+    const outputEl = document.getElementById("output");
+    const statusEl = document.getElementById("status");
+
+    let NEXT_ID = START_NEXT_ID;
+
+    function refreshHeader(){
+      nextIdEl.textContent = String(NEXT_ID);
+      nextTitleEl.textContent = `Énigme ${NEXT_ID}`;
+    }
+
+    function escapeJsonString(s){
+      // échappement minimal JSON
+      return String(s)
+        .replaceAll("\\", "\\\\")
+        .replaceAll('"', '\\"')
+        .replaceAll("\r\n", "\n")
+        .replaceAll("\r", "\n");
+    }
+
+    function buildSnippet(){
+      const titre = `Énigme ${NEXT_ID}`;
+      const q = questionEl.value.trim();
+      const r = reponseEl.value.trim();
+
+      if(!q || !r){
+        statusEl.innerHTML = '<span class="warn">⚠️ Remplis Question + Réponse.</span>';
+        return null;
+      }
+
+      const question = escapeJsonString(q);
+      const reponse = escapeJsonString(r);
+
+      // On génère un objet précédé d’une virgule, prêt à être collé après un objet existant
+      return `,\n    {\n      "id": ${NEXT_ID},\n      "titre": "${titre}",\n      "question": "${question}",\n      "reponse": "${reponse}"\n    }`;
+    }
+
+    document.getElementById("btnGenerate").addEventListener("click", () => {
+      const snippet = buildSnippet();
+      if(!snippet) return;
+
+      outputEl.textContent = snippet;
+      statusEl.innerHTML = '<span class="ok">✅ Généré. Tu peux copier.</span>';
+
+      // Incrémente pour la prochaine
+      NEXT_ID += 1;
+      refreshHeader();
+
+      // Vide les champs pour enchaîner
+      questionEl.value = "";
+      reponseEl.value = "";
+      questionEl.focus();
+    });
+
+    document.getElementById("btnCopy").addEventListener("click", async () => {
+      const text = outputEl.textContent || "";
+      if(!text || text.includes("Clique")){
+        statusEl.innerHTML = '<span class="warn">⚠️ Rien à copier. Clique “Générer”.</span>';
+        return;
+      }
+      try{
+        await navigator.clipboard.writeText(text);
+        statusEl.innerHTML = '<span class="ok">📋 Copié ! Colle-le dans enigmes.json.</span>';
+      }catch(e){
+        // fallback
+        const ta = document.createElement("textarea");
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand("copy");
+        document.body.removeChild(ta);
+        statusEl.innerHTML = '<span class="ok">📋 Copié ! (mode compatibilité)</span>';
+      }
+    });
+
+    document.getElementById("btnClear").addEventListener("click", () => {
+      questionEl.value = "";
+      reponseEl.value = "";
+      outputEl.textContent = "Clique “Générer”.";
+      statusEl.textContent = "";
+      questionEl.focus();
+    });
+
+    refreshHeader();
+  </script>
+</body>
+</html>
