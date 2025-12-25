@@ -195,8 +195,8 @@
   "reponse": "14 - On lit l’image ligne par ligne : 🦊 + 🦊 = 18, donc 🦊 = 9. (3 🐻) + 🦊 = 13, donc 3🐻 + 9 = 13, d’où 3🐻 = 4 et 🐻 = 4/3. (3 🐻) − 🦁 = 2, donc 4 − 🦁 = 2 et 🦁 = 2. Dernière ligne, priorité à la multiplication : 🦁 + 🐻 × 🦊 = 2 + (4/3)×9 = 2 + 12 = 14"
 },
     {
-  "id": 37,
-  "titre": "Énigme 37",
+  "id": 33,
+  "titre": "Énigme 33",
   "question": "Quel est le résultat exact de l’expression 6 ÷ 2(1 + 2) ?",
   "reponse": "9 - On calcule d’abord la parenthèse (1 + 2) = 3, ce qui donne 6 ÷ 2 × 3. La division et la multiplication ont la même priorité, donc on calcule de gauche à droite : 6 ÷ 2 = 3, puis 3 × 3 = 9."
 }
