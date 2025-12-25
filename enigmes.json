@@ -183,17 +183,16 @@
       "reponse": "Le silence - le simple fait de parler le fait disparaître."
     },
     {
-  "id": 31,
-  "titre": "Os à compléter",
-  "question": "Quelle pièce numérotée s’insère parfaitement pour compléter la forme de l’os ?",
-  "reponse": "6 - C’est la seule pièce dont les courbes et les angles correspondent exactement à l’espace manquant."
-    },
-    {
-  "id": 32,
-  "titre": "Calcul animaux",
-  "question": "En respectant les équations entre le renard, l’ours et le lion, quel est le résultat du dernier calcul ?",
-  "reponse": "14 - Le renard vaut 9, trois ours valent 4 donc un ours vaut 4/3, le lion vaut 2 et le calcul final donne 2 + (4/3 × 9)."
-   }
-    
+    "id": 31,
+    "titre": "Énigme 31",
+    "question": "Quelle pièce numérotée permet de compléter parfaitement la forme de l’os ?",
+    "reponse": "6 - C’est la seule pièce dont la forme correspond exactement à l’espace manquant."
+  },
+  {
+    "id": 32,
+    "titre": "Énigme 32",
+    "question": "Quel est le résultat du dernier calcul avec le renard, l’ours et le lion ?",
+    "reponse": "14 - On lit l’image ligne par ligne : 1. 🦊 + 🦊 = 18 donc 🦊 = 9. 2. (3 🐻) + 🦊 = 13 donc 3🐻 + 9 = 13, 3🐻 = 4 et 🐻 = 4/3. 3. (3 🐻) − 🦁 = 2 donc 4 − 🦁 = 2 et 🦁 = 2. Dernière ligne, priorité à la multiplication : 🦁 + 🐻 × 🦊 = 2 + (4/3)×9 = 2 + 12 = 14."
+  } 
   ]
 }
