@@ -205,6 +205,12 @@
   "titre": "Énigme 34",
   "question": "Quel banc se déforme le plus sous le poids : A ou B ?",
   "reponse": "Le banc A (poutre circulaire) se déforme le plus. - Même si les deux poutres ont la même surface, leur rigidité en flexion dépend de la répartition de la matière.\nÀ surface égale, une poutre carrée possède un moment d’inertie plus élevé qu’une poutre circulaire, ce qui la rend plus rigide.\n👉 La poutre circulaire résiste donc moins à la flexion et se plie davantage."
-}
+},
+    {
+      "id": 35,
+      "titre": "Énigme 35",
+      "question": "Quelle boisson le garçon va-t-il boire en suivant les tuyaux ?",
+      "reponse": "4."
+    }
   ]
 }
