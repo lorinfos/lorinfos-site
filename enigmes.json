@@ -213,11 +213,10 @@
       "reponse": "4."
     },
     {
-      "id": 36,
-      "titre": "Énigme 36",
-      "question": "Quel est le nombre total de cubes dans la dernière construction ?",
-      "reponse": "19. Certains cubes ne sont pas visibles de face, mais ils sont bien présents à l’arrière ou à l’intérieur de la structure.
-En comptant chaque niveau et en ajoutant les cubes cachés, on obtient un total de 19 cubes."
-    }
+  "id": 36,
+  "titre": "Énigme 36",
+  "question": "Quel est le nombre total de cubes dans la dernière construction ?",
+  "reponse": "19. Certains cubes ne sont pas visibles de face, mais ils sont bien présents à l’arrière ou à l’intérieur de la structure.\nEn comptant chaque niveau et en ajoutant les cubes cachés, on obtient un total de 19 cubes."
+}
   ]
 }
