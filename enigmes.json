@@ -217,6 +217,12 @@
   "titre": "Énigme 36",
   "question": "Quel est le nombre total de cubes dans la dernière construction ?",
   "reponse": "19. Certains cubes ne sont pas visibles de face, mais ils sont bien présents à l’arrière ou à l’intérieur de la structure.\nEn comptant chaque niveau et en ajoutant les cubes cachés, on obtient un total de 19 cubes."
+},
+{
+  "id": 37,
+  "titre": "Énigme 37",
+  "question": "D’où vient le dentifrice qui arrive sur la brosse à dents ?",
+  "reponse": "Le tube n°3. En suivant le trajet du dentifrice depuis la brosse, on peut remonter le tuyau sans interruption.\nLes autres tubes semblent proches, mais leurs conduits se croisent ou se terminent ailleurs.\nLe seul chemin continu et cohérent mène au tube numéro 3."
 }
   ]
 }
