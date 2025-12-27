@@ -228,7 +228,7 @@
   "id": 38,
   "titre": "Énigme 38",
   "question": "Qui sera mouillé le plus vite : A, B ou C ?",
-  "reponse": "A.\nLa pluie tombe en biais vers la droite, donc le vent la pousse de gauche vers la droite.\nA court vers la gauche : il court face à la pluie et “rentre dedans”, il reçoit plus de gouttes sur l’avant et le haut.\nC court dans le même sens que la pluie, il en prend moins de face, et B est entre les deux car il reste immobile."
+  "reponse": "C est celui qui se mouille le plus vite, car la pluie tombe en diagonale vers la gauche, ce qui signifie que le vent pousse les gouttes de droite vers la gauche, et l’enfant C, qui court vers la droite, se déplace donc à l’encontre de la pluie et rencontre un nombre bien plus important de gouttes par seconde, même si sa surface frontale est plus petite ; à l’inverse, l’enfant A, bien qu’il expose une surface plus large avec son dos et son côté, court dans le même sens que la pluie et la “suit”, ce qui réduit la quantité de gouttes qu’il rencontre, tandis que l’enfant B, immobile, reçoit la pluie principalement par le dessus et se situe entre les deux, ce qui confirme que le facteur déterminant n’est pas la surface exposée mais la vitesse relative entre la personne et la pluie."
 }
   ]
 }
