@@ -235,6 +235,12 @@
   "titre": "Énigme 39",
   "question": "Quel est le résultat du dernier calcul ?",
   "reponse": "30. Quatre pommes valent 40, donc une pomme vaut 10.\nSix oranges valent 30, donc une orange vaut 5.\nDeux grappes de raisin valent 8, donc une grappe vaut 4.\nDans le dernier calcul, on respecte la priorité : 10 + (5 × 4) = 30."
+},
+{
+  "id": 40,
+  "titre": "Énigme 40",
+  "question": "Combien de téléphones peuvent être chargés en même temps ?",
+  "reponse": "13.\nUne multiprise a le câble coupé et une autre n’a aucun câble : elles sont inutilisables.\nPar ailleurs, sur une multiprise, un emplacement femelle ne comporte qu’un seul trou et ne permet pas de brancher un chargeur.\nEn ne comptant que les prises réellement alimentées et compatibles, le total est de 13."
 }
   ]
 }
