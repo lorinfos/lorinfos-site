@@ -362,9 +362,10 @@
 
       <!-- Info monétisation (transparence) -->
       <div class="info">
-  <strong>⚠️</strong> <strong>Pour faire vivre le site</strong>, certaines réponses peuvent ouvrir <strong>une courte publicité</strong>.
-  Ferme simplement l’onglet : <strong>la réponse s’affiche ensuite</strong>.
-</div>
+        <strong>💡 Info :</strong> En ouvrant une réponse, <strong>une courte publicité peut s’ouvrir</strong> pour soutenir le site.
+        <br />
+        ✔️ Tu peux la fermer immédiatement — <strong>la réponse et son explication restent toujours accessibles</strong> 🧠✨
+      </div>
 
       <div class="search" role="search" aria-label="Rechercher une énigme">
         <input id="searchInput" type="search" placeholder="Rechercher une énigme (ex: train, soeur, course…)" autocomplete="off" />
@@ -412,7 +413,7 @@
     </div>
   </div>
 
-  <!-- Modal Mentions légales (V3 — monétisation active) -->
+  <!-- Modal Mentions légales -->
   <div id="legalOverlay" class="overlay" role="dialog" aria-modal="true" aria-hidden="true">
     <div class="modal">
       <div class="modal-head">
@@ -600,7 +601,8 @@ En cas d’évolution future impliquant l’utilisation de cookies ou traceurs s
 
 💰 PUBLICITÉ, LIENS SPONSORISÉS & MONÉTISATION
 
-Le site LORINFOS peut proposer, de manière occasionnelle ou contextuelle, des liens publicitaires ou sponsorisés.
+Le site LORINFOS peut déclencher l’ouverture d’un contenu publicitaire dans un nouvel onglet lors de l’ouverture d’une réponse.
+Cette ouverture contribue au financement du site, sans surcoût pour l’utilisateur.
 
 Ces liens :
 • sont déclenchés volontairement par l’utilisateur,
@@ -626,14 +628,29 @@ Toute demande sera examinée de bonne foi, sans reconnaissance préalable de res
 
   <script>
     /* -------------------------------------------------
-      GoatCounter: événements "once per session"
+      GoatCounter: événements
     -------------------------------------------------- */
+
+    // Garde "once per session" pour les events UX généraux (tab, answer_view, etc.)
     function gcEventOncePerSession(name) {
       try {
         const key = "gc_once_" + name;
         if (sessionStorage.getItem(key) === "1") return;
         sessionStorage.setItem(key, "1");
 
+        if (window.goatcounter && typeof window.goatcounter.count === "function") {
+          window.goatcounter.count({
+            path: "/event/" + String(name),
+            title: String(name),
+            event: true
+          });
+        }
+      } catch (e) {}
+    }
+
+    // ✅ Event normal (PAS once) -> utile pour "1 pub par clic"
+    function gcEvent(name) {
+      try {
         if (window.goatcounter && typeof window.goatcounter.count === "function") {
           window.goatcounter.count({
             path: "/event/" + String(name),
@@ -670,19 +687,14 @@ Toute demande sera examinée de bonne foi, sans reconnaissance préalable de res
     let ALL_ENIGMES = [];
     let AFFILIATE_URL = "";
 
-    // ---- MONÉTISATION (couche 1) ----
+    // ---- MONÉTISATION ----
     // Recommandé: le mettre dans enigmes.json via "monetized_url"
     let MONETIZED_URL_DEFAULT = "";
-
-    // Cooldown (2 minutes)
-    const AD_COOLDOWN_MS = 2 * 60 * 1000; // 120000 ms
-    const AD_LAST_KEY = "lorinfos_last_ad_ts";
 
     function blurActive(){ try{ document.activeElement && document.activeElement.blur(); }catch(e){} }
 
     function setTab(which){
       const isEnigmes = which === "enigmes";
-      const nextTab = isEnigmes ? "enigmes" : "muscler";
 
       tabEnigmes.classList.toggle("primary", isEnigmes);
       tabEnigmes.classList.toggle("selected", isEnigmes);
@@ -797,35 +809,19 @@ Toute demande sera examinée de bonne foi, sans reconnaissance préalable de res
       }
     }
 
-    function shouldOpenAdNow(){
-      try{
-        const last = Number(localStorage.getItem(AD_LAST_KEY) || "0");
-        const now = Date.now();
-        if (!last) return true;
-        return (now - last) >= AD_COOLDOWN_MS;
-      }catch(e){
-        // Si localStorage bloqué => on laisse passer (meilleur UX)
-        return true;
-      }
-    }
-
-    function markAdOpened(){
-      try{ localStorage.setItem(AD_LAST_KEY, String(Date.now())); }catch(e){}
-    }
-
+    // ✅ 1 pub par clic (sans cooldown)
     function tryOpenMonetizedLink(){
       const link = (MONETIZED_URL_DEFAULT || "").trim();
       if (!link || link === "TON_LIEN_MONETISE_ICI") return;
 
-      if (!shouldOpenAdNow()){
-        gcEventOncePerSession("monetized_cooldown_block");
-        return;
+      const w = window.open(link, "_blank", "noopener,noreferrer");
+      if (w) {
+        // ✅ On track chaque clic pub (pas "once per session")
+        gcEvent("monetized_open");
+      } else {
+        gcEvent("monetized_popup_blocked");
+        // Optionnel : pas d'alert pour garder une UX clean
       }
-
-      // Ouverture nouvel onglet (moins “violent” + conforme à ton choix)
-      window.open(link, "_blank", "noopener,noreferrer");
-      markAdOpened();
-      gcEventOncePerSession("monetized_open");
     }
 
     function renderEnigmesList(list){
@@ -853,7 +849,7 @@ Toute demande sera examinée de bonne foi, sans reconnaissance préalable de res
 
         const btn = card.querySelector(".answer-btn");
         btn.addEventListener("click", () => {
-          // Pub (si cooldown OK), puis réponse (toujours)
+          // Pub (1 par clic), puis réponse (toujours)
           tryOpenMonetizedLink();
           openAnswer(titre, reponse);
         });
@@ -913,14 +909,20 @@ Toute demande sera examinée de bonne foi, sans reconnaissance préalable de res
         const enigmes = await loadJSON("enigmes.json");
         renderEnigmes(enigmes);
       }catch(err){
-        $("enigmes-list").innerHTML = `<div class="empty">Impossible de charger <b>enigmes.json</b>.</div>`;
+        // ✅ Message user-friendly (au lieu de "Impossible de charger enigmes.json")
+        $("enigmes-list").innerHTML = `
+          <div class="empty">
+            Des énigmes sont en cours d’ajout ✨<br/>
+            Merci de patienter un instant et de réessayer dans 1–2 minutes 🧠
+          </div>
+        `;
       }
 
       try{
         const ressources = await loadJSON("ressources.json");
         renderRessources(ressources);
       }catch(err){
-        $("ressources-list").innerHTML = `<div class="empty">Impossible de charger <b>ressources.json</b>.</div>`;
+        $("ressources-list").innerHTML = `<div class="empty">Aucune ressource pour l’instant. Bientôt disponible 👀✅</div>`;
       }
 
       const h = (location.hash || "").toLowerCase();
