@@ -247,6 +247,12 @@
   "titre": "Énigme 41",
   "question": "Quel réservoir se videra en premier ?",
   "reponse": "Le réservoir X.\nMême s’ils contiennent chacun 1000 litres et ont le même robinet, leur forme change la hauteur d’eau au-dessus de la sortie.\nDans le réservoir X, l’eau reste plus haute plus longtemps, ce qui maintient une pression plus élevée et un débit plus rapide.\nLe réservoir Y perd cette hauteur plus vite, l’écoulement ralentit plus tôt, donc X se vide en premier."
+},
+{
+  "id": 42,
+  "titre": "Énigme 42",
+  "question": "Quelle est la taille du rat ?",
+  "reponse": "30 cm.\nOn note R la hauteur du rocher et r la taille du rat.\nÀ gauche, la distance entre le sommet du rocher et la tête du rat est de 100 cm, donc R − r = 100.\nÀ droite, le rat posé sur le rocher atteint 160 cm, donc R + r = 160.\nEn résolvant, on obtient r = 30 cm."
 }
   ]
 }
