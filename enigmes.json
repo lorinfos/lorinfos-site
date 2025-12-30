@@ -253,6 +253,12 @@
   "titre": "Énigme 42",
   "question": "Quelle est la taille du rat ?",
   "reponse": "30 cm.\nOn note R la hauteur du rocher et r la taille du rat.\nÀ gauche, la distance entre le sommet du rocher et la tête du rat est de 100 cm, donc R − r = 100.\nÀ droite, le rat posé sur le rocher atteint 160 cm, donc R + r = 160.\nEn résolvant, on obtient r = 30 cm."
+},
+{
+  "id": 43,
+  "titre": "Énigme 43",
+  "question": "Lequel des deux squelettes est une femme ?",
+  "reponse": "Le squelette n°2. La différence se voit au niveau du bassin : celui du n°2 est plus large, avec un angle sous-pubien ouvert en U et un détroit pelvien plus arrondi, caractéristiques féminines.\nLe bassin du n°1 est plus étroit et anguleux, typique d’un squelette masculin."
 }
   ]
 }
