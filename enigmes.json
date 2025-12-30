@@ -259,6 +259,12 @@
   "titre": "Énigme 43",
   "question": "Lequel des deux squelettes est une femme ?",
   "reponse": "Le squelette n°2. La différence se voit au niveau du bassin : celui du n°2 est plus large, avec un angle sous-pubien ouvert en U et un détroit pelvien plus arrondi, caractéristiques féminines.\nLe bassin du n°1 est plus étroit et anguleux, typique d’un squelette masculin."
+},
+{
+  "id": 44,
+  "titre": "Énigme 44",
+  "question": "Qui utilise le moins de force pour déplacer le réfrigérateur ?",
+  "reponse": "L’homme du haut.\nEn tirant avec une corde depuis une position plus élevée, une partie de la force appliquée agit vers le haut.\nCela compense une partie du poids du réfrigérateur et réduit l’effort nécessaire.\nEn poussant directement, toute la force doit lutter contre le poids et la gravité, sans avantage mécanique."
 }
   ]
 }
