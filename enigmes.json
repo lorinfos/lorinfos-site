@@ -271,6 +271,12 @@
   "titre": "Énigme 45",
   "question": "Quel est le résultat du dernier calcul ?",
   "reponse": "15.\nTrois paires de chaussures valent 30, donc une paire vaut 10 et une chaussure seule vaut 5.\nDeux pigeons et une paire font 20, donc un pigeon vaut 5.\nUn double cornet vaut 4, donc un cornet seul vaut 2.\nDans le dernier calcul, on respecte la priorité : 5 + (5 × 2) = 15."
+},
+{
+  "id": 46,
+  "titre": "Énigme 46",
+  "question": "Qui a le plus besoin d’aide : A ou B ?",
+  "reponse": "A.\nPour pousser une voiture en montée, l’effort dépend de l’inclinaison de la pente. Plus la pente est forte, plus la force totale nécessaire est grande.\nEn A, une seule personne doit fournir tout l’effort sur une pente de 30°.\nEn B, la pente est plus raide (60°), mais l’effort total est partagé entre deux personnes, ce qui réduit l’effort fourni par chacun.\nAinsi, malgré la pente plus faible, la personne seule en A fournit plus d’effort individuel et a donc le plus besoin d’aide."
 }
   ]
 }
