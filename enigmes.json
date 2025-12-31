@@ -265,6 +265,12 @@
   "titre": "Énigme 44",
   "question": "Qui utilise le moins de force pour déplacer le réfrigérateur ?",
   "reponse": "L’homme du haut.\nEn tirant avec une corde depuis une position plus élevée, une partie de la force appliquée agit vers le haut.\nCela compense une partie du poids du réfrigérateur et réduit l’effort nécessaire.\nEn poussant directement, toute la force doit lutter contre le poids et la gravité, sans avantage mécanique."
+},
+{
+  "id": 45,
+  "titre": "Énigme 45",
+  "question": "Quel est le résultat du dernier calcul ?",
+  "reponse": "15.\nTrois paires de chaussures valent 30, donc une paire vaut 10 et une chaussure seule vaut 5.\nDeux pigeons et une paire font 20, donc un pigeon vaut 5.\nUn double cornet vaut 4, donc un cornet seul vaut 2.\nDans le dernier calcul, on respecte la priorité : 5 + (5 × 2) = 15."
 }
   ]
 }
