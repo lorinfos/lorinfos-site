@@ -283,6 +283,12 @@
   "titre": "Énigme 47",
   "question": "Quelle affirmation est vraie ? (A, B, C ou D)",
   "reponse": "B)  X = Y = 50.\nLe dynamomètre mesure la tension, pas la somme des masses.\nEn équilibre, la tension est identique des deux côtés du câble.\nS’il indique 50 kg, chaque sac exerce donc une force de 50 kg.\nLa somme vaut bien 100 kg, mais ce n’est pas ce que mesure l’appareil."
+},
+{
+  "id": 48,
+  "titre": "Énigme 48",
+  "question": "Qui a raison dans ce calcul ? Tom ou Jerry ?",
+  "reponse": "Jerry - 36.\nOn commence par les parenthèses : 2 + 4 = 6.\nL’expression devient 30 ÷ 5 × 6.\nLa division et la multiplication ont la même priorité, on calcule donc de gauche à droite : 30 ÷ 5 = 6, puis 6 × 6 = 36.\nLa bonne réponse est donc 36"
 }
   ]
 }
