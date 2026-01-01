@@ -277,6 +277,12 @@
   "titre": "Énigme 46",
   "question": "Qui a le plus besoin d’aide : A ou B ?",
   "reponse": "A.\nPour pousser une voiture en montée, l’effort dépend de l’inclinaison de la pente. Plus la pente est forte, plus la force totale nécessaire est grande.\nEn A, une seule personne doit fournir tout l’effort sur une pente de 30°.\nEn B, la pente est plus raide (60°), mais l’effort total est partagé entre deux personnes, ce qui réduit l’effort fourni par chacun.\nAinsi, malgré la pente plus faible, la personne seule en A fournit plus d’effort individuel et a donc le plus besoin d’aide."
+},
+{
+  "id": 47,
+  "titre": "Énigme 47",
+  "question": "Quelle affirmation est vraie ? (A, B, C ou D)",
+  "reponse": "Question :\nQuelle affirmation est vraie ?\n\nRéponse :\nB)  X = Y = 50.\nLe dynamomètre mesure la tension, pas la somme des masses.\nEn équilibre, la tension est identique des deux côtés du câble.\nS’il indique 50 kg, chaque sac exerce donc une force de 50 kg.\nLa somme vaut bien 100 kg, mais ce n’est pas ce que mesure l’appareil."
 }
   ]
 }
