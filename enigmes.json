@@ -282,7 +282,7 @@
   "id": 47,
   "titre": "Énigme 47",
   "question": "Quelle affirmation est vraie ? (A, B, C ou D)",
-  "reponse": "Question :\nQuelle affirmation est vraie ?\n\nRéponse :\nB)  X = Y = 50.\nLe dynamomètre mesure la tension, pas la somme des masses.\nEn équilibre, la tension est identique des deux côtés du câble.\nS’il indique 50 kg, chaque sac exerce donc une force de 50 kg.\nLa somme vaut bien 100 kg, mais ce n’est pas ce que mesure l’appareil."
+  "reponse": "B)  X = Y = 50.\nLe dynamomètre mesure la tension, pas la somme des masses.\nEn équilibre, la tension est identique des deux côtés du câble.\nS’il indique 50 kg, chaque sac exerce donc une force de 50 kg.\nLa somme vaut bien 100 kg, mais ce n’est pas ce que mesure l’appareil."
 }
   ]
 }
