@@ -289,6 +289,12 @@
   "titre": "Énigme 48",
   "question": "Qui a raison dans ce calcul ? Tom ou Jerry ?",
   "reponse": "Jerry - 36.\nOn commence par les parenthèses : 2 + 4 = 6.\nL’expression devient 30 ÷ 5 × 6.\nLa division et la multiplication ont la même priorité, on calcule donc de gauche à droite : 30 ÷ 5 = 6, puis 6 × 6 = 36.\nLa bonne réponse est donc 36"
+},
+{
+  "id": 49,
+  "titre": "Énigme 49",
+  "question": "Lequel atteindra le bas en premier ?",
+  "reponse": "La sphère pleine.\nTous ont la même masse et le même rayon, mais leur masse n’est pas répartie de la même façon.\nPlus la masse est proche du centre, moins l’objet doit “dépenser” d’énergie pour tourner, et plus il accélère.\nLa sphère pleine, dont la masse est très concentrée au centre, roule donc plus vite que les autres."
 }
   ]
 }
