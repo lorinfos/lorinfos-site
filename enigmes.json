@@ -295,6 +295,12 @@
   "titre": "Énigme 49",
   "question": "Parmi la sphère pleine, le cylindre plein, le cylindre creux et l’anneau, lequel arrive en bas en premier ?",
   "reponse": "La sphère pleine.\nTous ont la même masse et le même rayon, mais leur masse n’est pas répartie de la même façon.\nPlus la masse est proche du centre, moins l’objet doit “dépenser” d’énergie pour tourner, et plus il accélère.\nLa sphère pleine, dont la masse est très concentrée au centre, roule donc plus vite que les autres."
+},
+{
+  "id": 50,
+  "titre": "Énigme 50",
+  "question": "Tu manges lequel : le piment rouge ou le piment vert ?",
+  "reponse": "Le piment vert.\nIl rapporte 1 $ qui double chaque jour, ce qui crée une croissance exponentielle.\nAprès 30 jours, on atteint environ 537 millions de dollars, et dès le 31ᵉ jour, la somme dépasse 1 milliard.\nLe piment rouge donne 1 milliard immédiatement, mais sur le long terme, le piment vert est mathématiquement le meilleur choix."
 }
   ]
 }
