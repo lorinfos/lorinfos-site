@@ -307,6 +307,12 @@
   "titre": "Énigme 51",
   "question": "Combien pèse un œuf ?",
   "reponse": "150 g.\nLa balance est à l’équilibre : 6 œufs + 1 kg = 2 œufs + 1 kg + 600 g.\nOn enlève 1 kg des deux côtés, il reste 6 œufs = 2 œufs + 600 g.\nDonc 4 œufs = 600 g, soit 150 g par œuf."
+},
+{
+  "id": 52,
+  "titre": "Énigme 52",
+  "question": "Quelle est la bonne réponse ? (A, B, C ou D)",
+  "reponse": "A - 2024.\nDans l’énigme « Deux zéro deux quatre », chaque mot désigne un chiffre précis et non une quantité : deux = 2, zéro = 0, deux = 2, quatre = 4.\nEn français, pour indiquer une répétition ou une quantité, on dirait « deux zéros » ou « deux fois zéro », ce qui n’est pas le cas ici.\nL’absence de pluriel et la structure de la phrase imposent donc une lecture séquentielle, chiffre par chiffre, comme lorsqu’on lit un numéro à voix haute.\nEn respectant cette règle linguistique et logique, la seule réponse correcte est 2024."
 }
   ]
 }
