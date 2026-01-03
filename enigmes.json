@@ -301,6 +301,12 @@
   "titre": "Énigme 50",
   "question": "Tu manges lequel : le piment rouge ou le piment vert ?",
   "reponse": "Le piment vert.\nIl rapporte 1 $ qui double chaque jour, ce qui crée une croissance exponentielle.\nAprès 30 jours, on atteint environ 537 millions de dollars, et dès le 31ᵉ jour, la somme dépasse 1 milliard.\nLe piment rouge donne 1 milliard immédiatement, mais sur le long terme, le piment vert est mathématiquement le meilleur choix."
+},
+    {
+  "id": 51,
+  "titre": "Énigme 51",
+  "question": "Combien pèse un œuf ?",
+  "reponse": "150 g.\nLa balance est à l’équilibre : 6 œufs + 1 kg = 2 œufs + 1 kg + 600 g.\nOn enlève 1 kg des deux côtés, il reste 6 œufs = 2 œufs + 600 g.\nDonc 4 œufs = 600 g, soit 150 g par œuf."
 }
   ]
 }
