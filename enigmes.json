@@ -313,6 +313,12 @@
   "titre": "Énigme 52",
   "question": "Quelle est la bonne réponse ? (A, B, C ou D)",
   "reponse": "A - 2024.\nDans l’énigme « Deux zéro deux quatre », chaque mot désigne un chiffre précis et non une quantité : deux = 2, zéro = 0, deux = 2, quatre = 4.\nEn français, pour indiquer une répétition ou une quantité, on dirait « deux zéros » ou « deux fois zéro », ce qui n’est pas le cas ici.\nL’absence de pluriel et la structure de la phrase imposent donc une lecture séquentielle, chiffre par chiffre, comme lorsqu’on lit un numéro à voix haute.\nEn respectant cette règle linguistique et logique, la seule réponse correcte est 2024."
+},
+{
+  "id": 53,
+  "titre": "Énigme 53",
+  "question": "Quel verre contient le plus d’eau ?",
+  "reponse": "Le verre B.\nLes quatre verres sont remplis jusqu’au même niveau, mais les objets à l’intérieur déplacent une partie de l’eau.\nPlus l’objet est volumineux, moins il reste d’eau dans le verre.\nLe trombone du verre B est l’objet qui déplace le moins d’eau : c’est donc ce verre qui en contient le plus."
 }
   ]
 }
